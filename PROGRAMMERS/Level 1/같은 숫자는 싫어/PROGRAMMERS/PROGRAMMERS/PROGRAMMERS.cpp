@@ -10,8 +10,11 @@ using namespace std;
 int main()
 {
 	int nLast = -1;
-	vector<int> answer;
+
+
+
 	vector<int> arr;
+	vector<int> answer;
 
 	for (int i = 0; i < arr.size(); i++)
 	{
