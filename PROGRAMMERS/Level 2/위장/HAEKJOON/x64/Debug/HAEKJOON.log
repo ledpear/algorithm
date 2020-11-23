@@ -1,0 +1,7 @@
+﻿  source.cpp
+e:\onedrive\onedrive - ismedia\개인용\취준\코딩테스트\_프로그래머스\위장\haekjoon\source.cpp(104): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+e:\onedrive\onedrive - ismedia\개인용\취준\코딩테스트\_프로그래머스\위장\haekjoon\source.cpp(112): warning C4267: '*=': conversion from 'size_t' to 'int', possible loss of data
+e:\onedrive\onedrive - ismedia\개인용\취준\코딩테스트\_프로그래머스\위장\haekjoon\source.cpp(116): warning C4267: '*=': conversion from 'size_t' to 'int', possible loss of data
+e:\onedrive\onedrive - ismedia\개인용\취준\코딩테스트\_프로그래머스\위장\haekjoon\source.cpp(126): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  HAEKJOON.vcxproj -> E:\OneDrive\OneDrive - isMedia\개인용\취준\코딩테스트\_프로그래머스\위장\x64\Debug\HAEKJOON.exe
+  HAEKJOON.vcxproj -> E:\OneDrive\OneDrive - isMedia\개인용\취준\코딩테스트\_프로그래머스\위장\x64\Debug\HAEKJOON.pdb (Partial PDB)

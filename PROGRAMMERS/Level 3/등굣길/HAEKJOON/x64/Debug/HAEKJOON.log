@@ -1,0 +1,5 @@
+﻿  source.cpp
+e:\onedrive\onedrive - ismedia\개인용\취준\코딩테스트\_프로그래머스\등굣길\haekjoon\source.cpp(177): warning C4154: deletion of an array expression; conversion to pointer supplied
+e:\onedrive\onedrive - ismedia\개인용\취준\코딩테스트\_프로그래머스\등굣길\haekjoon\source.cpp(179): warning C4154: deletion of an array expression; conversion to pointer supplied
+  HAEKJOON.vcxproj -> E:\OneDrive\OneDrive - isMedia\개인용\취준\코딩테스트\_프로그래머스\등굣길\x64\Debug\HAEKJOON.exe
+  HAEKJOON.vcxproj -> E:\OneDrive\OneDrive - isMedia\개인용\취준\코딩테스트\_프로그래머스\등굣길\x64\Debug\HAEKJOON.pdb (Partial PDB)
