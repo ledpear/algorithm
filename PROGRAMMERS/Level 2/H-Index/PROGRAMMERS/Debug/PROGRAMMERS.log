@@ -1,5 +1,5 @@
 ﻿  PROGRAMMERS.cpp
-c:\users\ismedia\onedrive - ismedia\개인용\취준\algorithm\programmers\level 2\h-index\programmers\programmers.cpp(29): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\ismedia\onedrive - ismedia\개인용\취준\algorithm\programmers\level 2\h-index\programmers\programmers.cpp(37): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\ismedia\onedrive - ismedia\개인용\취준\algorithm\programmers\level 2\h-index\programmers\programmers.cpp(33): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\ismedia\onedrive - ismedia\개인용\취준\algorithm\programmers\level 2\h-index\programmers\programmers.cpp(35): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
   PROGRAMMERS.vcxproj -> C:\Users\isMedia\OneDrive - isMedia\개인용\취준\algorithm\PROGRAMMERS\Level 2\H-Index\Debug\PROGRAMMERS.exe
   PROGRAMMERS.vcxproj -> C:\Users\isMedia\OneDrive - isMedia\개인용\취준\algorithm\PROGRAMMERS\Level 2\H-Index\Debug\PROGRAMMERS.pdb (Full PDB)
