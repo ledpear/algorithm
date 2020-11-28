@@ -12,16 +12,7 @@ int main()
 	string s;
 
 	int nP = 0;
-
-
-
-
 	int nY = 0;
-
-
-
-
-
 
 	for (int i = 0; i < s.size(); i++)
 	{
@@ -29,14 +20,7 @@ int main()
 			nP++;
 		if (s[i] == 'y' || s[i] == 'Y')
 			nY++;
-
-
-
 	}
-
-
-
-
     return nP == nY;
 }
 
