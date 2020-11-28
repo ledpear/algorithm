@@ -12,6 +12,9 @@ int main()
 	string s;
 
 	int nP = 0;
+
+
+
 	int nY = 0;
 	for (int i = 0; i < s.size(); i++)
 	{
