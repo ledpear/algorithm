@@ -1,0 +1,7 @@
+﻿  PROGRAMMERS.cpp
+e:\onedrive\onedrive - ismedia\개인용\취준\algorithm\programmers\level 2\문자열 압축\programmers\programmers.cpp(27): warning C4018: '<=': signed/unsigned mismatch
+e:\onedrive\onedrive - ismedia\개인용\취준\algorithm\programmers\level 2\문자열 압축\programmers\programmers.cpp(29): warning C4018: '>=': signed/unsigned mismatch
+e:\onedrive\onedrive - ismedia\개인용\취준\algorithm\programmers\level 2\문자열 압축\programmers\programmers.cpp(37): warning C4018: '>': signed/unsigned mismatch
+e:\onedrive\onedrive - ismedia\개인용\취준\algorithm\programmers\level 2\문자열 압축\programmers\programmers.cpp(65): warning C4018: '>': signed/unsigned mismatch
+  PROGRAMMERS.vcxproj -> E:\OneDrive\OneDrive - isMedia\개인용\취준\algorithm\PROGRAMMERS\Level 2\문자열 압축\Debug\PROGRAMMERS.exe
+  PROGRAMMERS.vcxproj -> E:\OneDrive\OneDrive - isMedia\개인용\취준\algorithm\PROGRAMMERS\Level 2\문자열 압축\Debug\PROGRAMMERS.pdb (Full PDB)
