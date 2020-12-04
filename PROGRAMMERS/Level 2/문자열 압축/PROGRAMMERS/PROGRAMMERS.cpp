@@ -12,7 +12,7 @@ int main()
 {
 	int nLast = -1;
 	string s;
-	s = "abcabcabcabcdededededede";
+	s = "abcabcdede";
 	int answer = 0;
 
 	// 1. 요약할 사이즈를 정한다.
@@ -23,11 +23,18 @@ int main()
 	//int pos = 0;
 	string temp;
 	string Result = "";
-	answer = s.size() - 1;
-	for (int nSize = 2; nSize <= s.size() / 2; nSize++) //요약 크기
+	answer = s.size();
+	for (int nSize = 1; nSize <= s.size() / 2; nSize++) //요약 크기
 	{
-		for (int nPos = 0; s.size() - nPos >= nSize; nPos++) //요약 시작할 문자열
+		for (int nPos = 0; /*s.size() - nPos >= nSize*/; nPos += nSize) //요약 시작할 문자열
 		{
+			if (nPos + nSize > s.size())
+			{
+				if(nPos < s.size())
+					Result += s.substr(nPos);
+				break;
+			}
+
 			temp = s.substr(nPos, nSize);
 			if (s.substr(nPos + nSize, nSize) == temp)
 			{
@@ -49,16 +56,16 @@ int main()
 				}
 				Result += to_string(nCount);
 				Result += s.substr(nPos, nSize);
-				nPos = nPos + (nCount * nSize) - 1;
+				nPos = nPos + ((nCount - 1) * nSize);
 			}
 			else
 			{
-				if (nPos + nSize == s.size())
+				if (nPos + nSize <= s.size())
 				{
 					Result += s.substr(nPos, nSize);
 				}
 				else
-					Result += s[nPos];
+					Result += s.substr(nPos);
 				continue;
 			}
 		}
