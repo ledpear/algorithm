@@ -1,0 +1,5 @@
+﻿  PROGRAMMERS.cpp
+e:\onedrive\onedrive - ismedia\개인용\취준\algorithm\programmers\level 1\시저 암호\programmers\programmers.cpp(18): warning C4018: '<': signed/unsigned mismatch
+e:\onedrive\onedrive - ismedia\개인용\취준\algorithm\programmers\level 1\시저 암호\programmers\programmers.cpp(17): warning C4101: 'temp': unreferenced local variable
+  PROGRAMMERS.vcxproj -> E:\OneDrive\OneDrive - isMedia\개인용\취준\algorithm\PROGRAMMERS\Level 1\시저 암호\Debug\PROGRAMMERS.exe
+  PROGRAMMERS.vcxproj -> E:\OneDrive\OneDrive - isMedia\개인용\취준\algorithm\PROGRAMMERS\Level 1\시저 암호\Debug\PROGRAMMERS.pdb (Full PDB)
