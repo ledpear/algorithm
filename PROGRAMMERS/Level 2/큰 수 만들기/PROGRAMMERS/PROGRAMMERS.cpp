@@ -41,23 +41,58 @@ int main()
 {
 	int nLast = -1;
 	string answer = "";
-	string number = "1924";
-	int k = 2;
+	string number = "4177252841";
+	int k = 9;
 
-	int Max;
-	Max = -1;
-	int size = number.size() - k;
+	int K = k;
+	int pos = 0;
+	int nMax = -1;
+	int PosTemp = 0;
+	int i = 0;
+	int size = number.size();
+	while (true)
+	{
+		if (K + pos == size)
+		{
+			//answer += number.substr(pos);
+			break;
+		}
+		else if (K + pos >= size)
+		{
+			for (i = pos; i < size; i++)
+			{
+				if (nMax < (number.at(i) - '0'))
+				{
+					PosTemp = i;
+					nMax = (number.at(i) - '0');
+				}
+			}
+		}
+		else
+		{
+			for (i = pos; i <= K + pos; i++)
+			{
+				if (nMax < (number.at(i) - '0'))
+				{
+					PosTemp = i;
+					nMax = (number.at(i) - '0');
+				}
+			}
+		}
 
-	for (int i = 0; i < k; i++)
-	{
-		answer += '0';
-	}
-	
-	for (int i = 0; i < size + 1; i++)
-	{
-		vector<bool> bDontUsePostion(number.size());
-		bDontUsePostion[i] = true;
-		MakeNumber(i, bDontUsePostion, 1, Max, k, number, answer);
+		K = K - (PosTemp - pos);
+		answer += number.at(PosTemp);
+		pos = PosTemp + 1;
+		PosTemp = -1;
+		nMax = -1;
+
+		if (pos == size) break;
+		if (K == 0)
+		{
+			if(pos != number.size())
+				answer += number.substr(pos);
+			break;
+		}
 	}
 
     return 0;
