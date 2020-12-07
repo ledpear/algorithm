@@ -5,52 +5,40 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <functional>
 
 using namespace std;
 
 int main()
 {
 	vector<int> citations;
-// 	citations.push_back(3);
-// 	citations.push_back(0);
-// 	citations.push_back(6);
-// 	citations.push_back(1);
-	citations.push_back(1);
+ 	citations.push_back(3);
+ 	citations.push_back(0);
+ 	citations.push_back(6);
+ 	citations.push_back(1);
+	citations.push_back(5);
 /*	citations.push_back(5);*/
 
-	sort(citations.begin(), citations.end());
-
 	int answer = 0;
-	int pos = 0;
-	int undo = -1;
-	int undoPos = 0;
-	bool UndoReset = true;
-	int Max = 0;
 
-	if (citations.size() == 1 && citations[0] == 1)
-		return 1;
+	sort(citations.begin(), citations.end(), greater<>());
 
-	for (int i = 0; i < citations.size(); i++)
+
+	//발표한 논문 총 n 편중
+	//h편 이상 인용된 논문이 h편 이상이고
+	//나머지 논문이 h편 이하 인용
+
+	int nMax = -1;
+	int nPos = -1;
+	int i;
+	for (i = 0; i < citations.size(); i++)
 	{
-		if (i < citations[i] && citations[i] <= citations.size() - i)
+		if (i >= citations[i])
 		{
-			pos = i;
-			if (undo != citations[i])
-			{
-				undo = Max;
-				Max = citations[i];
-				
-				UndoReset = true;
-			}
-			else
-				UndoReset = false;
+			break;
 		}
 	}
-
-	if (UndoReset)
-		answer = Max;
-	else
-		answer = undo;
+	answer = i;
 
 	system("pause");
 	return answer;
