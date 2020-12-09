@@ -11,7 +11,7 @@ using namespace std;
 int main()
 {
 	int nLast = -1;
-	vector<int> people = { 70,50,80,50};
+	vector<int> people = { 70,80,50};
 	int limit = 100;;
 	int answer = 0;
 
@@ -21,36 +21,33 @@ int main()
 	int nSum = 0;
 	int nPos = 0;
 
+	int nHead = 0;
+	int nTail = people.size() - 1;
+
 	while (true)
 	{
-		nSum = people[0];
-		nPos = people.size();
-
-		while (true)
+		if (nHead == nTail)
 		{
-			--nPos;
-			if (nPos == 0)
-			{
-				break;
-			}
-			else if (nSum + people[nPos] <= limit)
-			{
-				break;
-			}
+			++nCount;
+			break;
+		}
+		else if (nHead > nTail)
+		{
+			break;
 		}
 
-		if (nPos == 0)
+		if (people[nHead] + people[nTail] > limit)
 		{
-			people.erase(people.begin());
+			--nTail;
+			++nCount;
 		}
 		else
 		{
-			people.erase(people.begin() + nPos);
-			people.erase(people.begin());
+			++nHead;
+			--nTail;
+			++nCount;
 		}
-		nCount++;
 
-		if (people.size() == 0) break;
 	}
 
 	answer = nCount;
