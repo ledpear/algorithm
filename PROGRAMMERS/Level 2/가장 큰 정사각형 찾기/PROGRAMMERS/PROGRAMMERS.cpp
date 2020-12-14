@@ -9,8 +9,8 @@ using namespace std;
 
 int main()
 {
-	//vector<vector<int>> board = { {0, 0, 0, 0},{0, 0, 0, 1}};
-	vector<vector<int>> board = { {0, 1, 1, 1},{1, 1, 1, 1},{1, 1, 1, 1},{0, 0, 1, 0} };
+	vector<vector<int>> board = { {0, 0, 1, 1},{1, 1, 1, 1}};
+	//vector<vector<int>> board = { {0, 1, 1, 1},{1, 1, 1, 1},{1, 1, 1, 1},{0, 0, 1, 0} };
 	
 	int nHeight = board.size();
 	int nWidth = board[0].size();
@@ -50,8 +50,6 @@ int main()
 							bResult = false;
 							break;
 						}
-						else
-							vPass[i][x] = true;
 					}
 					//y에서 0이 안나왔으면 x방향 확인, 
 					if (bResult)
@@ -63,8 +61,18 @@ int main()
 								bResult = false;
 								break;
 							}
-							else
-								vPass[i][x] = true;
+						}
+					}
+
+					if (bResult)
+					{
+						for (int i = nY; i <= y; i++)
+						{
+							vPass[i][x] = true;
+						}
+						for (int i = nX; i < x; i++)
+						{
+							vPass[y][i] = true;
 						}
 					}
 
