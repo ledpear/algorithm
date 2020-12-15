@@ -29,10 +29,66 @@ bool WorkCompare(vector<int> a, vector<int> b)
 	return a[eWork] < b[eWork];
 }
 
+//////////////////////
+//힙를 활용한 풀이법
+//1. 시간은 1씩더해서 진행
+//2. 프로세스 요청 시간으로 정렬되어있는 벡터 배열에서 처음부터 끝까지 순서대로 진행
+//3. 지금 시간과 요청한 시간과 일치하면 힙에 추가
+//4. 반환한 프로세스와 벡터의 사이즈가 일치하면 종료
+//5. 힙은 최대힙으로 작성해서
+//6. 힙 크기를 동적 할 수 있나? -> 동적으로 시도
+class pHeap
+{
+public:
+	pHeap();
+	~pHeap();
+
+	void Push(vector<int> vNode);
+	vector<int> Pop();
+
+	void Compare(int nNodePos);
+
+private:
+	vector<vector<int>> vHeap;
+};
+
+pHeap::pHeap()
+{
+}
+
+pHeap::~pHeap()
+{
+}
+
+void pHeap::Compare(int nNodePos)
+{
+	if (nNodePos == 0)
+		return;
+
+	int ParentNode = nNodePos / 2;
+	if (vHeap[ParentNode][eWork] < vHeap[nNodePos][eWork])
+	{
+
+	}
+}
+
+void pHeap::Push(vector<int> vNode)
+{
+	if (vHeap.size() == 0)
+		vHeap.push_back(vNode);
+	else
+	{
+		vHeap.push_back(vNode);
+		int NodePos = vHeap.size() - 1;
+		int ParentNode = NodePos / 2;
+
+	}
+}
+
 int main()
 {
 	int nLast = -1;
-	vector<vector<int>> jobs = { {0, 3},{4, 9},{5, 6} };
+	vector<vector<int>> jobs = { {4, 9},{ 4, 5 } ,{ 4, 1 } };
 	int answer = 0;
 
 	int nSize = jobs.size();
@@ -62,6 +118,8 @@ int main()
 	//2.도착했다면 프로세스 진행하고 1로 아니라면 요청 시간 정렬 배열에서 탐색
 	
 	//요청한 시간 순서로 다음 프로세스 탐색
+
+	
 
 	int nTime = 0;
 	int nRequestPosition = 0;
