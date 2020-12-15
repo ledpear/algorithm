@@ -1,4 +1,6 @@
-﻿  stdafx.cpp
-  PROGRAMMERS.cpp
-  PROGRAMMERS.vcxproj -> E:\OneDrive\OneDrive - isMedia\개인용\취준\algorithm\PROGRAMMERS\Level 1\_샘플\PROGRAMMERS\Debug\PROGRAMMERS.exe
-  PROGRAMMERS.vcxproj -> E:\OneDrive\OneDrive - isMedia\개인용\취준\algorithm\PROGRAMMERS\Level 1\_샘플\PROGRAMMERS\Debug\PROGRAMMERS.pdb (Full PDB)
+﻿  PROGRAMMERS.cpp
+d:\algorithm\programmers\level 3\베스트앨범\programmers\programmers.cpp(50): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+d:\algorithm\programmers\level 3\베스트앨범\programmers\programmers.cpp(94): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+d:\algorithm\programmers\level 3\베스트앨범\programmers\programmers.cpp(100): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  PROGRAMMERS.vcxproj -> D:\algorithm\PROGRAMMERS\Level 3\베스트앨범\Debug\PROGRAMMERS.exe
+  PROGRAMMERS.vcxproj -> D:\algorithm\PROGRAMMERS\Level 3\베스트앨범\Debug\PROGRAMMERS.pdb (Full PDB)
