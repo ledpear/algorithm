@@ -46,7 +46,10 @@ public:
 	void Push(vector<int> vNode);
 	vector<int> Pop();
 
-	void Compare(int nNodePos);
+	void CompareUP(int nNodePos);
+	void CompareDOWN(int nNodePos);
+
+	int GetSize();
 
 private:
 	vector<vector<int>> vHeap;
@@ -54,59 +57,88 @@ private:
 
 pHeap::pHeap()
 {
+	vector<int> temp(1);
+	vHeap.push_back(temp);
 }
 
 pHeap::~pHeap()
 {
 }
 
-void pHeap::Compare(int nNodePos)
+void pHeap::CompareUP(int nNodePos)
 {
-	if (nNodePos == 0)
+	if (nNodePos == 1)
 		return;
 
 	int ParentNode = nNodePos / 2;
-	if (vHeap[ParentNode][eWork] < vHeap[nNodePos][eWork])
+	if (vHeap[ParentNode][eWork] > vHeap[nNodePos][eWork])
 	{
+		vector<int> temp = vHeap[ParentNode];
+		vHeap[ParentNode] = vHeap[nNodePos];
+		vHeap[nNodePos] = temp;
 
+		CompareUP(ParentNode);
+	}
+}
+
+void pHeap::CompareDOWN(int nNodePos)
+{
+	if (nNodePos * 2 >= vHeap.size())
+		return;
+
+	int ParentNode = nNodePos / 2;
+	if (vHeap[ParentNode][eWork] > vHeap[nNodePos][eWork])
+	{
+		vector<int> temp = vHeap[ParentNode];
+		vHeap[ParentNode] = vHeap[nNodePos];
+		vHeap[nNodePos] = temp;
+
+		CompareDOWN(ParentNode);
 	}
 }
 
 void pHeap::Push(vector<int> vNode)
 {
-	if (vHeap.size() == 0)
-		vHeap.push_back(vNode);
-	else
-	{
-		vHeap.push_back(vNode);
-		int NodePos = vHeap.size() - 1;
-		int ParentNode = NodePos / 2;
+	vHeap.push_back(vNode);
+	int NodePos = vHeap.size() - 1;
+	CompareUP(NodePos);
+}
 
-	}
+vector<int> pHeap::Pop()
+{
+	if (vHeap.size() > 1)
+	{
+		vector<int> temp = vHeap[1];
+
+		vHeap[1] = vHeap[vHeap.size() - 1];
+		vHeap.pop_back();
+
+		return temp;
+	}	
+}
+
+int pHeap::GetSize()
+{
+	return vHeap.size() - 1;
 }
 
 int main()
 {
 	int nLast = -1;
-	vector<vector<int>> jobs = { {4, 9},{ 4, 5 } ,{ 4, 1 } };
+	vector<vector<int>> jobs = { {0, 3},{ 1, 9 } ,{ 2, 6 } };
 	int answer = 0;
 
 	int nSize = jobs.size();
 
 	//요청 시간 정렬
-	vector<vector<int>> Request_Sort = jobs;
-	sort(Request_Sort.begin(), Request_Sort.end(), RequestCompare);
-	for (int i = 0; i < Request_Sort.size(); i++)
-	{
-		Request_Sort[i].push_back(i);
-	}
+	sort(jobs.begin(), jobs.end(), RequestCompare);
 
 	//작업시간 정렬
-	vector<vector<int>> Work_Sort = Request_Sort;
-	sort(Work_Sort.begin(), Work_Sort.end(), WorkCompare);
-
-	//작업 완료한건지 확인하는 bool배열
-	vector<bool> bWorked(Work_Sort.size(), false);
+// 	vector<vector<int>> Work_Sort = Request_Sort;
+// 	sort(Work_Sort.begin(), Work_Sort.end(), WorkCompare);
+// 
+// 	//작업 완료한건지 확인하는 bool배열
+// 	vector<bool> bWorked(Work_Sort.size(), false);
 
 	//힙 구현
 	//정렬한 job 순서대로 
@@ -119,54 +151,48 @@ int main()
 	
 	//요청한 시간 순서로 다음 프로세스 탐색
 
-	
-
 	int nTime = 0;
-	int nRequestPosition = 0;
-	int nWorkPosition = 0;
+	pHeap Heap;
+	int nPosition = 0;
+	int nRunnigTime = 0;
+	int nEnd = 0;
 	int nTotal = 0;
+	vector<int> vWork;
 
 	while (true)
 	{
-		//만약에 처리한 작업일때 예외처리 해야함
-		if (nTime >= Work_Sort[nWorkPosition][eRequest])
+		if (nPosition < nSize && jobs[nPosition][eRequest] == nTime)
 		{
-			if (bWorked[Work_Sort[nWorkPosition][ePosition]])
+			if (nRunnigTime == 0)
 			{
-				nWorkPosition++;										//포지션 위치 증가
+				vWork = jobs[nPosition];
+				nRunnigTime = jobs[nPosition][eWork];
+				nPosition++;
 			}
 			else
 			{
-				nTime += Work_Sort[nWorkPosition][eWork];				//시간 진행
-				bWorked[Work_Sort[nWorkPosition][ePosition]] = true;	//작업 체크
-				nTotal += (nTime - Work_Sort[nWorkPosition][eRequest]);	//토탈시간 계산
-
-				nWorkPosition++;										//포지션 위치 증가
+				Heap.Push(jobs[nPosition]);
+				nPosition++;
 			}
-
-			if(nWorkPosition >= nSize) break;						//예외처리
 		}
-		else if (nTime >= Request_Sort[nRequestPosition][eRequest])
+
+		if (nRunnigTime == 0 && !vWork.empty())
 		{
-			if (bWorked[Request_Sort[nRequestPosition][ePosition]])
-			{
-				nRequestPosition++;										//포지션 위치 증가
-			}
-			else
-			{
-				nTime += Request_Sort[nRequestPosition][eWork];
-				bWorked[Request_Sort[nRequestPosition][ePosition]] = true;
-				nTotal += (nTime - Request_Sort[nRequestPosition][eRequest]);
+			nTotal += nTime - vWork[eRequest];
+			if (++nEnd == nSize)	break;
 
-				nRequestPosition++;
-			}
+			vWork.clear();
 
-			if (nRequestPosition >= nSize) break;
+			if (Heap.GetSize() != 0)
+			{
+				vWork = Heap.Pop();
+				nRunnigTime = vWork[eWork];				
+			}
 		}
-		else
-		{
-			nTime = Request_Sort[nRequestPosition][eRequest];
-		}
+
+		nTime++;
+		if (nRunnigTime > 0)
+			nRunnigTime--;
 	}
 
 	answer = nTotal / nSize;
