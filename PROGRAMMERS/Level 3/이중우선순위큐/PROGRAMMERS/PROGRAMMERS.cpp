@@ -14,8 +14,6 @@ public:
 	qHeap() {}
 	~qHeap() {}
 
-private:
-	vector<int> vHeap;
 	int GetSize() { return vHeap.size(); }
 
 	int GetMax();
@@ -26,7 +24,22 @@ private:
 	void PopMin();
 
 	void SetSort(int topPosition, int position);
+
+	vector<int> vHeap;
+	
 };
+
+void qHeap::PopMax()
+{
+	if(vHeap.size() != 0)
+		vHeap.erase(vHeap.begin());
+}
+
+void qHeap::PopMin()
+{
+	if (vHeap.size() != 0)
+		vHeap.erase(vHeap.begin() + (vHeap.size() - 1));
+}
 
 int qHeap::GetMax()
 {
@@ -78,9 +91,9 @@ void qHeap::Push(int nInput)
 
 	while (position != 0)
 	{
-		int nLog = log(position + 1);
+		int nLog = log2(position + 1);
 
-		ParentPosition = pow(2, nLog + 1) - 2;
+		ParentPosition = pow(2, nLog) - 2;
 
 		//ParentPosition = (position - 1) / 2;
 
@@ -96,6 +109,7 @@ void qHeap::Push(int nInput)
 		}
 		else
 		{
+			SetSort(ParentPosition + 1, position);
 			break;
 		}
 	}
@@ -105,12 +119,34 @@ void qHeap::Push(int nInput)
 int main()
 {
 	int nLast = -1;
+	vector<string> operations = { "I 7", "I 5", "I -5","D -1" };
+	vector<int> answer;
 
-	vector<int> test = { 6,4,5,1,9,2,7,8,3 };
 
-	for (int i = 0; i < test.size(); i++)
+	qHeap heap;
+
+	for (int i = 0; i < operations.size(); i++)
 	{
+		string temp = operations[i].substr(2);
+		int num = atoi(temp.c_str());
+
+		if (operations[i][0] == 'I')
+		{
+			heap.Push(num);
+		}
+		else
+		{
+			if (num == 1)
+			{
+				heap.PopMax();
+			}
+			else
+				heap.PopMin();
+		}
 	}
+	
+	answer.push_back(heap.GetMax());
+	answer.push_back(heap.GetMin());
 
     return 0;
 }
