@@ -1,4 +1,6 @@
-﻿  stdafx.cpp
-  PROGRAMMERS.cpp
-  PROGRAMMERS.vcxproj -> D:\algorithm\PROGRAMMERS\Level 3\이중우선순위큐\Debug\PROGRAMMERS.exe
-  PROGRAMMERS.vcxproj -> D:\algorithm\PROGRAMMERS\Level 3\이중우선순위큐\Debug\PROGRAMMERS.pdb (Full PDB)
+﻿  PROGRAMMERS.cpp
+h:\_algorithm\programmers\level 3\이중우선순위큐\programmers\programmers.cpp(92): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+h:\_algorithm\programmers\level 3\이중우선순위큐\programmers\programmers.cpp(94): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+h:\_algorithm\programmers\level 3\이중우선순위큐\programmers\programmers.cpp(126): warning C4018: '<': signed/unsigned mismatch
+  PROGRAMMERS.vcxproj -> H:\_algorithm\PROGRAMMERS\Level 3\이중우선순위큐\Debug\PROGRAMMERS.exe
+  PROGRAMMERS.vcxproj -> H:\_algorithm\PROGRAMMERS\Level 3\이중우선순위큐\Debug\PROGRAMMERS.pdb (Full PDB)
