@@ -1,0 +1,6 @@
+﻿  stdafx.cpp
+  PROGRAMMERS.cpp
+h:\_algorithm\programmers\level 2\피보나치 수\programmers\programmers.cpp(31): warning C4700: uninitialized local variable 'n' used
+  LINK : H:\_algorithm\PROGRAMMERS\Level 2\피보나치 수\Debug\PROGRAMMERS.exe not found or not built by the last incremental link; performing full link
+  PROGRAMMERS.vcxproj -> H:\_algorithm\PROGRAMMERS\Level 2\피보나치 수\Debug\PROGRAMMERS.exe
+  PROGRAMMERS.vcxproj -> H:\_algorithm\PROGRAMMERS\Level 2\피보나치 수\Debug\PROGRAMMERS.pdb (Full PDB)
