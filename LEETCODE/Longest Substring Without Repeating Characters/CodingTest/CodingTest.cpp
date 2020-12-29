@@ -4,56 +4,35 @@
 #include "stdafx.h"
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 int main()
 {
 	string s;
-	s = "pwwkew";
-	int nMax = 0;
+	s = "dvdf";
 
-	string temp = "";
+	vector<char> Words;
+	int nMax = 0;
 
 	for (int i = 0; i < s.size(); i++)
 	{
-		if (temp.size() == 0)
-		{
-			temp += s[i];
-			continue;
-		}		
+		vector<char>::iterator iter = find(Words.begin(), Words.end(), s[i]);
 
-		if (temp[0] != s[i])
+		if (iter != Words.end())
 		{
-			temp += s[i];
+			if (nMax < Words.size())	nMax = Words.size();
+			Words.erase(Words.begin(), ++iter);
+			Words.push_back(s[i]);
 		}
 		else
 		{
-			while (true)
-			{
-				if (i + temp.size() > s.size())
-				{
-					if (nMax <= temp.size())
-						nMax = temp.size();
-					temp = s[i];
-					break;
-				}
-				else if (temp.compare(s.substr(i, temp.size())) == 0)
-				{
-					i += temp.size();
-				}
-				else
-				{
-					if (nMax <= temp.size())
-						nMax = temp.size();
-					temp = s[i];
-					break;
-				}
-			}			
+			Words.push_back(s[i]);
 		}
 	}
+	if (nMax < Words.size())	nMax = Words.size();
 
-
-    return 0;
+	return nMax;
 }
 
