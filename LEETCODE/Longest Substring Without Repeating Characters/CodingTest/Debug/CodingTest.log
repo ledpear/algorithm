@@ -1,0 +1,6 @@
+﻿  CodingTest.cpp
+h:\_algorithm\leetcode\longest substring without repeating characters\codingtest\codingtest.cpp(18): warning C4018: '<': signed/unsigned mismatch
+h:\_algorithm\leetcode\longest substring without repeating characters\codingtest\codingtest.cpp(36): warning C4018: '<=': signed/unsigned mismatch
+h:\_algorithm\leetcode\longest substring without repeating characters\codingtest\codingtest.cpp(47): warning C4018: '<=': signed/unsigned mismatch
+  CodingTest.vcxproj -> H:\_algorithm\LEETCODE\Longest Substring Without Repeating Characters\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\LEETCODE\Longest Substring Without Repeating Characters\Debug\CodingTest.pdb (Full PDB)
