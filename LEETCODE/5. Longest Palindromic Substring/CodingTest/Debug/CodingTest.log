@@ -1,8 +1,6 @@
 ﻿  CodingTest.cpp
-h:\_algorithm\leetcode\5. longest palindromic substring\codingtest\codingtest.cpp(18): warning C4018: '<': signed/unsigned mismatch
-h:\_algorithm\leetcode\5. longest palindromic substring\codingtest\codingtest.cpp(20): warning C4018: '<=': signed/unsigned mismatch
-h:\_algorithm\leetcode\5. longest palindromic substring\codingtest\codingtest.cpp(22): warning C4018: '>': signed/unsigned mismatch
-h:\_algorithm\leetcode\5. longest palindromic substring\codingtest\codingtest.cpp(46): warning C4018: '<=': signed/unsigned mismatch
-h:\_algorithm\leetcode\5. longest palindromic substring\codingtest\codingtest.cpp(117): warning C4018: '<': signed/unsigned mismatch
+h:\_algorithm\leetcode\5. longest palindromic substring\codingtest\codingtest.cpp(16): warning C4018: '<': signed/unsigned mismatch
+h:\_algorithm\leetcode\5. longest palindromic substring\codingtest\codingtest.cpp(41): warning C4018: '<': signed/unsigned mismatch
+h:\_algorithm\leetcode\5. longest palindromic substring\codingtest\codingtest.cpp(45): warning C4018: '<': signed/unsigned mismatch
   CodingTest.vcxproj -> H:\_algorithm\LEETCODE\5. Longest Palindromic Substring\Debug\CodingTest.exe
   CodingTest.vcxproj -> H:\_algorithm\LEETCODE\5. Longest Palindromic Substring\Debug\CodingTest.pdb (Full PDB)
