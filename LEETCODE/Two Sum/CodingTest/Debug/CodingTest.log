@@ -1,4 +1,0 @@
-﻿  CodingTest.cpp
-h:\_algorithm\leetcode\two sum\codingtest\codingtest.cpp(11): warning C4101: 'target': unreferenced local variable
-  CodingTest.vcxproj -> H:\_algorithm\LEETCODE\Two Sum\Debug\CodingTest.exe
-  CodingTest.vcxproj -> H:\_algorithm\LEETCODE\Two Sum\Debug\CodingTest.pdb (Full PDB)
