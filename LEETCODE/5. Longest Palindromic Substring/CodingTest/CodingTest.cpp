@@ -7,27 +7,18 @@
 
 using namespace std;
 
-string PalindromicString(string s, int nLeft, int nRight)
+int PalindromicString(string s, int nLeft, int nRight)
 {
 	int L = nLeft;
 	int R = nRight;
-	string strResult = "";
 
 	while (L >= 0 && R < s.size() && s[L] == s[R])
 	{
-		if (L != R)
-		{
-			strResult += s[R];
-			strResult = s[L] + strResult;
-		}
-		else
-			strResult += s[L];
-
 		R++;
 		L--;
 	}
 
-	return strResult;
+	return R - L - 1;
 }
 
 int main()
@@ -36,25 +27,28 @@ int main()
 	
 	string MaxResult = "";
 
-	string strResult, temp, LongString, ShortString;
+	int nMax, nPos;
+	nMax = 0;
+	nPos = 0;
 
 	for (int i = 0; i < s.size(); i++)
 	{
-		string strSmall, strLarge;
-		strSmall = PalindromicString(s, i, i);
-		if (i + 1 < s.size())
-			strLarge = PalindromicString(s, i, i + 1);
+		int nShort = PalindromicString(s, i, i);
+		int nLong = PalindromicString(s, i, i + 1);
+		int nResult;
+		if (nShort < nLong)
+			nResult = nLong;
 		else
-			strLarge = "";
+			nResult = nShort;
 
-		if (strSmall.size() < strLarge.size())
-			strResult = strLarge;
-		else
-			strResult = strSmall;
-
-		if (MaxResult.size() < strResult.size())
-			MaxResult = strResult;
+		if (nMax < nResult)
+		{
+			nMax = nResult;
+			nPos = i;
+		}
 	}
+
+	MaxResult = s.substr(nPos - ((nMax - 1) / 2), nMax);
 
     return 0;
 }
