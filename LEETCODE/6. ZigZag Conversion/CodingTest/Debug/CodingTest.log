@@ -1,0 +1,5 @@
+﻿  CodingTest.cpp
+h:\_algorithm\leetcode\6. zigzag conversion\codingtest\codingtest.cpp(36): warning C4018: '<': signed/unsigned mismatch
+h:\_algorithm\leetcode\6. zigzag conversion\codingtest\codingtest.cpp(41): warning C4018: '<': signed/unsigned mismatch
+  CodingTest.vcxproj -> H:\_algorithm\LEETCODE\6. ZigZag Conversion\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\LEETCODE\6. ZigZag Conversion\Debug\CodingTest.pdb (Full PDB)
