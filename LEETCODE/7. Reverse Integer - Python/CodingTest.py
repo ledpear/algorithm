@@ -21,7 +21,11 @@ class Solution:
             answer = '-' + answer
 
         answer = int(answer)
-        return answer
+
+        if answer >= 2**31-1 or answer <= -2**31 : return 0
+        else :  return answer
+
+
 
 print(Solution.reverse(None, 123))
 print(Solution.reverse(None, -123))

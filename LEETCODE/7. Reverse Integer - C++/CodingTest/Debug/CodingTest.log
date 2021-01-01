@@ -1,0 +1,4 @@
+﻿  CodingTest.cpp
+h:\_algorithm\leetcode\7. reverse integer - c++\codingtest\codingtest.cpp(34): warning C4244: '+=': conversion from 'double' to '__int64', possible loss of data
+  CodingTest.vcxproj -> H:\_algorithm\LEETCODE\7. Reverse Integer - C++\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\LEETCODE\7. Reverse Integer - C++\Debug\CodingTest.pdb (Full PDB)
