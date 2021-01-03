@@ -7,40 +7,37 @@
 
 using namespace std;
 
-// bool CheckMatch(string s, string p, int m_s_pos, int m_p_pos)
-// {
-// 	bool bResult;
-// 	int s_pos = m_s_pos;
-// 	int p_pos = m_p_pos;
-// 
-// 	if (p[p_pos] == '.')
-// 	{
-// 		s_pos--;
-// 	}
-// 	else if (p[p_pos] == '*')
-// 	{
-// 
-// 	}
-// 
-// 	return bResult;
-// }
+class Solution {
+public:
+	bool isMatch(string s, string p) {
+		int s_size = s.size();
+		int p_size = p.size();
+
+		bool bResult;
+
+		if (p_size == 0)
+			return s_size == 0;
+		bResult = (s_size != 0 && (p[0] == s[0] || p[0] == '.'));
+
+		if (p_size >= 2 && p[1] == '*')
+		{
+			return (isMatch(s, p.substr(2)) || (bResult && isMatch(s.substr(1), p)));
+		}
+		else
+		{
+			return bResult && isMatch(s.substr(1), p.substr(1));
+		}
+	}
+};
 
 int main()
 {
-	string s;
-	string p;
-	int s_pos = s.size() - 1;
-	for (int p_pos = p.size() - 1; p_pos >= 0; p_pos--)
-	{
-		if (p[p_pos] == '.')
-		{
-			s_pos--;
-		}
-		else if (p[p_pos] == '*')
-		{
+	string s = "aaaaaa";
+	string p = "b***";
 
-		}
-	}
+	Solution sol;
+	bool bResult = sol.isMatch(s, p);
+
 
     return 0;
 }
