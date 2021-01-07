@@ -1,58 +1,11 @@
 class Solution:
     def maxArea(self, height) -> int:
-        data = []
-        for i in range(0,len(height)) :
-            temp = [i, height[i]]
-            data.append(temp)
 
-        data.sort(key = lambda x : -x[1])
+        MaxSize = 0
 
-        pos1 = data[0][0]
-        pos2 = 0
-        if height[pos1] != data[1][1] :
-            pos2 = data[1][0]
-        else :
-            for i in range(1, len(data)):
-                if (height[pos1] == data[i][1]) :
-                    pos2 = data[i][0]
-                else :
-                    break;
-
-        left = min(pos1, pos2)
-        right = max(pos1, pos2)
-
-        MaxSize = (right - left) * min(height[left], height[right])
-
-
-        while(True) :
-
-            pos1 = left
-            pos2 = right
-
-
-
-            while (True):
-                if pos1 >= 0:
-                    size = (right - pos1) * min(height[pos1], height[right])
-                    MaxSize = max(MaxSize, size)
-                    pos1 = pos1 - 1
-                else:
-                    break
-
-            while (True):
-                if pos2 < len(height):
-                    size = (pos2 - left) * min(height[left], height[pos2])
-                    MaxSize = max(MaxSize, size)
-                    pos2 = pos2 + 1
-                else:
-                    break
-
-            if left == 0 and right == len(height) - 1: break
-
-            if left > 0 : left -= 1
-            if right < (len(height) - 1) : right += 1
-
-
+        for i in range(0, len(height)) :
+            for j in range(i +1, len(height)):
+                MaxSize = max(MaxSize, abs(i - j) * min(height[i], height[j]))
 
         return MaxSize
 
