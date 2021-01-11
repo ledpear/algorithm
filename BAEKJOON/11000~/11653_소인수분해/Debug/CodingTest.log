@@ -1,0 +1,4 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\11000~\11653_소인수분해\source.cpp(11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\11000~\11653_소인수분해\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\11000~\11653_소인수분해\Debug\CodingTest.pdb (Full PDB)
