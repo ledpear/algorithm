@@ -28,8 +28,6 @@ int main()
 		}
 	}
 
-	PrimeNum[1] = false;
-
 	if (PrimeNum[input] == false)
 		cout << input << endl;
 	else
