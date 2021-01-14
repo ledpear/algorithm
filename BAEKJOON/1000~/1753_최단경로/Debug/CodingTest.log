@@ -1,3 +1,5 @@
 ﻿  Source.cpp
-  CodingTest.vcxproj -> H:\_algorithm\LEETCODE\CodingTest\Debug\CodingTest.exe
-  CodingTest.vcxproj -> H:\_algorithm\LEETCODE\CodingTest\Debug\CodingTest.pdb (Full PDB)
+h:\_algorithm\baekjoon\1000~\1753_최단경로\source.cpp(17): warning C4018: '<': signed/unsigned mismatch
+h:\_algorithm\baekjoon\1000~\1753_최단경로\source.cpp(63): warning C4018: '<': signed/unsigned mismatch
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\1000~\1753_최단경로\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\1000~\1753_최단경로\Debug\CodingTest.pdb (Full PDB)
