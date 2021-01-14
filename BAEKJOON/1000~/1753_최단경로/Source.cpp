@@ -5,28 +5,11 @@
 #include <cmath>
 #include <string>
 #include <utility>
+#include <queue>
 
 using namespace std;
 
 #define INF		987654321
-
-int FindMin(vector<int> vWeight, vector<bool> vVisit)
-{
-	int nMin = INF;
-	int nNodeNum = 0;
-	for (int i = 1; i < vWeight.size(); i++)
-	{
-		if (!vVisit[i])
-		{
-			if (nMin > vWeight[i])
-			{
-				nMin = vWeight[i];
-				nNodeNum = i;
-			}
-		}
-	}
-	return nNodeNum;
-}
 
 int main()
 {
@@ -34,11 +17,8 @@ int main()
 	cin >> V >> E;
 
 	vector<int> vWeight(V + 1, INF);
-	vector<bool> vVisit(V + 1, false);
 	int StartNode;
 	cin >> StartNode;
-
-	vWeight[StartNode] = 0;
 
 	vector<vector<pair<int, int>>> vEdge(V + 1);
 
@@ -52,30 +32,44 @@ int main()
 	}
 
 	// 시작점으로 사용하지 않은 노드 중 최소 노드를 찾는다.
-	// 해당 노드가 갈 수 있는 간선을 찾아 가중치와 값을 더 해서 현제값과 비교해 더 작은 값을 넣는다
+	// 해당 노드가 갈 수 있는 간선을 찾아 가중치와 값을 더 해서 현재값과 비교해 더 작은 값을 넣는다
 
-	int FindNode = 0;
-	for (int i = 1; i < V; i++)
+	pair<int, int> FindNode;
+	priority_queue<pair<int,int>> pq;
+	pq.push(pair<int, int>(0, StartNode));
+
+	while(pq.size() != 0)
 	{
-		FindNode = FindMin(vWeight, vVisit);
-		vVisit[FindNode] = true;
+		FindNode = pq.top();
+		pq.pop();
+		int Node = FindNode.second;
+		int Dist = -FindNode.first;
 
-		for (int j = 0; j < vEdge[FindNode].size(); j++)
+		if (Dist <= vWeight[Node])
 		{
-			if (vWeight[vEdge[FindNode][j].first] > (vWeight[FindNode] + vEdge[FindNode][j].second))
+			vWeight[Node] = Dist;
+
+			for (int j = 0; j < vEdge[Node].size(); j++)
 			{
-				vWeight[vEdge[FindNode][j].first] = (vWeight[FindNode] + vEdge[FindNode][j].second);
+				int Cost = vWeight[Node] + vEdge[Node][j].second;
+				if (Cost < vWeight[vEdge[Node][j].first])
+				{
+					pq.push(pair<int, int>(-Cost, vEdge[Node][j].first));
+					vWeight[vEdge[Node][j].first] = Cost;
+				}
 			}
 		}
 	}
 
-	for (int i = 1; i < V; i++)
+	for (int i = 1; i <= V; i++)
 	{
 		if (vWeight[i] == INF)
 			cout << "INF\n";
 		else
 			cout << vWeight[i] << "\n";
 	}
+
+	system("pause");
 
 	return 0;
 }
