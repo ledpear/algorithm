@@ -1,9 +1,10 @@
 #include <vector>
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
-void BackTracking(int &Score, vector<vector<int>> vMap, int N, int nRow)
+void BackTracking(int &Score, vector<int> vMap, int N, int nRow)
 {
 	if (N == nRow)
 	{
@@ -12,22 +13,22 @@ void BackTracking(int &Score, vector<vector<int>> vMap, int N, int nRow)
 	}
 	else
 	{
-		for (int i = 0; i < N; i++)
+		for (int nCol = 0; nCol < N; nCol++)
 		{
-			if (!vMap[nRow][i])
+			bool bPass = true;
+			for (int backRow = 0; backRow < nRow; backRow++)
 			{
-				vector<vector<int>> vTemp = vMap;
-				vTemp[nRow][i] = 9;
-
-				for (int j = 1; j < N - nRow; j++)
+				int backCol = vMap[backRow];
+				if (backCol == nCol || (nRow - backRow) == abs(nCol - backCol))
 				{
-					vTemp[nRow + j][i] = true;
-					if (i - j >= 0)
-						vTemp[nRow + j][i - j] = true;
-					if (i + j < N)
-						vTemp[nRow + j][i + j] = true;
+					bPass = false;
+					break;
 				}
-
+			}
+			if (bPass)
+			{
+				vector<int> vTemp = vMap;
+				vTemp[nRow] = nCol;
 				BackTracking(Score, vTemp, N, nRow + 1);
 			}
 		}
@@ -39,7 +40,7 @@ int main()
 	int input;
 	cin >> input;
 
-	vector<vector<int>> vMap(input, vector<int>(input, 0));
+	vector<int> vMap(input, -1);
 	int Score = 0;
 	int nRow = 0;
 	BackTracking(Score, vMap, input, nRow);
