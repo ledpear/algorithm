@@ -4,13 +4,17 @@
 
 using namespace std;
 
+vector<vector<int>> vMap(10, vector<int>(10, 0));
+vector<vector<int>> vRow = vMap;
+vector<vector<int>> vColumn = vMap;
+vector<vector<int>> vArea = vMap;
+vector<pair<int, int>> vFind;
 vector<vector<int>> gMap;
 bool bResult;
 
-void BackTracking(vector<vector<int>> vMap, vector<vector<int>> vRow, vector<vector<int>> vColumn, vector<vector<int>> vArea,
-	vector<pair<int, int>> vFind, int nCnt)
+void BackTracking(int nCnt)
 {
-	if (vFind.size() != nCnt)
+	if (vFind.size() != nCnt && !bResult)
 	{
 		pair<int, int> pTemp = vFind[nCnt];
 
@@ -25,7 +29,7 @@ void BackTracking(vector<vector<int>> vMap, vector<vector<int>> vRow, vector<vec
 				vRow[nY][a] = true;
 				vColumn[nX][a] = true;
 				vArea[(((nY - 1) / 3) * 3) + (((nX - 1) / 3) % 3) + 1][a] = true;
-				BackTracking(vMap, vRow, vColumn, vArea, vFind, nCnt + 1);
+				BackTracking(nCnt + 1);
 				vMap[nY][nX] = 0;
 				vRow[nY][a] = false;
 				vColumn[nX][a] = false;
@@ -35,31 +39,19 @@ void BackTracking(vector<vector<int>> vMap, vector<vector<int>> vRow, vector<vec
 	}
 	else
 	{
-		gMap = vMap;
-
-		for (int i = 1; i < 10; i++)
+		if (!bResult)
 		{
-			int j;
-			for (j = 1; j < 9; j++)
-			{
-				cout << gMap[i][j] << " ";
-			}
-			cout << gMap[i][j] << "\n";
+			gMap = vMap;
+			bResult = true;
 		}
-
-		system("pause");
-		exit(0);
 	}
 }
 
 int main()
 {
-	vector<vector<int>> vMap(10, vector<int>(10, 0));
-	vector<vector<int>> vRow = vMap;
-	vector<vector<int>> vColumn = vMap;
-	vector<vector<int>> vArea = vMap;
-
-	vector<pair<int, int>> vFind;
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
 	for (int i = 1; i < 10; i++)
 	{
@@ -84,7 +76,17 @@ int main()
 	gMap = vMap;
 	bResult = false;
 
-	BackTracking(vMap, vRow, vColumn, vArea, vFind, 0);
+	BackTracking(0);
+
+	for (int i = 1; i < 10; i++)
+	{
+		int j;
+		for (j = 1; j < 9; j++)
+		{
+			cout << gMap[i][j] << " ";
+		}
+		cout << gMap[i][j] << "\n";
+	}
 
 	return 0;
 }
