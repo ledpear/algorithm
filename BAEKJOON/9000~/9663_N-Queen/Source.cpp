@@ -3,9 +3,9 @@
 
 using namespace std;
 
-void BackTracking(int &Score, vector<vector<int>> vMap, int N, int count)
+void BackTracking(int &Score, vector<vector<int>> vMap, int N, int nRow)
 {
-	if (N == count)
+	if (N == nRow)
 	{
 		Score++;
 		return;
@@ -14,36 +14,21 @@ void BackTracking(int &Score, vector<vector<int>> vMap, int N, int count)
 	{
 		for (int i = 0; i < N; i++)
 		{
-			for (int j = 0; j < N; j++)
+			if (!vMap[nRow][i])
 			{
-				if(vMap[i][j])	continue;
-				else
+				vector<vector<int>> vTemp = vMap;
+				vTemp[nRow][i] = 9;
+
+				for (int j = 1; j < N - nRow; j++)
 				{
-					vector<vector<int>> vTemp = vMap;
-
-					vTemp[i][j] = true;
-					for (int a = 0; a < N; a++)
-					{
-						vTemp[i][a] = true;
-						vTemp[a][j] = true;
-						if (i - a >= 0)
-						{
-							if (j - a >= 0)
-								vTemp[i - a][j - a] = true;
-							if (j + a < N)
-								vTemp[i - a][j + a] = true;
-						}
-						if (i + a < N)
-						{
-							if (j - a >= 0)
-								vTemp[i + a][j - a] = true;
-							if (j + a < N)
-								vTemp[i + a][j + a] = true;
-						}
-					}
-
-					BackTracking(Score, vTemp, N, count + 1);
+					vTemp[nRow + j][i] = true;
+					if (i - j >= 0)
+						vTemp[nRow + j][i - j] = true;
+					if (i + j < N)
+						vTemp[nRow + j][i + j] = true;
 				}
+
+				BackTracking(Score, vTemp, N, nRow + 1);
 			}
 		}
 	}
@@ -56,8 +41,10 @@ int main()
 
 	vector<vector<int>> vMap(input, vector<int>(input, 0));
 	int Score = 0;
-	int count = 0;
-	BackTracking(Score, vMap, input, count);
+	int nRow = 0;
+	BackTracking(Score, vMap, input, nRow);
+
+	cout << Score << endl;
 
 	return 0;
 }
