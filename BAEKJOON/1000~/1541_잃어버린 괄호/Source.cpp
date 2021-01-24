@@ -6,6 +6,7 @@
 #include <string>
 
 using namespace std;
+#define INF -987654321
 
 int main()
 {
@@ -14,42 +15,86 @@ int main()
 
 	vector<int> vNumber;
 	vector<char> vOper;
-	string strTemp = "";
+	string strTemp1 = "";
+	string strTemp2 = "";
 
-	strTemp += input[0];
+	strTemp1 += input[0];
+	
+	string strMinus = "";
+	bool bPlus = false;
 	for (int i = 1; i < input.size(); i++)
 	{
 		if (input[i] == '+' || input[i] == '-')
 		{
-			vNumber.push_back(stoi(strTemp));
-			vOper.push_back(input[i]);
-			strTemp = "";
+			if (bPlus)
+			{
+				int nTemp = stoi(strTemp1) + stoi(strTemp2);
+				strTemp2 = to_string(nTemp);
+				bPlus = false;
+			}
+
+			if (input[i] == '-')
+			{
+				if(strTemp2.compare("") == 0)
+					strMinus += strTemp1;
+				else
+					strMinus += strTemp2;
+				
+				strMinus += '-';
+				strTemp1 = "";
+				strTemp2 = "";
+			}
+			else if (input[i] == '+')
+			{
+				bPlus = true;
+				strTemp2 = strTemp1;
+				strTemp1 = "";
+			}
 		}
 		else
 		{
-			strTemp += input[i];
+			strTemp1 += input[i];
 		}
 	}
-	vNumber.push_back(stoi(strTemp));
 
-	vector<bool> vUsed(vNumber.size(), false);
-	for (int i = 0; i < vOper.size(); i++)
+	if (bPlus)
 	{
-		if (vOper[i] == '+')
+		int nTemp = stoi(strTemp1) + stoi(strTemp2);
+		strMinus += to_string(nTemp);
+	}
+	else
+		strMinus += strTemp1;
+
+	strTemp1 = strMinus[0];
+	bool bFirst = true;
+	int nSum = INF;
+	for (int i = 1; i < strMinus.size(); i++)
+	{
+		if (strMinus[i] == '-')
 		{
-			vNumber[i] += vNumber[i + 1];
-			vUsed[i + 1] = true;
+			if (bFirst)
+			{
+				nSum = stoi(strTemp1);
+				bFirst = false;
+			}
+			else
+			{
+				nSum -= stoi(strTemp1);
+			}
+			strTemp1 = "";
+		}
+		else
+		{
+			strTemp1 += strMinus[i];
 		}
 	}
 
-	int nSum = vNumber[0];
-	for (int i = 1; i < vNumber.size(); i++)
-	{
-		if (!vUsed[i])
-			nSum -= vNumber[i];
-	}
+	if (nSum == INF)
+		nSum = stoi(strTemp1);
+	else
+		nSum -= stoi(strTemp1);
 
-	cout << nSum << endl;
+	cout << nSum << '\n';
 
 	return 0;
 }
