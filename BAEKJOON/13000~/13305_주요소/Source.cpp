@@ -22,9 +22,9 @@ int main()
 	long long nPrice = 1000000001;
 	for (int i = 0; i < nSize - 1; i++)
 	{
-		if (nPrice > vCity[i])
+		if (nPrice > vCity[i])	//최저값보다 작으면 기름값 갱신
 			nPrice = vCity[i];
-		nCost += nPrice * vDist[i];
+		nCost += nPrice * vDist[i]; // 최저값 * 거리
 	}
 
 	cout << nCost << '\n';
