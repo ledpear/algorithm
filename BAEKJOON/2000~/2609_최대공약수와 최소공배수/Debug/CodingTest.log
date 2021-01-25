@@ -1,0 +1,4 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\2000~\2609_최대공약수와 최소공배수\source.cpp(22): warning C4101: 'nMul': unreferenced local variable
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\2000~\2609_최대공약수와 최소공배수\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\2000~\2609_최대공약수와 최소공배수\Debug\CodingTest.pdb (Full PDB)
