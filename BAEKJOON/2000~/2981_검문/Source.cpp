@@ -7,25 +7,44 @@
 
 using namespace std;
 
+int gcd(int a, int b)
+{
+	return b == 0 ? a : gcd(b, a % b);
+}
+
 int main()
 {
-	int nSize, nCount;
-	cin >> nSize >> nCount;
+	int nSize;
+	cin >> nSize;
+	vector<int> vArr(nSize);
+	for (int i = 0; i < nSize; i++)
+		cin >> vArr[i];
 
-	vector<vector<int>> vDP(nSize + 1, vector<int>(nSize + 1));
-
-	for (int i = 0; i <= nSize; i++)
+	sort(vArr.begin(), vArr.end());
+	int n = vArr[1] - vArr[0];
+	for (int i = 2; i < nSize; i++)
 	{
-		for (int j = 0; j <= i; j++)
-		{
-			if (j == 0 || j == i)
-				vDP[i][j] = 1;
-			else
-				vDP[i][j] = (vDP[i - 1][j - 1] + vDP[i - 1][j]) % 10007;
-		}
+		n = gcd(n, vArr[i] - vArr[i - 1]);
 	}
 
-	cout << vDP[nSize][nCount] << '\n';
+	vector<int> vResult;
+
+	for (int i = 2; i * i <= n; i++)
+	{
+		if (n % i == 0)
+		{
+			vResult.push_back(i);
+			if (n / i != i)
+				vResult.push_back(n / i);
+		}
+	}
+	vResult.push_back(n);
+	sort(vResult.begin(), vResult.end());
+
+	int i;
+	for (i = 0; i < vResult.size() - 1; i++)
+		cout << vResult[i] << ' ';
+	cout << vResult[i] << '\n';
 
 	system("pause");
 
