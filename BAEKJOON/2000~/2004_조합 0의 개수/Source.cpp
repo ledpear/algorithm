@@ -13,24 +13,43 @@ int main()
 {
 	int n, m;
 	cin >> n >> m;
-	vector<vector<node>> vDP(n + 1, vector<node>(n + 1));
+	vector<vector<unsigned long long>> vDP(n + 1, vector<unsigned long long>(n + 1));
 	for (int i = 0; i <= n; i++)
 	{
 		for (int j = 0; j <= i; j++)
 		{
-			node temp;
+			unsigned long long temp;
 			if (j == 0 || j == i)
 			{
-				temp.first = 1;
-				temp.second = 0;
-				vDP[i][j] = temp;
+				vDP[i][j] = 1;
 			}
 			else
 			{
-				temp.first = vDP[i - 1][j - 1].first + vDP[i - 1][j].first;
-				temp.second = vDP[i - 1][j - 1].first + vDP[i - 1][j].first;
+				vDP[i][j] = (vDP[i - 1][j - 1] + vDP[i - 1][j]) % max;
 			}
+
+			if (i == n && j == m) break;
 		}
 	}
+
+	int nCount = 0;
+
+	while (true)
+	{
+		if (vDP[n][m] % 10 == 0)
+		{
+			nCount++;
+			vDP[n][m] /= 10;
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	cout << nCount << '\n';
+
+	system("pause");
+
 	return 0;
 }
