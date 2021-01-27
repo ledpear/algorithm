@@ -13,40 +13,28 @@ int main()
 {
 	int n, m;
 	cin >> n >> m;
-	vector<vector<unsigned long long>> vDP(n + 1, vector<unsigned long long>(n + 1));
-	for (int i = 0; i <= n; i++)
-	{
-		for (int j = 0; j <= i; j++)
-		{
-			unsigned long long temp;
-			if (j == 0 || j == i)
-			{
-				vDP[i][j] = 1;
-			}
-			else
-			{
-				vDP[i][j] = (vDP[i - 1][j - 1] + vDP[i - 1][j]) % max;
-			}
-
-			if (i == n && j == m) break;
-		}
-	}
+	
+	unsigned long long nNum = 1;
 
 	int nCount = 0;
 
-	while (true)
+	for (int i = 1; i <= m; i++)
 	{
-		if (vDP[n][m] % 10 == 0)
+		nNum = ((nNum * (n - i + 1)) / i) % max;
+
+		while (true)
 		{
-			nCount++;
-			vDP[n][m] /= 10;
-		}
-		else
-		{
-			break;
+			if (nNum % 10 == 0)
+			{
+				nCount++;
+				nNum /= 10;
+			}
+			else
+			{
+				break;
+			}
 		}
 	}
-
 	cout << nCount << '\n';
 
 	system("pause");
