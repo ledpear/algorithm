@@ -1,3 +1,4 @@
 ﻿  Source.cpp
+h:\_algorithm\baekjoon\18000~\18258_큐 2\source.cpp(14): warning C4091: 'typedef ': ignored on left of 'node' when no variable is declared
   CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\18000~\18258_큐 2\Debug\CodingTest.exe
   CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\18000~\18258_큐 2\Debug\CodingTest.pdb (Full PDB)

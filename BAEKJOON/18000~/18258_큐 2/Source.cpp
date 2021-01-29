@@ -4,9 +4,89 @@
 #include <algorithm>
 #include <cmath>
 #include <string>
-#include <queue>
 
 using namespace std;
+
+typedef struct node
+{
+	int data;
+	struct node* link;
+};
+
+class cQueue
+{
+public:
+	cQueue()
+	{
+		m_bEmpty = true;
+		m_nSize = 0;
+		m_nFront = nullptr;
+		m_nback = nullptr;
+	};
+	int GetSize() { return m_nSize; };
+	bool GetEmpty() { return m_bEmpty; };
+	int GetFront()
+	{
+		if (m_bEmpty)
+			return -1;
+		else
+			return m_nFront->data;
+	};
+	int GetBack()
+	{
+		if (m_bEmpty)
+			return -1;
+		else
+			return m_nback->data;
+	};
+	void Push(int input)
+	{
+		node* nTemp = new node;
+		nTemp->data = input;
+		nTemp->link = nullptr;
+		if (m_nFront == nullptr)
+		{
+			m_nFront = nTemp;
+		}
+		if (m_nback == nullptr)
+		{
+			m_nback = nTemp;
+		}
+		else
+		{
+			m_nback->link = nTemp;
+			m_nback = nTemp;
+		}
+		m_nSize++;
+		m_bEmpty = false;
+	};
+	int Pop()
+	{
+		if (m_bEmpty)
+			return -1;
+
+		node* nTemp = m_nFront;
+		int nOutput = nTemp->data;
+		m_nFront = nTemp->link;
+		m_nSize--;
+
+		delete(nTemp);
+		if (m_nSize == 0)
+		{
+			m_bEmpty = true;
+			m_nback = nullptr;
+		}
+
+		return nOutput;
+	};
+
+protected:
+private:
+	bool	m_bEmpty;
+	node*	m_nFront;
+	node*	m_nback;
+	int		m_nSize;
+};
 
 int main()
 {
@@ -15,7 +95,7 @@ int main()
 	int nSize;
 	cin >> nSize;
 	string strCommand;
-	queue<int> qu;
+	cQueue qu;
 	for (int i = 0; i < nSize; i++)
 	{
 		cin >> strCommand;
@@ -24,39 +104,27 @@ int main()
 		{
 			int input;
 			cin >> input;
-			qu.push(input);
+			qu.Push(input);
 		}
 		if (strCommand == "pop")
 		{
-			if (qu.empty())
-				cout << -1 << '\n';
-			else
-			{
-				cout << qu.front() << '\n';
-				qu.pop();
-			}			
+			cout << qu.Pop() << '\n';
 		}
 		if (strCommand == "size")
 		{
-			cout << qu.size() << '\n';
+			cout << qu.GetSize() << '\n';
 		}
 		if (strCommand == "empty")
 		{
-			cout << qu.empty() << '\n';
+			cout << qu.GetEmpty() << '\n';
 		}
 		if (strCommand == "front")
 		{
-			if (qu.empty())
-				cout << -1 << '\n';
-			else
-				cout << qu.front() << '\n';
+			cout << qu.GetFront() << '\n';
 		}
 		if (strCommand == "back")
 		{
-			if (qu.empty())
-				cout << -1 << '\n';
-			else
-				cout << qu.back() << '\n';
+			cout << qu.GetBack() << '\n';
 		}
 	}
 
