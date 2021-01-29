@@ -12,43 +12,32 @@ int main()
 {
 	int nSize;
 	cin >> nSize;
-	stack<int> sInput;
-	int nTemp;
+	vector<int> vArr(nSize);
+
+	for (int i = 0; i < nSize; i++)
+		cin >> vArr[i];
+
+	stack<int> s;
+	vector<int> vResult(nSize, -1);
+
 	for (int i = 0; i < nSize; i++)
 	{
-		cin >> nTemp;
-		sInput.push(nTemp);
-	}
-
-	stack<int> sCompare;
-	stack<int> sOutput;
-	while (!sInput.empty())
-	{
-		if (sCompare.empty())
-		{
-			sOutput.push(-1);
-			sCompare.push(sInput.top());
-			sInput.pop();
-		}
+		if (s.empty())
+			s.push(i);
 		else
 		{
-			if (sInput.top() > sCompare.top())
-				sCompare.pop();
-			else
+			while (!s.empty() && vArr[i] > vArr[s.top()])
 			{
-				sOutput.push(sCompare.top());
-				sCompare.push(sInput.top());
-				sInput.pop();
+				vResult[s.top()] = vArr[i];
+				s.pop();
 			}
+			s.push(i);
 		}
 	}
 
-	while (sOutput.size() > 1)
-	{
-		cout << sOutput.top() << ' ';
-		sOutput.pop();
-	}
-	cout << sOutput.top() << '\n';
+	for (int i = 0; i < nSize - 1; i++)
+		cout << vResult[i] << ' ';
+	cout << vResult[nSize - 1] << '\n';
 
 	system("pause");
 
