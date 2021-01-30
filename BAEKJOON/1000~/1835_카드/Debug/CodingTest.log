@@ -1,0 +1,4 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\1000~\1835_카드\source.cpp(23): warning C4101: 'nTemp': unreferenced local variable
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\1000~\1835_카드\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\1000~\1835_카드\Debug\CodingTest.pdb (Full PDB)
