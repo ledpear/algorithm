@@ -91,7 +91,12 @@ public:
 			nFront = nTemp->BackLink;
 			delete(nTemp);
 			nSize--;
-			if (nSize == 0)	bEmpty = true;
+			if (nSize == 0)
+			{
+				bEmpty = true;
+				nFront = nullptr;
+				nBack = nullptr;
+			}
 
 			return nOutput;
 		}
@@ -107,7 +112,12 @@ public:
 			nBack = nTemp->FrontLink;
 			delete(nTemp);
 			nSize--;
-			if (nSize == 0)	bEmpty = true;
+			if (nSize == 0)
+			{
+				bEmpty = true;
+				nFront = nullptr;
+				nBack = nullptr;
+			}
 
 			return nOutput;
 		}
