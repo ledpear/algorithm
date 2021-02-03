@@ -1,0 +1,5 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\5000~\5430_ac\source.cpp(32): warning C4018: '<': signed/unsigned mismatch
+h:\_algorithm\baekjoon\5000~\5430_ac\source.cpp(50): warning C4018: '<': signed/unsigned mismatch
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\5000~\5430_AC\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\5000~\5430_AC\Debug\CodingTest.pdb (Full PDB)
