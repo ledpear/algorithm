@@ -1,0 +1,4 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\2000~\2630_색종이 만들기\source.cpp(33): warning C4101: 'bCompare': unreferenced local variable
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\2000~\2630_색종이 만들기\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\2000~\2630_색종이 만들기\Debug\CodingTest.pdb (Full PDB)
