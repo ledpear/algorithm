@@ -33,44 +33,35 @@ int main()
 	sort(vArr.begin(), vArr.end());
 
 	int nLeftPos = vArr[0].first;
-	int nRightPos = vArr[vArr.size() - 1].first;
-	int nResult = 0;
-	bool bLeft = true;
 	int nLeftMax = vMap[nLeftPos];
+	int nRightPos = vArr[vArr.size() - 1].first;
 	int nRightMax = vMap[nRightPos];
-	while (nLeftPos != nRightPos)
+
+	int nResult = 0;
+	bool bLeft = true;	
+
+	for (int i = 0; i < vArr.size(); i++)
 	{
-		if (bLeft)
+		if (nLeftMax <= vArr[i].second)
 		{
-			if (vMap[nLeftPos] > nLeftMax)
-			{
-				nLeftMax = vMap[nLeftPos];
-				bLeft = !bLeft;
-			}
-			else
-			{
-				vMap[nLeftPos] = nLeftMax;
-				nLeftPos++;
-			}
-		}
-		else
-		{
-			if (vMap[nRightPos] > nRightMax)
-			{
-				nRightMax = vMap[nRightPos];
-				bLeft = !bLeft;
-			}
-			else
-			{
-				vMap[nRightPos] = nRightMax;
-				nRightPos--;
-			}
+			nResult += (vArr[i].first - nLeftPos) * nLeftMax;
+			nLeftMax = vArr[i].second;
+			nLeftPos = vArr[i].first;
 		}
 	}
 
-	for (int i = vArr[0].first; i <= vArr[vArr.size() - 1].first; i++)
-		nResult += vMap[i];
+	for (int i = vArr.size() -1 ; i >= 0; i--)
+	{
+		if (nRightMax < vArr[i].second)
+		{
+			nResult += (nRightPos - vArr[i].first) * nRightMax;
+			nRightMax = vArr[i].second;
+			nRightPos = vArr[i].first;
+		}
+	}
 
+	nResult += nLeftMax;
+	
 	cout << nResult << '\n';
 
 	return 0;
