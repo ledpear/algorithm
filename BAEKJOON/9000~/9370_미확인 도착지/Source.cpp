@@ -24,10 +24,8 @@ int main()
 		int nNodeSize, nEdgeSize, nTargetSize;
 		cin >> nNodeSize >> nEdgeSize >> nTargetSize;
 
+		vector<vector<pair<int,int>>> vEdge(nNodeSize + 1);
 		vector<vector<int>> vMap(nNodeSize + 1, vector<int>(nNodeSize + 1, INF));
-
-		for (int i = 1; i <= nNodeSize; i++)
-			vMap[i][i] = 0;
 
 		int nStartNode;
 		int nRoute[2];
@@ -37,23 +35,64 @@ int main()
 		{
 			int nStart, nEnd, nW;
 			cin >> nStart >> nEnd >> nW;
-			vMap[nStart][nEnd] = nW;
-			vMap[nEnd][nStart] = nW;
+			vEdge[nStart].emplace_back(nEnd, nW);
+			vEdge[nEnd].emplace_back(nStart, nW);
 		}
 
-		for (int k = 1; k <= nNodeSize; k++)
+		priority_queue<pair<int, int>> pq;
+		pq.push(make_pair(0, nStartNode));
+		vMap[nStartNode][nStartNode] = 0;
+
+		while (!pq.empty())
 		{
-			for (int i = 1; i <= nNodeSize; i++)
+			pair<int, int> nTemp = pq.top();
+			pq.pop();
+
+			int nCost = -nTemp.first;
+			int nNode = nTemp.second;
+
+			for (int i = 0; i < vEdge[nNode].size(); i++)
 			{
-				for (int j = 1; j <= nNodeSize; j++)
+				int nTempNode = vEdge[nNode][i].first;
+				int nTempCost = vEdge[nNode][i].second;
+
+				if (vMap[nStartNode][nTempNode] > nCost + nTempCost)
 				{
-					vMap[i][j] = min(vMap[i][j], vMap[i][k] + vMap[k][j]);
+					vMap[nStartNode][nTempNode] = nCost + nTempCost;
+					pq.push(make_pair(-vMap[nStartNode][nTempNode], nTempNode));
+				}					
+			}
+		}
+
+		for (int i = 0; i < 2; i++)
+		{
+			pq.push(make_pair(0, nRoute[i]));
+			vMap[nRoute[i]][nRoute[i]] = 0;
+
+			while (!pq.empty())
+			{
+				pair<int, int> nTemp = pq.top();
+				pq.pop();
+
+				int nCost = -nTemp.first;
+				int nNode = nTemp.second;
+
+				for (int j = 0; j < vEdge[nNode].size(); j++)
+				{
+					int nTempNode = vEdge[nNode][j].first;
+					int nTempCost = vEdge[nNode][j].second;
+
+					if (vMap[nRoute[i]][nTempNode] > nCost + nTempCost)
+					{
+						vMap[nRoute[i]][nTempNode] = nCost + nTempCost;
+						pq.push(make_pair(-vMap[nRoute[i]][nTempNode], nTempNode));
+					}
 				}
 			}
 		}
 
-		int nMin = INF;
 		vector<int> vResult;
+
 		for (int i = 0; i < nTargetSize; i++)
 		{
 			int nTarget;
@@ -61,14 +100,14 @@ int main()
 
 			for (int j = 0; j < 2; j++)
 			{
-				int nTemp = vMap[nStartNode][nRoute[j]] + vMap[nRoute[0]][nRoute[1]] + vMap[nRoute[!j]][nTarget];
-				if (vMap[nStartNode][nTarget] == nTemp)
+				if (vMap[nStartNode][nTarget] == vMap[nStartNode][nRoute[j]] + vMap[nRoute[0]][nRoute[1]] + vMap[nRoute[!j]][nTarget])
 				{
 					vResult.push_back(nTarget);
 					break;
 				}
 			}
 		}
+
 		sort(vResult.begin(), vResult.end());
 		for (int i = 0; i < vResult.size() - 1; i++)
 			cout << vResult[i] << ' ';

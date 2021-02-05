@@ -1,4 +1,6 @@
 ﻿  Source.cpp
-h:\_algorithm\baekjoon\9000~\9370_미확인 도착지\source.cpp(73): warning C4018: '<': signed/unsigned mismatch
+h:\_algorithm\baekjoon\9000~\9370_미확인 도착지\source.cpp(54): warning C4018: '<': signed/unsigned mismatch
+h:\_algorithm\baekjoon\9000~\9370_미확인 도착지\source.cpp(80): warning C4018: '<': signed/unsigned mismatch
+h:\_algorithm\baekjoon\9000~\9370_미확인 도착지\source.cpp(112): warning C4018: '<': signed/unsigned mismatch
   CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\9000~\9370_미확인 도착지\Debug\CodingTest.exe
   CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\9000~\9370_미확인 도착지\Debug\CodingTest.pdb (Full PDB)
