@@ -1,0 +1,4 @@
+﻿  Source.cpp
+h:\_algorithm\codeforces\round699\space navigation\source.cpp(28): warning C4018: '<': signed/unsigned mismatch
+  CodingTest.vcxproj -> H:\_algorithm\CODEFORCES\Round699\Space Navigation\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\CODEFORCES\Round699\Space Navigation\Debug\CodingTest.pdb (Full PDB)
