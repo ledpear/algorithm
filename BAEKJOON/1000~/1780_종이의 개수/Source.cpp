@@ -13,33 +13,42 @@ using namespace std;
 vector<vector<int>> vMap;
 int nResult[3] = { 0, };
 
-int QT(int h, int w, int size)
+void QT(int h, int w, int size)
 {
-	if (size == 1)
-	{
-		nResult[vMap[h][w]]++;
-		return vMap[h][w];
-	}		
+// 	if (size == 1)
+// 	{
+// 		nResult[vMap[h][w]]++;
+// 		return vMap[h][w];
+// 	}		
 	
 	int nSize = size / 3;
 	int nVal = vMap[h][w];
 	bool bResult = true;
 
-	for (int i = 0; i < 3; i++)
+	for (int i = h; i < h + size; i++)
 	{
-		for (int j = 0; j < 3; j++)
+		for (int j = w; j < w + size; j++)
 		{
-			bResult = (nVal == QT(h + (i * nSize), w + (j * nSize), nSize));
+			bResult = (nVal == vMap[i][j]);
+			if (!bResult) break;
 		}
+		if (!bResult) break;
 	}
 
 	if (bResult)
 	{
-		nResult[nVal] -= 8;
-		return nVal;
+		nResult[nVal]++;
 	}
 	else
-		return -1;
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				QT(h + (i * nSize), w + (j * nSize), nSize);
+			}
+		}
+	}
 }
 
 int main()
