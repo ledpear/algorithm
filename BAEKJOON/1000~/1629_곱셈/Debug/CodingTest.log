@@ -1,0 +1,4 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\1000~\1629_곱셈\source.cpp(16): warning C4244: 'return': conversion from 'unsigned __int64' to 'int', possible loss of data
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\1000~\1629_곱셈\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\1000~\1629_곱셈\Debug\CodingTest.pdb (Full PDB)
