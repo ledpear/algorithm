@@ -41,43 +41,31 @@ qTree* QuadTree(int h, int w, int size)
 	}
 
 	int nColor = vMap[h][w];
-	bool bResult = true;
-	for (int nH = h; nH < h + size; nH++)
-	{
-		for (int nW = w; nW < w + size; nW++)
-		{
-			if (nColor != vMap[nH][nW])
-			{
-				bResult = false;
-				break;
-			}
-		}
-		if (!bResult)break;
-	}
+	int nHalf = size / 2;
 
-	if (bResult)
+	qNode->LT = QuadTree(h, w, nHalf);
+	qNode->RT = QuadTree(h, w + nHalf, nHalf);
+	qNode->LB = QuadTree(h + nHalf, w, nHalf);
+	qNode->RB = QuadTree(h + nHalf, w + nHalf, nHalf);
+
+	if (nColor == qNode->LT->nColor && nColor == qNode->RT->nColor && nColor == qNode->LB->nColor && nColor == qNode->RB->nColor)
 	{
 		qNode->nColor = nColor;
-		qNode->strResult += to_string(qNode->nColor) ;
-		return qNode;
 	}
 	else
-	{
-		int nHalf = size / 2;
-		qNode->LT = QuadTree(h, w, nHalf);
-		qNode->RT = QuadTree(h, w + nHalf, nHalf);
-		qNode->LB = QuadTree(h + nHalf, w, nHalf);
-		qNode->RB = QuadTree(h + nHalf, w + nHalf, nHalf);
+		qNode->nColor = -1;
 
+	if (qNode->nColor >= 0)
+		qNode->strResult = to_string(nColor);
+	else
 		qNode->strResult += '(' + qNode->LT->strResult + qNode->RT->strResult + qNode->LB->strResult + qNode->RB->strResult + ')';
 
-		delete(qNode->LT);
-		delete(qNode->RT);
-		delete(qNode->LB);
-		delete(qNode->RB);
+	delete(qNode->LT);
+	delete(qNode->RT);
+	delete(qNode->LB);
+	delete(qNode->RB);
 
-		return qNode;
-	}
+	return qNode;
 }
 
 int main()
