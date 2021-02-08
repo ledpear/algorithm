@@ -9,22 +9,6 @@
 #include <deque>
 
 using namespace std;
-vector<unsigned long long> V;
-
-int Sol(unsigned long long A, unsigned long long size, unsigned long long C)
-{
-	if (V[size] != 0)
-		return V[size];
-	if (size == 1)
-	{
-		V[size] = A; 
-		return V[size] % C;
-	}
-
-	V[size] = (Sol(A, size / 2, C) * Sol(A, size / 2 + size % 2, C)) % C;
-		
-	return V[size];
-}
 
 int main()
 {
@@ -37,24 +21,24 @@ int main()
 	//cout << Sol(A, B, C) << '\n';
 
 	int nTemp = B;
-	vector<int> V;
+	vector<int> vBinary;
 	vector<unsigned long long> vVal;
 	unsigned long long Result = 1;
 
 	while (nTemp != 0)
 	{
-		V.push_back(nTemp % 2);
+		vBinary.push_back(nTemp % 2);
 		nTemp /= 2;
 	}
 
-	for (int i = 0; i < V.size(); i++)
+	for (int i = 0; i < vBinary.size(); i++)
 	{
 		if (i == 0)
 			vVal.push_back(A % C);
 		else
 			vVal.push_back((vVal[i - 1] * vVal[i - 1]) % C);
 
-		if (V[i])
+		if (vBinary[i])
 		{
 			Result = (Result * vVal[i]) % C;
 		}
