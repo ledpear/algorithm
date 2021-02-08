@@ -1,3 +1,4 @@
 ﻿  Source.cpp
+h:\_algorithm\baekjoon\10000~\10816_숫자 카드 2\source.cpp(24): warning C4101: 'nFind': unreferenced local variable
   CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\10000~\10816_숫자 카드 2\Debug\CodingTest.exe
   CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\10000~\10816_숫자 카드 2\Debug\CodingTest.pdb (Full PDB)

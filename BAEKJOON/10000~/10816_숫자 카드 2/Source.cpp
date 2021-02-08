@@ -7,33 +7,9 @@
 #include <stack>
 #include <queue>
 #include <deque>
+#include <map>
 
 using namespace std;
-
-typedef pair<int, int> P;
-vector<P> vArr;
-
-int search(int nTarget)
-{
-	int nFirst = 0;
-	int nLast = vArr.size() - 1;
-	int nFind;
-	while (nFirst <= nLast)
-	{
-		nFind = (nFirst + nLast) / 2;
-		if (vArr[nFind].first == nTarget)
-			return nFind;
-		else
-		{
-			if (vArr[nFind].first < nTarget)
-				nFirst = nFind + 1;
-			else
-				nLast = nFind - 1;
-		}
-	}
-
-	return -1;
-}
 
 int main()
 {
@@ -41,47 +17,35 @@ int main()
 	cin.tie(0);
 
 	int nSize, nTest;
+	map<int, int> mArr;
 
 	cin >> nSize;
 	
 	int nTemp, nFind;
-	cin >> nTemp;
-	vArr.push_back(P(nTemp, 1));
-	for (int i = 1; i < nSize; i++)
+
+	for (int i = 0; i < nSize; i++)
 	{
 		cin >> nTemp;
-		nFind = search(nTemp);
-		if (nFind == -1)
-		{
-			vArr.push_back(P(nTemp, 1));
-			sort(vArr.begin(), vArr.end());
-		}			
+		auto iter = mArr.find(nTemp);
+		if (iter != mArr.end())
+			iter->second++;
 		else
-			vArr[nFind].second += 1;
+			mArr.insert({ nTemp, 1 });
 	}
-
-	sort(vArr.begin(), vArr.end());
 
 	cin >> nTest;
-	vector<int> vTest(nTest);
-	for (int i = 0; i < nTest; i++)
-		cin >> vTest[i];
 
-	int i;
-	for (i = 0; i < nTest - 1; i++)
+	for (int i = 0; i < nTest; i++)
 	{
-		nFind = search(vTest[i]);
-		if (nFind == -1)
-			cout << '0';
+		cin >> nTemp;
+
+		auto iter = mArr.find(nTemp);
+		if (iter != mArr.end())
+			cout << iter->second;
 		else
-			cout << vArr[nFind].second;
+			cout << '0';
 		cout << ' ';
 	}
-	nFind = search(vTest[i]);
-	if (nFind == -1)
-		cout << '0\n';
-	else
-		cout << vArr[nFind].second << '\n';
 
 	system("pause");
 
