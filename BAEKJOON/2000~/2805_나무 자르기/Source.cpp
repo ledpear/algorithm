@@ -21,37 +21,39 @@ int main()
 	for (int i = 0; i < nSize; i++)
 		cin >> vArr[i];
 
-	sort(vArr.begin(), vArr.end());
-
-	int nStart, nEnd, nFind;
+	unsigned long long nStart, nEnd, nFind, nResult;
 	nStart = 0;
 	nEnd = vArr.back();
-	while (true)
+	nResult = 0;
+	while (nStart <= nEnd)
 	{
-		int nSum = 0;
+		unsigned long long nSum = 0;
 		nFind = (nStart + nEnd) / 2;
 
 		for (int i = 0; i < nSize; i++)
 		{
-			if(vArr[i] > nFind)
+			if (vArr[i] > nFind)
 				nSum += (vArr[i] - nFind);
 		}
 
 		if (nSum == nTarget)
 		{
-			cout << nFind << '\n';
+			nResult = nFind;
 			break;
 		}
 		else
 		{
-			if (nSum < nTarget)
-				nEnd = nFind - 1;
-			else
+			if (nSum > nTarget)
+			{
 				nStart = nFind + 1;
+				if (nResult < nFind)nResult = nFind;
+			}
+			else
+				nEnd = nFind - 1;
 		}
 	}
 
-	system("pause");
+	cout << nResult << '\n';
 
 	return 0;
 }
