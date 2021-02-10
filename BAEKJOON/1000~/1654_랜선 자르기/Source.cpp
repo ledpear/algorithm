@@ -27,7 +27,7 @@ int main()
 	}
 		
 
-	int nStart, nEnd, nFind, nResult;
+	unsigned long long nStart, nEnd, nFind, nResult;
 	nStart = 1;
 	nEnd = nMax;
 	nResult = 0;
