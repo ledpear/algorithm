@@ -9,45 +9,52 @@
 #include <deque>
 
 using namespace std;
+typedef unsigned long long ull;
 vector<int> vArr;
 int nResult = 0;
-void bt(int nStart, int nCount, int nMin, int nFind)
-{
-	if (nCount == 0)
-	{
-		nResult = max(nResult, nMin);
-	}
-	else
-	{
-		int nEnd = vArr.size() - nCount;
-		int nTempMin = nMin;
-
-		for (int i = nStart; i <= nEnd; i++)
-		{
-			if (nFind >= 1)
-				nMin = min(nMin, vArr[i] - vArr[nStart - 1]);
-			bt(i + 1, nCount - 1, nMin, nFind + 1);
-			nMin = nTempMin;
-		}
-	}
-}
 
 int main()
 {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-	int nSize, nCount;
-	cin >> nSize >> nCount;
+	int nSize, nTarget;
+	cin >> nSize >> nTarget;
 	vArr = vector<int>(nSize);
 	for (int i = 0; i < nSize; i++)
 		cin >> vArr[i];
 	sort(vArr.begin(), vArr.end());
 
-	bt(0, nCount, vArr[nSize - 1], 0);
+	ull start, end, find, Result;
+	start = 1;
+	end = vArr[nSize - 1];
+	Result = 0;
 
-	cout << nResult << '\n';
+	while (start <= end)
+	{
+		find = (start + end) / 2;
+		int nCount = 1;
+		int pos = 0;
+		for (int i = 1; i < nSize; i++)
+		{
+			if (find <= vArr[i] - vArr[pos])
+			{
+				nCount++;
+				pos = i;
+			}
+		}
+		if (nTarget <= nCount)
+		{
+			start = find + 1;
+			Result = max(Result, find);
+		}
+		else
+		{
+			end = find - 1;
+		}
+	}
 
+	cout << Result << '\n';
 	system("pause");
 
 	return 0;
