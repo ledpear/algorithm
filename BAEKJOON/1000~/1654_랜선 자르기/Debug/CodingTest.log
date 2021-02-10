@@ -1,0 +1,4 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\1000~\1654_랜선 자르기\source.cpp(44): warning C4390: ';': empty controlled statement found; is this the intent?
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\1000~\1654_랜선 자르기\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\1000~\1654_랜선 자르기\Debug\CodingTest.pdb (Full PDB)
