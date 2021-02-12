@@ -13,22 +13,42 @@ using namespace std;
 typedef unsigned long long ull;
 typedef vector<vector<ull>> matrix;
 
-matrix squared(matrix m)
+matrix operator * (const matrix &A, const matrix &B)
 {
-	int nSize = m.size();
-	matrix mTemp = matrix(nSize, vector<ull>(nSize, 0));
+	ull nSize = A.size();
+	matrix mTemp(nSize, vector<ull>(nSize, 0));
 
-	for (int i = 0; i < nSize; i++)
+	for (ull i = 0; i < nSize; i++)
 	{
-		for (int j = 0; j < nSize; j++)
+		for (ull j = 0; j < nSize; j++)
 		{
-			ull nSum = 0;
-			for (int x = 0; x < nSize; x++)
+			for (ull x = 0; x < nSize; x++)
 			{
-				nSum = (nSum + m[i][x] * m[x][j]) % 1000;
+				mTemp[i][j] += A[i][x] * B[x][j];
 			}
-			mTemp[i][j] = nSum;// % 1000;
+			mTemp[i][j] %= 1000;
 		}
+	}
+	return mTemp;
+}
+
+matrix power(matrix m, ull n)
+{
+	ull nSize = m.size();
+	matrix mTemp(nSize, vector<ull>(nSize));
+	for (ull i = 0; i < nSize; i++)
+	{
+		mTemp[i][i] = 1;
+	}
+
+	while (n > 0)
+	{
+		if (n % 2 == 1)
+		{
+			mTemp = mTemp * m;
+		}
+		n /= 2;
+		m = m * m;
 	}
 
 	return mTemp;
@@ -39,63 +59,36 @@ int main()
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-	int nSize, nCount;
-	matrix m, mResult, temp;
-	bool bStart = false;
+	ull nSize, nCount;
+	matrix m, mResult;
 
 	cin >> nSize >> nCount;
-	m = matrix(nSize, vector<ull>(nSize, 1));
+	m = matrix(nSize, vector<ull>(nSize, 0));
+	mResult = matrix(nSize, vector<ull>(nSize));
 
-	for (int i = 0; i < nSize; i++)
+	for (ull i = 0; i < nSize; i++)
 	{
-		for (int j = 0; j < nSize; j++)
+		for (ull j = 0; j < nSize; j++)
 			cin >> m[i][j];
 	}
 
-
-	if (nCount % 2 == 1)
-	{
-		mResult = m;
-		bStart = true;
-	}
-
-	nCount /= 2;
+	for (ull i = 0; i < nSize; i++)
+		mResult[i][i] = 1;
 
 	while (nCount > 0)
 	{
-		m = squared(m);
 		if (nCount % 2 == 1)
 		{
-			if (!bStart)
-			{
-				mResult = m;
-				bStart = true;
-				nCount /= 2;
-				continue;
-			}
-
-			temp = mResult;
-			for (int i = 0; i < nSize; i++)
-			{
-				for (int j = 0; j < nSize; j++)
-				{
-					ull nSum = 0;
-					for (int x = 0; x < nSize; x++)
-					{
-						nSum = (nSum + temp[i][x] * m[x][j]) % 1000;
-					}
-
-					mResult[i][j] = nSum;// % 1000;
-				}
-			}
+			mResult = mResult * m;
 		}
 
+		m = m * m;
 		nCount /= 2;
 	}
 
-	for (int i = 0; i < nSize; i++)
+	for (ull i = 0; i < nSize; i++)
 	{
-		for (int j = 0; j < nSize; j++)
+		for (ull j = 0; j < nSize; j++)
 			cout << mResult[i][j] << ' ';
 		cout << '\n';
 	}
