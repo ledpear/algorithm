@@ -22,35 +22,14 @@ matrix operator * (const matrix &A, const matrix &B)
 	{
 		for (ull j = 0; j < nSize; j++)
 		{
-			for (ull x = 0; x < nSize; x++)
+			ull nSum = 0;
+			for (int x = 0; x < nSize; x++)
 			{
-				mTemp[i][j] += A[i][x] * B[x][j];
+				nSum += A[i][x] * B[x][j];
 			}
-			mTemp[i][j] %= 1000;
+			mTemp[i][j] = nSum % 1000;
 		}
 	}
-	return mTemp;
-}
-
-matrix power(matrix m, ull n)
-{
-	ull nSize = m.size();
-	matrix mTemp(nSize, vector<ull>(nSize));
-	for (ull i = 0; i < nSize; i++)
-	{
-		mTemp[i][i] = 1;
-	}
-
-	while (n > 0)
-	{
-		if (n % 2 == 1)
-		{
-			mTemp = mTemp * m;
-		}
-		n /= 2;
-		m = m * m;
-	}
-
 	return mTemp;
 }
 
@@ -64,7 +43,7 @@ int main()
 
 	cin >> nSize >> nCount;
 	m = matrix(nSize, vector<ull>(nSize, 0));
-	mResult = matrix(nSize, vector<ull>(nSize));
+	mResult = matrix(nSize, vector<ull>(nSize, 0));
 
 	for (ull i = 0; i < nSize; i++)
 	{
