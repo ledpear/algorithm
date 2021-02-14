@@ -1,0 +1,13 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\2000~\2193_이친수\source.cpp(28): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+h:\_algorithm\baekjoon\2000~\2193_이친수\source.cpp(29): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+h:\_algorithm\baekjoon\2000~\2193_이친수\source.cpp(40): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+h:\_algorithm\baekjoon\2000~\2193_이친수\source.cpp(48): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+h:\_algorithm\baekjoon\2000~\2193_이친수\source.cpp(49): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+h:\_algorithm\baekjoon\2000~\2193_이친수\source.cpp(50): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+h:\_algorithm\baekjoon\2000~\2193_이친수\source.cpp(53): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+h:\_algorithm\baekjoon\2000~\2193_이친수\source.cpp(55): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+h:\_algorithm\baekjoon\2000~\2193_이친수\source.cpp(56): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+h:\_algorithm\baekjoon\2000~\2193_이친수\source.cpp(58): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\2000~\2193_이친수\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\2000~\2193_이친수\Debug\CodingTest.pdb (Full PDB)
