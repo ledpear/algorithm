@@ -1,0 +1,4 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\6000~\6549_히스토그램에서 가장 큰 직사각형\source.cpp(28): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\6000~\6549_히스토그램에서 가장 큰 직사각형\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\6000~\6549_히스토그램에서 가장 큰 직사각형\Debug\CodingTest.pdb (Full PDB)
