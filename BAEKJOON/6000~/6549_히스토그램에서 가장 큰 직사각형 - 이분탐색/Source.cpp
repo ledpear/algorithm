@@ -9,7 +9,8 @@
 #include <deque>
 
 using namespace std;
-typedef unsigned long long ull;
+typedef long long ll;
+vector<ll> vArr;
 
 int main()
 {
@@ -18,71 +19,46 @@ int main()
 
 	while (true)
 	{
-		ull nSize;
+		ll nSize;
 		cin >> nSize;
 		if (nSize == 0)
 			break;
 
-		ull nMax = 0;
-		ull nMin = 1000000001;
-		vector<int> vArr(nSize);
-		for (int i = 0; i < nSize; i++)
+		ll nMax = 0;
+		vArr = vector<ll>(nSize);
+		for (ll i = 0; i < nSize; i++)
 		{
 			cin >> vArr[i];
-			if (nMax < vArr[i])
-				nMax = vArr[i];
-			if (nMin > vArr[i])
-				nMin = vArr[i];
 		}
-			
-		ull nStart, nEnd, nFind, nResult;
-		nResult = 0;
-		nStart = nMin;
-		nEnd = nMax;
-		nFind = 1;
 
-		while (nStart <= nEnd)
+		for (ll i = 0; i < nSize; i++)
 		{
-			ull nSum = 0;
-			ull nTempMin = 1000000001;
-			ull nCount = 0;
-			ull nTemp;
-			bool bContinuous = false;
-			for (int i = 0; i < nSize; i++)
+			ll pos = i - 1;
+			ll val = vArr[i];
+			ll sum = vArr[i];
+
+			while (pos >= 0)
 			{
-				if (vArr[i] >= nFind)
-				{
-					if (nTempMin > vArr[i])
-						nTempMin = vArr[i];
-					nCount++;
-				}
+				if (vArr[pos] >= val)
+					sum += val;
 				else
-				{
-					nTemp = nTempMin * nCount;
-					if (nSum < nTemp)
-						nSum = nTemp;
-					nTemp = 0;
-					nTempMin = 1000000001;
-					nCount = 0;
-				}
+					break;
+				pos--;
 			}
-
-			nTemp = nTempMin * nCount;
-			if (nSum < nTemp)
-				nSum = nTemp;
-
-			if (nResult <= nSum)
+			pos = i + 1;
+			while (pos < nSize)
 			{
-				nResult = nSum;
-				nStart = nFind + 1;
+				if (vArr[pos] >= val)
+					sum += val;
+				else
+					break;
+				pos++;
 			}
-			else
-				nEnd = nFind - 1;
-
-			nFind = (nStart + nEnd) / 2;
+			if (nMax <= sum)
+				nMax = sum;
 		}
 
-		cout << nResult << '\n';
+		cout << nMax << '\n';
 	}
 
 	system("pause");

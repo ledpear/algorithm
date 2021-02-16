@@ -31,12 +31,10 @@ int main()
 		for (int j = i + vArr[i].first; j <= nSize; j++)
 		{
 			vDP[j] = max(vDP[j], vArr[i].second + vDP[i]);
-			if (nMax < vDP[i + vArr[i].first])
-				nMax = vDP[i + vArr[i].first];
 		}
 	}
 
-	cout << nMax << '\n';
+	cout << vDP[nSize] << '\n';
 
 	return 0;
 }
