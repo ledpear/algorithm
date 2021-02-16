@@ -1,0 +1,5 @@
+﻿  Source.cpp
+h:\_algorithm\codeforces\round702_div.3\a. dense array\source.cpp(30): warning C4018: '<': signed/unsigned mismatch
+h:\_algorithm\codeforces\round702_div.3\a. dense array\source.cpp(36): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+  CodingTest.vcxproj -> H:\_algorithm\CODEFORCES\Round702_Div.3\A. Dense Array\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\CODEFORCES\Round702_Div.3\A. Dense Array\Debug\CodingTest.pdb (Full PDB)
