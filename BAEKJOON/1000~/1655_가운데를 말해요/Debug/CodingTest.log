@@ -1,0 +1,4 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\1000~\1655_가운데를 말해요\source.cpp(31): warning C4018: '<': signed/unsigned mismatch
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\1000~\1655_가운데를 말해요\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\1000~\1655_가운데를 말해요\Debug\CodingTest.pdb (Full PDB)
