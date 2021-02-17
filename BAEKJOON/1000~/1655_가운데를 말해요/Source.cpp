@@ -21,19 +21,19 @@ int main()
 	cin.tie(0);
 	int nSize, nTemp;
 	cin >> nSize;
-	priority_queue<int, vector<int>, greater<int>> pq;
+	//priority_queue<int, vector<int>, greater<int>> pq;
+	vector<int> vArr;
+// 	cin >> nTemp;
+// 	vArr.push_back(nTemp);
 	for (int i = 0; i < nSize; i++)
 	{
 		cin >> nTemp;
-		pq.push(nTemp);
-		priority_queue<int, vector<int>, greater<int>> pqTemp = pq;
 
-		for (int i = 0; i < (pq.size() - 1) / 2; i++)
-		{
-			pqTemp.pop();
-		}
+		auto iter = upper_bound(vArr.begin(), vArr.end(), nTemp);
+		vArr.insert(iter, nTemp);
 
-		cout << pqTemp.top() << '\n';
+
+		cout << vArr[(vArr.size() - 1) / 2] << '\n';
 	}
 	system("pause");
 	return 0;
