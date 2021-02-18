@@ -1,0 +1,4 @@
+﻿  Source.cpp
+h:\_algorithm\codeforces\round702_div.2\b. eastern exhibition\source.cpp(42): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+  CodingTest.vcxproj -> H:\_algorithm\CODEFORCES\Round702_Div.2\B. Eastern Exhibition\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\CODEFORCES\Round702_Div.2\B. Eastern Exhibition\Debug\CodingTest.pdb (Full PDB)
