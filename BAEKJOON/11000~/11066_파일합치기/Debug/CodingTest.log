@@ -1,5 +1,2 @@
-﻿  Source.cpp
-h:\_algorithm\baekjoon\11000~\11066_파일합치기\source.cpp(39): warning C4018: '<': signed/unsigned mismatch
-h:\_algorithm\baekjoon\11000~\11066_파일합치기\source.cpp(26): warning C4101: 'nTemp': unreferenced local variable
-  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\11000~\11066_파일합치기\Debug\CodingTest.exe
+﻿  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\11000~\11066_파일합치기\Debug\CodingTest.exe
   CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\11000~\11066_파일합치기\Debug\CodingTest.pdb (Full PDB)

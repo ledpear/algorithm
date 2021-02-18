@@ -1,60 +1,34 @@
-#include <vector>
-#include <iostream>
-#include <limits>
+#include<iostream>
 #include <algorithm>
-#include <cmath>
-#include <string>
-#include <stack>
-#include <queue>
-#include <deque>
-#include <map>
-#include <set>
-#include <functional>
 
+int INF = 1000000007;
 using namespace std;
-typedef unsigned long long ull;
-typedef pair<ull, ull> p;
 
-int main()
-{
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	int nTestSize;
-	cin >> nTestSize;
-	for (int nTest = 0; nTest < nTestSize; nTest++)
-	{
-		int nSize, nTemp, nSum = 0, nMin, nPos;
-		cin >> nSize;
-		vector<int> vArr(nSize);
+int dp[501][501];
+int cost[501];
+int sum[501];
+int T, K, i;
 
-
-		for (int i = 0; i < nSize; i++)
-		{
-			cin >> vArr[i];
+int main() {
+	cin >> T;
+	while (T--) {
+		cin >> K;
+		for (i = 1; i <= K; ++i) {
+			cin >> cost[i];
+			sum[i] = sum[i - 1] + cost[i];
 		}
 
-		while (vArr.size() != 1)
-		{
-			nMin = 987654321;
+		for (int d = 1; d < K; ++d) {
+			for (int tx = 1; tx + d <= K; ++tx) {
+				int ty = tx + d;
+				dp[tx][ty] = INF;
 
-			for (int i = 0; i < vArr.size() - 1; i++)
-			{
-				if (nMin > vArr[i] + vArr[i + 1])
-				{
-					nMin = vArr[i] + vArr[i + 1];
-					nPos = i;
-				}
+				for (int mid = tx; mid < ty; ++mid)
+					dp[tx][ty] = min(dp[tx][ty], dp[tx][mid] + dp[mid + 1][ty] + sum[ty] - sum[tx - 1]);
 			}
-
-			vArr[nPos] = nMin;
-			nSum += nMin;
-			vArr.erase(vArr.begin() + nPos + 1);
 		}
 
-		cout << nSum << '\n';
+		cout << dp[1][K] << endl;
 	}
-
-	system("pause");
-
 	return 0;
 }
