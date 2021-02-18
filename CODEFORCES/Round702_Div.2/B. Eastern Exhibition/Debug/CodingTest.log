@@ -1,4 +1,12 @@
 ﻿  Source.cpp
 h:\_algorithm\codeforces\round702_div.2\b. eastern exhibition\source.cpp(42): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+h:\_algorithm\codeforces\round702_div.2\b. eastern exhibition\source.cpp(69): warning C4244: 'initializing': conversion from 'ull' to 'int', possible loss of data
+h:\_algorithm\codeforces\round702_div.2\b. eastern exhibition\source.cpp(70): warning C4244: 'initializing': conversion from 'ull' to 'int', possible loss of data
+h:\_algorithm\codeforces\round702_div.2\b. eastern exhibition\source.cpp(71): warning C4244: 'initializing': conversion from 'ull' to 'int', possible loss of data
+h:\_algorithm\codeforces\round702_div.2\b. eastern exhibition\source.cpp(72): warning C4244: 'initializing': conversion from 'ull' to 'int', possible loss of data
+h:\_algorithm\codeforces\round702_div.2\b. eastern exhibition\source.cpp(81): warning C4244: '/=': conversion from 'double' to 'ull', possible loss of data
+h:\_algorithm\codeforces\round702_div.2\b. eastern exhibition\source.cpp(82): warning C4244: '=': conversion from 'double' to 'ull', possible loss of data
+h:\_algorithm\codeforces\round702_div.2\b. eastern exhibition\source.cpp(84): warning C4244: '=': conversion from 'double' to 'ull', possible loss of data
+h:\_algorithm\codeforces\round702_div.2\b. eastern exhibition\source.cpp(85): warning C4244: '=': conversion from 'double' to 'ull', possible loss of data
   CodingTest.vcxproj -> H:\_algorithm\CODEFORCES\Round702_Div.2\B. Eastern Exhibition\Debug\CodingTest.exe
   CodingTest.vcxproj -> H:\_algorithm\CODEFORCES\Round702_Div.2\B. Eastern Exhibition\Debug\CodingTest.pdb (Full PDB)

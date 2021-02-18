@@ -12,7 +12,7 @@
 #include <functional>
 
 using namespace std;
-typedef unsigned long long ull;
+typedef long long ull;
 typedef pair<ull, ull> p;
 
 ull dist(p a, p b)
@@ -54,21 +54,46 @@ int main()
 				nMin_Y = vArr[i].second;
 		}
 
-		p pCenter;
-		pCenter.first = nMin_X + ((nMax_X - nMin_X) / 2);
-		pCenter.second = nMin_Y + ((nMax_Y - nMin_Y) / 2);
+		int j;
+		p pA, pB, pCenter;
+		pCenter.first = 0;
+		pCenter.second = 0;
+		ull area = 0;
+		for (int i = 0; i < nSize; i++)
+		{
+			j = (i + 1) % nSize;
 
+			pA = vArr[i];
+			pB = vArr[j];
+
+			int x1 = pA.first;
+			int x2 = pB.first;
+			int y1 = pA.second;
+			int y2 = pB.second;
+
+			area += x1 * y2;
+			area -= y1 * x2;
+
+			pCenter.first += ((x1 + x2) * ((x1 * y2) - (x2 * y1)));
+			pCenter.second += ((y1 + y2) * ((x1 * y2) - (x2 * y1)));
+		}
+
+		area /= 2.0;
+		area = fabs(area);
+
+		pCenter.first = abs(pCenter.first / (6.0 * area));
+		pCenter.second = abs(pCenter.second / (6.0 * area));
 
 		ull nCount = 0;
 		ull nMin = 2000000001;
 		ull nDist = 0;
 		p temp;
-		
+
 		for (int i = (int)pCenter.first - 1; i <= (int)pCenter.first + 1; i++)
 		{
 			for (int j = (int)pCenter.second - 1; j <= (int)pCenter.second + 1; j++)
 			{
-				if(i < 0 || j < 0)
+				if (i < 0 || j < 0)
 					continue;
 
 				nDist = 0;
@@ -77,7 +102,7 @@ int main()
 				for (int k = 0; k < nSize; k++)
 				{
 					nDist += dist(temp, vArr[k]);
-				}		
+				}
 				if (nMin == nDist)
 					nCount++;
 				else if (nMin > nDist)
