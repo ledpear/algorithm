@@ -22,16 +22,34 @@ int main()
 
 	int nTestSize;
 	cin >> nTestSize;
+	vector<int> vDP(101, 1000000001);
+	vDP[0] = 0;
 
 	for (int nTest = 0; nTest < nTestSize; nTest++)
 	{
-		int nSize;
+		ull nSize, nTemp, nSum = 0;
+		bool bResult = true;
 		cin >> nSize;
-		vector<int> vArr(nSize);
 
 		for (int i = 0; i < nSize; i++)
-			cin >> vArr[i];
-	}
+		{
+			cin >> nTemp;
+			nSum += nTemp;
 
+			if (vDP[i] == 1000000001)
+				vDP[i] = vDP[i - 1] + i;
+
+			if (nSum < vDP[i])
+			{
+				bResult = false;
+			}
+		}
+
+		if (bResult)
+			cout << "YES\n";
+		else
+			cout << "NO\n";
+	}
+	system("pause");
 	return 0;
 }
