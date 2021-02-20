@@ -1,0 +1,5 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\7000~\7576_토마토\source.cpp(54): warning C4244: '=': conversion from 'ull' to 'int', possible loss of data
+h:\_algorithm\baekjoon\7000~\7576_토마토\source.cpp(55): warning C4244: '=': conversion from 'ull' to 'int', possible loss of data
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\7000~\7576_토마토\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\7000~\7576_토마토\Debug\CodingTest.pdb (Full PDB)
