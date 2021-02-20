@@ -1,0 +1,6 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\2000~\2178_미로탐색\source.cpp(45): warning C4244: '=': conversion from 'ull' to 'int', possible loss of data
+h:\_algorithm\baekjoon\2000~\2178_미로탐색\source.cpp(46): warning C4244: '=': conversion from 'ull' to 'int', possible loss of data
+h:\_algorithm\baekjoon\2000~\2178_미로탐색\source.cpp(58): warning C4244: 'argument': conversion from 'ull' to 'unsigned int', possible loss of data
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\2000~\2178_미로탐색\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\2000~\2178_미로탐색\Debug\CodingTest.pdb (Full PDB)
