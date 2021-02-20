@@ -13,6 +13,7 @@
 using namespace std;
 typedef unsigned long long ull;
 typedef pair<ull, ull> p;
+typedef vector<vector<int>> vmap;
 
 int main()
 {
