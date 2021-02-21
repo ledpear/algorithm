@@ -3,7 +3,10 @@
 
 ### 알고리즘 트레이닝 사이트
 
-- 백준 : tjsrb7575
-- 프로그래머스 : 김선규
+- BaekJoon : tjsrb7575
+- Programmers : 김선규
 - LeetCode : LEDPEAR
 - CodeForces : LEDPEAR
+
+### 알고리즘 문제를 풀고 해설을 블로그에 작성합니다.
+- Blog : https://ledpear.tistory.com/
