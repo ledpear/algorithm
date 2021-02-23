@@ -1,0 +1,6 @@
+﻿  Source.cpp
+h:\_algorithm\codeforces\round704_div.2\c. maximum width\source.cpp(46): warning C4244: 'initializing': conversion from 'ull' to 'int', possible loss of data
+h:\_algorithm\codeforces\round704_div.2\c. maximum width\source.cpp(72): warning C4244: 'initializing': conversion from 'ull' to 'int', possible loss of data
+h:\_algorithm\codeforces\round704_div.2\c. maximum width\source.cpp(88): warning C4244: '=': conversion from 'ull' to 'int', possible loss of data
+  CodingTest.vcxproj -> H:\_algorithm\CODEFORCES\Round704_Div.2\C. Maximum width\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\CODEFORCES\Round704_Div.2\C. Maximum width\Debug\CodingTest.pdb (Full PDB)
