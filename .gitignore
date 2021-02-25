@@ -4,8 +4,5 @@
 
 *.opendb
 *.db
-*.sln
-*.sln
-BAEKJOON/2000~/2206_벽 부스고 이동하기/.vs/CodingTest/v14/.suo
-BAEKJOON/2000~/2206_벽 부스고 이동하기/CodingTest.sln
-BAEKJOON/2000~/2206_벽 부스고 이동하기/CodingTest.VC.db
+*.filters
+*.suo
