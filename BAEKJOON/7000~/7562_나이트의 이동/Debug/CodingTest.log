@@ -1,0 +1,6 @@
+﻿  Source.cpp
+h:\_algorithm\baekjoon\7000~\7562_나이트의 이동\source.cpp(46): warning C4244: '=': conversion from 'ull' to 'int', possible loss of data
+h:\_algorithm\baekjoon\7000~\7562_나이트의 이동\source.cpp(47): warning C4244: '=': conversion from 'ull' to 'int', possible loss of data
+h:\_algorithm\baekjoon\7000~\7562_나이트의 이동\source.cpp(48): warning C4244: '=': conversion from 'ull' to 'int', possible loss of data
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\7000~\7562_나이트의 이동\Debug\CodingTest.exe
+  CodingTest.vcxproj -> H:\_algorithm\BAEKJOON\7000~\7562_나이트의 이동\Debug\CodingTest.pdb (Full PDB)
