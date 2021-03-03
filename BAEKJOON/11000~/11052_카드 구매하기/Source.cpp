@@ -22,31 +22,28 @@ int main()
 
 	int nSize;
 	cin >> nSize;
-	vector<int> vArr(nSize);
-	vector<vector<int>> vDP(nSize + 1, vector<int>(nSize + 1, 0));
+	vector<int> vArr(nSize + 1);
+	vector<int> vDP(nSize + 1, 0);
 	
-	for (int i = 0; i < nSize; i++)
+	for (int i = 1; i <= nSize; i++)
 	{
 		cin >> vArr[i];
 	}
 
 	for (int i = 1; i <= nSize; i++)
 	{
-		vDP[1][i] = vArr[0] * i;
+		vDP[i] = vArr[1] * i;
 	}
 
 	for (int i = 2; i <= nSize; i++)
 	{
-		for (int j = 0; j <= nSize; j++)
+		for (int j = i; j <= nSize; j++)
 		{
-			if (j < i)
-				vDP[i][j] = vDP[i - 1][j];
-			else
-				vDP[i][j] = max(vDP[i - 1][j], vArr[i - 1] + vDP[i][j - i]);
+			vDP[j] = max(vDP[j], vArr[i] + vDP[j - i]);
 		}
 	}
 
-	cout << vDP[nSize][nSize] << '\n';
+	cout << vDP[nSize]<< '\n';
 	system("pause");
 
 	return 0;
