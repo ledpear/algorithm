@@ -2,8 +2,13 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+#directory
+Debug/
+Debug
+
+#extension
 *.opendb
 *.db
 *.filters
 *.suo
-.suo
+*.VC.db
