@@ -1,4 +1,0 @@
-﻿  Source.cpp
-d:\_algorithm\algorithm\_codingtest_c++\source.cpp(37): warning C4146: unary minus operator applied to unsigned type, result still unsigned
-  CodingTest.vcxproj -> D:\_algorithm\algorithm\_CodingTest_C++\Debug\CodingTest.exe
-  CodingTest.vcxproj -> D:\_algorithm\algorithm\_CodingTest_C++\Debug\CodingTest.pdb (Full PDB)
