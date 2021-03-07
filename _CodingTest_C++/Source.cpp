@@ -13,8 +13,8 @@
 using namespace std;
 
 //define
-#define DEF_MIN -2147483648;
-#define DEF_MAX 2147483647;
+#define DEF_MIN -2147483648
+#define DEF_MAX 2147483647
 
 typedef unsigned long long ull;
 typedef pair<ull, ull> p;
