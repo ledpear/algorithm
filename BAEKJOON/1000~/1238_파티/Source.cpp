@@ -64,31 +64,6 @@ vector<int> Dijkstra(int nNodeSize, int nEdgeSize, int nTarget, vector<vector<p>
 	return vResult;
 }
 
-vmap FloydWarshall(const vmap vMap)
-{
-	int nNodeSize = vMap.size();
-	vmap vResult = vMap;
-
-	for (int i = 0; i < nNodeSize; i++)
-	{
-		for (int j = 0; j < nNodeSize; j++)
-		{
-			for (int k = 0; k < nNodeSize; k++)
-			{
-				if (k != i && k != j && i != j && vResult[i][k] != DEF_MAX && vResult[k][j] != DEF_MAX)
-				{
-					if (vResult[i][j] > vResult[i][k] + vResult[k][j])
-					{
-						vResult[i][j] = vResult[i][k] + vResult[k][j];
-					}
-				}
-			}
-		}
-	}
-
-	return vResult;
-}
-
 int main()
 {
 	ios_base::sync_with_stdio(0);
@@ -102,40 +77,29 @@ int main()
 	//Declaration
 	int nNodeSize, nEdgeSize, nTarget, nResult = 0;
 	vector<vector<p>> vEgde;	// vEgde[Start Node] -> pair(End Node, Time)
-	vector<int> vResult;
-
-	vmap vMap;
+	vector<int> vTarget;
 
 	//Input
 	cin >> nNodeSize >> nEdgeSize >> nTarget;
-	//vEgde = vector<vector<p>>(nNodeSize + 1);
-	vMap = vmap(nNodeSize, vector<int>(nNodeSize, DEF_MAX));
+	vEgde = vector<vector<p>>(nNodeSize + 1);
 	for (int i = 0; i < nEdgeSize; i++)
 	{
 		int nStartNode, nEndNode, nW;
 		cin >> nStartNode >> nEndNode >> nW;
-		//vEgde[nStartNode].push_back(p(nEndNode, nW));
-		vMap[nStartNode - 1][nEndNode - 1] = nW;
+		vEgde[nStartNode].push_back(p(nEndNode, nW));
 	}
-	for (int i = 0; i < nNodeSize; i++)
-		vMap[i][i] = 0;
 
 	//Solution
-// 	for (int i = 1; i <= nNodeSize; i++)
-// 	{
-// 		if(i == nTarget) continue;
-// 
-// 		int Cost = 0;
-// 		Cost += Dijkstra(nNodeSize, nEdgeSize, i, vEgde)[nTarget];	//go
-// 		Cost += Dijkstra(nNodeSize, nEdgeSize, nTarget, vEgde)[i];	//back
-// 		if (nResult < Cost)
-// 			nResult = Cost;
-// 	}
-
-	vMap = FloydWarshall(vMap);
-	for (int i = 0; i < nNodeSize; i++)
+	vTarget = Dijkstra(nNodeSize, nEdgeSize, nTarget, vEgde);
+	for (int i = 1; i <= nNodeSize; i++)
 	{
-		nResult = max(nResult, vMap[i][nTarget - 1] + vMap[nTarget - 1][i]);
+		if(i == nTarget) continue;
+
+		int Cost = 0;
+		Cost += Dijkstra(nNodeSize, nEdgeSize, i, vEgde)[nTarget];	//go
+		Cost += vTarget[i];	//back
+		if (nResult < Cost)
+			nResult = Cost;
 	}
 
 	//Output
