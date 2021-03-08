@@ -5,3 +5,4 @@
 //최단경로
 struct DijkstraCompare;
 vector<int> Dijkstra(int nNodeSize, int nEdgeSize, int nTarget, vector<vector<p>> vEgde);
+vmap FloydWarshall(const vmap vMap);

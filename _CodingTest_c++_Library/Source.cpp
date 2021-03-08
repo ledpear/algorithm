@@ -67,6 +67,31 @@ struct DijkstraCompare
  	return vResult;
  }
 
+ vmap FloydWarshall(const vmap vMap)
+ {
+	 int nNodeSize = vMap.size();
+	 vmap vResult = vMap;
+
+	 for (int i = 0; i < nNodeSize; i++)
+	 {
+		 for (int j = 0; j < nNodeSize; j++)
+		 {
+			 for (int k = 0; k < nNodeSize; k++)
+			 {
+				 if (k != i && k != j && i != j && vResult[i][k] != DEF_MAX && vResult[k][j] != DEF_MAX)
+				 {
+					 if (vResult[i][j] > vResult[i][k] + vResult[k][j])
+					 {
+						 vResult[i][j] = vResult[i][k] + vResult[k][j];
+					 }
+				 }
+			 }
+		 }
+	 }
+
+	 return vResult;
+ }
+
 int main()
 {
 	ios_base::sync_with_stdio(0);
