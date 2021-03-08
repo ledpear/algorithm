@@ -21,7 +21,49 @@ typedef pair<ull, ull> p;
 typedef vector<vector<int>> vmap;
 
 //custum function
-template <typename T>
+//template <typename T>
+
+struct DijkstraCompare
+{
+	bool operator()(p a, p b)	//Node, W
+	{
+		return a.second > b.second;
+	}
+};
+
+vector<int> Dijkstra(int nNodeSize, int nEdgeSize, int nTarget, vector<vector<p>> vEgde)
+{
+	vector<int> vResult(nNodeSize + 1, DEF_MAX);
+	priority_queue<p, vector<p>, DijkstraCompare> pq; //(nNode, nW)
+
+	pq.push(p(nTarget, 0));
+	vResult[nTarget] = 0;
+
+	while (!pq.empty())
+	{
+		int nNowNode, nNowCost;
+		nNowNode = pq.top().first;
+		nNowCost = pq.top().second;
+		pq.pop();
+
+		if (vResult[nNowNode] < nNowCost) continue;
+
+		for (int i = 0; i < vEgde[nNowNode].size(); i++)
+		{
+			int nTargetNode, nTargetCost;
+			nTargetNode = vEgde[nNowNode][i].first;
+			nTargetCost = vEgde[nNowNode][i].second;
+
+			if (vResult[nTargetNode] > nNowCost + nTargetCost)
+			{
+				vResult[nTargetNode] = nNowCost + nTargetCost;
+				pq.push(p(nTargetNode, vResult[nTargetNode]));
+			}
+		}
+	}
+
+	return vResult;
+}
 
 int main()
 {
