@@ -96,6 +96,8 @@ int main()
 		}
 	}
 
+	//Solution
+
 	//Output
 	cout << BFS01(nW, nH, vMap) << '\n';
 

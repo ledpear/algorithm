@@ -22,19 +22,22 @@ typedef vector<vector<int>> vmap;
 
 //custum function
 template <typename T>
-void tSwap(T& a, T& b)
-{
-	T temp = a;
-	a = b;
-	b = temp;
-}
 
 int main()
 {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 	////////////////////////////////////
+	//Declaration
 
+
+	//Input
+
+
+	//Solution
+
+
+	//Output
 
 
 	////////////////////////////////////
