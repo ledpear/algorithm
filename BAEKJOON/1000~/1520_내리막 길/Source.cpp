@@ -21,30 +21,33 @@ typedef pair<ull, ull> p;
 typedef vector<vector<int>> vmap;
 
 //custum function
-void BackTracking(int nSizeH, int nSizeW, int nX, int nY, const int *nMoveX, const int *nMoveY, const vmap& vMap, vmap& vVisit, int& nScore)
+int BackTracking(int nSizeH, int nSizeW, int nX, int nY, const int *nMoveX, const int *nMoveY, const vmap& vMap, vmap& vDP)
 {
 	if (nX == nSizeW - 1 && nY == nSizeH - 1)
 	{
-		nScore++;
-		return;
+		return 1;
 	}
-
+	if (vDP[nY][nX] != -1)
+	{
+		return vDP[nY][nX];
+	}
+	vDP[nY][nX] = 0;
 	for (int i = 0; i < 4; i++)
 	{
 		int posX, posY;
 		posX = nX + nMoveX[i];
 		posY = nY + nMoveY[i];
 
-		if (posX >= 0 && posX < nSizeW && posY >= 0 && posY < nSizeH && vVisit[posY][posX] == false)
+		if (posX >= 0 && posX < nSizeW && posY >= 0 && posY < nSizeH)
 		{
 			if (vMap[posY][posX] < vMap[nY][nX])
 			{
-				vVisit[posY][posX] = true;
-				BackTracking(nSizeH, nSizeW, posX, posY, nMoveX, nMoveY, vMap, vVisit, nScore);
-				vVisit[posY][posX] = false;
+				vDP[nY][nX] = vDP[nY][nX] + BackTracking(nSizeH, nSizeW, posX, posY, nMoveX, nMoveY, vMap, vDP);
 			}
 		}
 	}
+
+	return vDP[nY][nX];
 }
 
 int main()
@@ -58,12 +61,12 @@ int main()
 	int nH, nW, nResult = 0;
 	int nMoveX[4] = { 1, -1, 0, 0 };
 	int nMoveY[4] = { 0, 0, 1, -1 };
-	vmap vMap, vVisit;
+	vmap vMap, vDP;
 
 	//Input
 	cin >> nH >> nW;
 	vMap = vmap(nH, vector<int>(nW));
-	vVisit = vmap(nH, vector<int>(nW, false));
+	vDP = vmap(nH, vector<int>(nW, -1));
 	for (int i = 0; i < nH; i++)
 	{
 		for (int j = 0; j < nW; j++)
@@ -73,7 +76,7 @@ int main()
 	}
 
 	//Solution
-	BackTracking(nH, nW, 0, 0, nMoveX, nMoveY, vMap, vVisit, nResult);
+	nResult = BackTracking(nH, nW, 0, 0, nMoveX, nMoveY, vMap, vDP);
 
 	//Output
 	cout << nResult << '\n';
