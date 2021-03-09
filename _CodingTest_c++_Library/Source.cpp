@@ -92,6 +92,70 @@ struct DijkstraCompare
 	 return vResult;
  }
 
+ class BinaryNum
+ {
+ public:
+	 BinaryNum(int nDec = 0)
+	 {
+		 clear();
+		 nDecNumber = nDec;
+
+		 if (nDec == 0)
+		 {
+			 vBinNumber.push_back(0);
+			 strNumber += '0';
+			 return;
+		 }
+
+		 while (nDec > 0)
+		 {
+			 vBinNumber.push_back(nDec % 2);
+			 strNumber = to_string(vBinNumber.back()) + strNumber;
+			 nDec /= 2;
+		 }
+	 }
+
+	 BinaryNum& operator=(int nDec)
+	 {
+		 clear();
+		 nDecNumber = nDec;
+
+		 if (nDec <= 0)
+		 {
+			 vBinNumber.push_back(0);
+			 strNumber += '0';
+		 }
+		 else
+		 {
+			 while (nDec > 0)
+			 {
+				 vBinNumber.push_back(nDec % 2);
+				 strNumber = to_string(vBinNumber.back()) + strNumber;
+				 nDec /= 2;
+			 }
+		 }
+
+		 return *this;
+	 }
+
+	 int getDec() { return nDecNumber; }
+	 vector<bool> getBin() { return vBinNumber; }
+	 string getString() { return strNumber; }
+
+ protected:
+ private:
+	 vector<bool> vBinNumber;
+	 int nDecNumber;
+	 string strNumber;
+
+	 void clear()
+	 {
+		 nDecNumber = 0;
+		 vBinNumber.clear();
+		 strNumber = "";
+	 }
+ };
+
 int main()
 {
 	ios_base::sync_with_stdio(0);
