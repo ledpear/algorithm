@@ -20,12 +20,8 @@ typedef unsigned long long ull;
 typedef pair<ull, ull> p;
 typedef vector<vector<int>> vmap;
 
-int nSizeH, nSizeW;
-const int nMoveX[4] = { 1, -1, 0, 0 };
-const int nMoveY[4] = { 0, 0, 1, -1 };
-vmap vMap, vDP;
 //custum function
-int BackTracking( int nX, int nY)
+int BackTracking(int nSizeH, int nSizeW, int nX, int nY, int nMoveX[4], int nMoveY[4], const vmap vMap, vmap& vDP)
 {
 	if (nX == nSizeW - 1 && nY == nSizeH - 1)
 	{
@@ -46,7 +42,7 @@ int BackTracking( int nX, int nY)
 		{
 			if (vMap[posY][posX] < vMap[nY][nX])
 			{
-				vDP[nY][nX] = vDP[nY][nX] + BackTracking(posX, posY);
+				vDP[nY][nX] = vDP[nY][nX] + BackTracking(nSizeH, nSizeW, posX, posY, nMoveX, nMoveY, vMap, vDP);
 			}
 		}
 	}
@@ -62,22 +58,25 @@ int main()
 	//백트래킹
 	//모든 루트를 백트래킹 방식으로 탐색
 	//Declaration
-	int nResult = 0;
+	int nH, nW, nResult = 0;
+	int nMoveX[4] = { 1, -1, 0, 0 };
+	int nMoveY[4] = { 0, 0, 1, -1 };
+	vmap vMap, vDP;
 
 	//Input
-	cin >> nSizeH >> nSizeW;
-	vMap = vmap(nSizeH, vector<int>(nSizeW));
-	vDP = vmap(nSizeH, vector<int>(nSizeW, -1));
-	for (int i = 0; i < nSizeH; i++)
+	cin >> nH >> nW;
+	vMap = vmap(nH, vector<int>(nW));
+	vDP = vmap(nH, vector<int>(nW, -1));
+	for (int i = 0; i < nH; i++)
 	{
-		for (int j = 0; j < nSizeW; j++)
+		for (int j = 0; j < nW; j++)
 		{
 			cin >> vMap[i][j];
 		}
 	}
 
 	//Solution
-	nResult = BackTracking(0, 0);
+	nResult = BackTracking(nH, nW, 0, 0, nMoveX, nMoveY, vMap, vDP);
 
 	//Output
 	cout << nResult << '\n';
