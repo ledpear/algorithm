@@ -28,7 +28,7 @@ int main()
 	cin.tie(0);
 	////////////////////////////////////
 	//Declaration
-	int nSize, nTarget, nResult = 0;
+	int nSize, nTarget, nResult = 0, nFront, nBack;
 	vector<int> vArr;
 
 	//Input
@@ -39,12 +39,24 @@ int main()
 	cin >> nTarget;
 
 	//Solution
-	for (int i = 0; i < nSize - 1; i++)
+	nFront = 0;
+	nBack = nSize - 1;
+	sort(vArr.begin(), vArr.end());
+
+	while (nFront != nBack)
 	{
-		for (int j = i + 1; j < nSize; j++)
+		if (vArr[nFront] + vArr[nBack] == nTarget)
 		{
-			if (vArr[i] + vArr[j] == nTarget)
-				nResult++;
+			nResult++;
+			nFront++;
+		}
+		else if (vArr[nFront] + vArr[nBack] < nTarget)
+		{
+			nFront++;
+		}
+		else if (vArr[nFront] + vArr[nBack] > nTarget)
+		{
+			nBack--;
 		}
 	}
 
