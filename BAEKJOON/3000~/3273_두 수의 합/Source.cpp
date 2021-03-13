@@ -28,40 +28,31 @@ int main()
 	cin.tie(0);
 	////////////////////////////////////
 	//Declaration
-	int nSize, nTarget, nResult = 0, nFront, nBack;
+	int nSize, nTarget, nResult = 0;
+	set<int> sArr;
 	vector<int> vArr;
 
 	//Input
 	cin >> nSize;
-	vArr = vector<int>(nSize);
 	for (int i = 0; i < nSize; i++)
-		cin >> vArr[i];
+	{
+		int nTemp;
+		cin >> nTemp;
+		vArr.push_back(nTemp);
+		if (sArr.find(nTemp) == sArr.end())
+			sArr.insert(nTemp);
+	}
 	cin >> nTarget;
 
 	//Solution
-	nFront = 0;
-	nBack = nSize - 1;
-	sort(vArr.begin(), vArr.end());
-
-	while (nFront != nBack)
+	for (int i = 0; i < nSize; i++)
 	{
-		if (vArr[nFront] + vArr[nBack] == nTarget)
-		{
+		if (sArr.find(nTarget - vArr[i]) != sArr.end())
 			nResult++;
-			nFront++;
-		}
-		else if (vArr[nFront] + vArr[nBack] < nTarget)
-		{
-			nFront++;
-		}
-		else if (vArr[nFront] + vArr[nBack] > nTarget)
-		{
-			nBack--;
-		}
 	}
 
 	//Output
-	cout << nResult << '\n';
+	cout << nResult / 2 << '\n';
 
 	////////////////////////////////////
 	system("pause");
