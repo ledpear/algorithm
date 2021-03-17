@@ -67,6 +67,7 @@ int main()
 	{
 		p tempR, tempB;
 		vmap tempMap;
+		bool bB_Finish = false;
 
 		pR = q.front().first.first;
 		pB = q.front().first.second;
@@ -96,6 +97,7 @@ int main()
 				tempR = pR;
 				tempB = pB;
 				tempMap = vMap;
+				bB_Finish = false;
 
 				while (true)
 				{
@@ -126,14 +128,15 @@ int main()
 					}
 					else if (tempMap[tempB.first][tempB.second + 1] == 'O')
 					{
+						bB_Finish = true;
 						break;
 					}
 				}
 
-				if (nResult != -1 && tempR != tempB)
+				if (nResult != -1 && !bB_Finish)
 					break;
 
-				if (tempR != tempB)
+				if (!bB_Finish)
 					q.push(make_pair(pp(tempR, tempB), nCount + 1));
 				else
 					nResult = -1;
@@ -143,6 +146,7 @@ int main()
 				tempR = pR;
 				tempB = pB;
 				tempMap = vMap;
+				bB_Finish = false;
 				
 				//B이동
 				while (true)
@@ -156,6 +160,7 @@ int main()
 					}
 					else if (tempMap[tempB.first][tempB.second - 1] == 'O')
 					{
+						bB_Finish = true;
 						break;
 					}
 				}
@@ -177,10 +182,10 @@ int main()
 					}
 				}
 
-				if (nResult != -1 && tempR != tempB)
+				if (nResult != -1 && !bB_Finish)
 					break;
 
-				if (tempR != tempB)
+				if (!bB_Finish)
 					q.push(make_pair(pp(tempR, tempB), nCount + 1));
 				else
 					nResult = -1;
@@ -191,6 +196,7 @@ int main()
 				tempR = pR;
 				tempB = pB;
 				tempMap = vMap;
+				bB_Finish = false;
 
 				//B이동
 				while (true)
@@ -204,6 +210,7 @@ int main()
 					}
 					else if (tempMap[tempB.first][tempB.second + 1] == 'O')
 					{
+						bB_Finish = true;
 						break;
 					}
 				}
@@ -225,10 +232,10 @@ int main()
 					}
 				}
 
-				if (nResult != -1 && tempR != tempB)
+				if (nResult != -1 && !bB_Finish)
 					break;
 
-				if (tempR != tempB)
+				if (!bB_Finish)
 					q.push(make_pair(pp(tempR, tempB), nCount + 1));
 				else
 					nResult = -1;
@@ -238,6 +245,7 @@ int main()
 				tempR = pR;
 				tempB = pB;
 				tempMap = vMap;
+				bB_Finish = false;
 
 				//R이동
 				while (true)
@@ -268,14 +276,15 @@ int main()
 					}
 					else if (tempMap[tempB.first][tempB.second - 1] == 'O')
 					{
+						bB_Finish = true;
 						break;
 					}
 				}
 
-				if (nResult != -1 && tempR != tempB)
+				if (nResult != -1 && !bB_Finish)
 					break;
 
-				if (tempR != tempB)
+				if (!bB_Finish)
 					q.push(make_pair(pp(tempR, tempB), nCount + 1));
 				else
 					nResult = -1;
@@ -295,6 +304,8 @@ int main()
 				tempR = pR;
 				tempB = pB;
 				tempMap = vMap;
+				bB_Finish = false;
+
 				while (true)
 				{
 					if (tempMap[tempR.first + 1][tempR.second] == '.')
@@ -323,14 +334,15 @@ int main()
 					}
 					else if (tempMap[tempB.first + 1][tempB.second] == 'O')
 					{
+						bB_Finish = true;
 						break;
 					}
 				}
 
-				if (nResult != -1 && tempR != tempB)
+				if (nResult != -1 && !bB_Finish)
 					break;
 
-				if (tempR != tempB)
+				if (!bB_Finish)
 					q.push(make_pair(pp(tempR, tempB), nCount + 1));
 				else
 					nResult = -1;
@@ -339,6 +351,7 @@ int main()
 				tempR = pR;
 				tempB = pB;
 				tempMap = vMap;
+				bB_Finish = false;
 
 				//B이동
 				while (true)
@@ -352,6 +365,7 @@ int main()
 					}
 					else if (tempMap[tempB.first - 1][tempB.second] == 'O')
 					{
+						bB_Finish = true;
 						break;
 					}
 				}
@@ -373,10 +387,10 @@ int main()
 					}
 				}
 
-				if (nResult != -1 && tempR != tempB)
+				if (nResult != -1 && !bB_Finish)
 					break;
 
-				if (tempR != tempB)
+				if (!bB_Finish)
 					q.push(make_pair(pp(tempR, tempB), nCount + 1));
 				else
 					nResult = -1;
@@ -387,6 +401,7 @@ int main()
 				tempR = pR;
 				tempB = pB;
 				tempMap = vMap;
+				bB_Finish = false;
 
 				//B이동
 				while (true)
@@ -400,6 +415,7 @@ int main()
 					}
 					else if (tempMap[tempB.first + 1][tempB.second] == 'O')
 					{
+						bB_Finish = true;
 						break;
 					}
 				}
@@ -421,10 +437,10 @@ int main()
 					}
 				}
 
-				if (nResult != -1 && tempR != tempB)
+				if (nResult != -1 && !bB_Finish)
 					break;
 
-				if (tempR != tempB)
+				if (!bB_Finish)
 					q.push(make_pair(pp(tempR, tempB), nCount + 1));
 				else
 					nResult = -1;
@@ -434,6 +450,7 @@ int main()
 				tempR = pR;
 				tempB = pB;
 				tempMap = vMap;
+				bB_Finish = false;
 
 				//R이동
 				while (true)
@@ -464,14 +481,15 @@ int main()
 					}
 					else if (tempMap[tempB.first - 1][tempB.second] == 'O')
 					{
+						bB_Finish = true;
 						break;
 					}
 				}
 
-				if (nResult != -1 && tempR != tempB)
+				if (nResult != -1 && !bB_Finish)
 					break;
 
-				if (tempR != tempB)
+				if (!bB_Finish)
 					q.push(make_pair(pp(tempR, tempB), nCount + 1));
 				else
 					nResult = -1;
