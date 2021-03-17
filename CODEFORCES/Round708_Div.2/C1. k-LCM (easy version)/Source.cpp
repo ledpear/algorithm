@@ -32,15 +32,42 @@ int LCM(int a, int b) {
 	return a * b / GCD(a, b);
 }
 
-void BT(vector<int>& vArr, int nSize, int nCount, int k, int& nMin, vector<int>& vMinArr)
+void BT(vector<int>& vArr, int nSize, int nCount, int k, int& nMin, vector<int>& vMinArr, map<p, int> &vDP)
 {
 	if (nCount + 1 == k)
 	{
-		int nLCM = 1;
 		vArr.push_back(nSize);
-		for (int i = 0; i < vArr.size(); i++)
+
+		int nLCM = vArr[0];
+		for (int i = 1; i < vArr.size(); i++)
 		{
-			nLCM = LCM(nLCM, vArr[i]);
+			if (nLCM > vArr[i])
+			{
+				auto iter = vDP.find(p(vArr[i], nLCM));
+				if (iter != vDP.end())
+				{
+					nLCM = iter->second;
+				}
+				else
+				{
+					vDP.insert(make_pair(p(vArr[i], nLCM), LCM(vArr[i], nLCM)));
+					nLCM = vDP[p(vArr[i], nLCM)];
+				}
+			}
+			else
+			{
+				auto iter = vDP.find(p(nLCM, vArr[i]));
+				if (iter != vDP.end())
+				{
+					nLCM = iter->second;
+				}
+				else
+				{
+					vDP.insert(make_pair(p(nLCM, vArr[i]), LCM(nLCM, vArr[i])));
+					nLCM = vDP[p(nLCM, vArr[i])];
+				}
+			}
+			
 		}
 
 		if (nMin > nLCM)
@@ -55,7 +82,7 @@ void BT(vector<int>& vArr, int nSize, int nCount, int k, int& nMin, vector<int>&
 	for (int i = nSize - (k - nCount - 1); i >= 1; i--)
 	{
 		vArr.push_back(i);
-		BT(vArr, nSize - i, nCount + 1, k, nMin, vMinArr);
+		BT(vArr, nSize - i, nCount + 1, k, nMin, vMinArr, vDP);
 		vArr.pop_back();
 	}
 }
@@ -73,9 +100,9 @@ int main()
 		int nSize, k, nMin = DEF_MAX;
 		cin >> nSize >> k;
 		vector<int> vArr, vMin;
+		map<p, int> pMap;
 
-
-		BT(vArr, nSize, 0, k, nMin, vMin);
+		BT(vArr, nSize, 0, k, nMin, vMin, pMap);
 
 		for (int i = 0; i < vMin.size(); i++)
 			cout << vMin[i] << ' ';
