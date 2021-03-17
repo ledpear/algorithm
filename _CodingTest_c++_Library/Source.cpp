@@ -156,6 +156,19 @@ struct DijkstraCompare
 	 }
  };
 
+ void PrintMap(const vmap& vMap)
+ {
+	 int nSizeX = vMap.size();
+	 int nSizeY = vMap[0].size();
+
+	 for (int i = 0; i < nSizeX; i++)
+	 {
+		 for (int j = 0; j < nSizeY; j++)
+			 cout << vMap[i][j] << ' ';
+		 cout << '\n';
+	 }
+ }
+
 int main()
 {
 	ios_base::sync_with_stdio(0);
