@@ -169,7 +169,7 @@ struct DijkstraCompare
 	 }
  }
 
- bool DFS(const vmap& vMap, vmap& vVisit, int nX, int nY)
+ bool DfsMap(const vmap& vMap, vmap& vVisit, int nX, int nY)
  {
 	 //방문처리
 	 if (vVisit[nX][nY] == true) return false;

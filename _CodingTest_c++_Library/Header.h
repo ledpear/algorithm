@@ -8,7 +8,7 @@ vector<int> Dijkstra(int nNodeSize, int nEdgeSize, int nTarget, vector<vector<p>
 vmap FloydWarshall(const vmap vMap);
 
 //DFS
-bool DFS(const vmap& vMap, vmap& vVisit, int nX, int nY);
+bool DfsMap(const vmap& vMap, vmap& vVisit, int nX, int nY);
 
 //Print
 void PrintMap(const vmap& vMap);
