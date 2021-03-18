@@ -196,7 +196,7 @@ struct DijkstraCompare
 			 int nPosValue = vMap[nPosX][nPosY];
 			 if (nPosValue != 0)
 			 {
-				 DFS(vMap, vVisit, nPosX, nPosY);
+				 DfsMap(vMap, vVisit, nPosX, nPosY);
 			 }
 		 }
 	 }
