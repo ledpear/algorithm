@@ -11,6 +11,9 @@ vmap FloydWarshall(const vmap vMap);
 bool DfsMap(const vmap& vMap, vmap& vVisit, int nX, int nY);
 bool DfsEgde(vector<int>& vVisit, const vector<vector<int>>& vEdge, int nNode)
 
+//BFS
+int BfsMap(vmap& vMap, int nX, int nY) //바뀐 영역의 수를 반환
+
 //Print
 void PrintMap(const vmap& vMap);
 

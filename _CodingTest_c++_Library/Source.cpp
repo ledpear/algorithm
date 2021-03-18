@@ -216,6 +216,46 @@ struct DijkstraCompare
 	 return true;
  }
 
+ int BfsMap(vmap& vMap, int nX, int nY)
+ {
+	 int nCount = 0;
+	 int nSizeX = vMap.size();
+	 int nSizeY = vMap[0].size();
+
+	 queue<p> qPoint;
+	 qPoint.push(p(nX, nY));
+
+	 while (qPoint.empty() == false)
+	 {
+		 const int nNowX = qPoint.front().first;
+		 const int nNowY = qPoint.front().second;
+		 const int nValue = vMap[nNowX][nNowY];
+		 qPoint.pop();
+
+		 //이동패턴 정의
+		 int nMoveX[4] = { 0, 0, 1, -1 };
+		 int nMoveY[4] = { 1, -1, 0, 0 };
+
+		 //이동할 수 있는 곳은 이동
+		 for (int i = 0; i < 4; i++)
+		 {
+			 int nPosX = nNowX + nMoveX[i];
+			 int nPosY = nNowY + nMoveY[i];
+
+			 //범위 및 방문 예외처리
+			 if (nPosX >= 0 && nPosX < nSizeX && nPosY >= 0 && nPosY < nSizeY && vMap[nPosX][nPosY] == 0)
+			 {
+				 //조건
+				 ++nCount;
+				 vMap[nPosX][nPosY] = 2;
+				 qPoint.push(p(nPosX, nPosY));
+			 }
+		 }
+	 }
+
+	 return nCount;
+ }
+
 int main()
 {
 	ios_base::sync_with_stdio(0);
