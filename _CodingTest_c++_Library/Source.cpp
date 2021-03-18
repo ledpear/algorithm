@@ -203,6 +203,19 @@ struct DijkstraCompare
 	 return true;
  }
 
+ bool DfsEgde(vector<int>& vVisit, const vector<vector<int>>& vEdge, int nNode)
+ {
+	 if (vVisit[nNode] == true) return false;
+	 vVisit[nNode] = true;
+
+	 for (int i = 0; i < vEdge[nNode].size(); i++)
+	 {
+		 DfsEgde(vVisit, vEdge, vEdge[nNode][i]);
+	 }
+
+	 return true;
+ }
+
 int main()
 {
 	ios_base::sync_with_stdio(0);

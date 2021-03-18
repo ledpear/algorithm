@@ -9,6 +9,7 @@ vmap FloydWarshall(const vmap vMap);
 
 //DFS
 bool DfsMap(const vmap& vMap, vmap& vVisit, int nX, int nY);
+bool DfsEgde(vector<int>& vVisit, const vector<vector<int>>& vEdge, int nNode)
 
 //Print
 void PrintMap(const vmap& vMap);
