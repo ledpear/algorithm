@@ -1,14 +1,14 @@
-#include <vector>
-#include <iostream>
-#include <limits>
 #include <algorithm>
 #include <cmath>
-#include <string>
-#include <stack>
-#include <queue>
 #include <deque>
+#include <iostream>
+#include <limits>
 #include <map>
+#include <queue>
 #include <set>
+#include <stack>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -16,9 +16,9 @@ using namespace std;
 #define DEF_MIN -2147483648
 #define DEF_MAX 2147483647
 
-typedef unsigned long long ull;
-typedef pair<ull, ull> p;
-typedef vector<vector<int>> vmap;
+using ull = unsigned long long ;
+using location =  pair<int, int> ;
+using matrix = vector<vector<int>>;
 
 //custum function
 
@@ -28,9 +28,6 @@ int main()
 	cin.tie(0);
 	////////////////////////////////////
 	//Declaration
-
-
-	//Input
 
 
 	//Solution
