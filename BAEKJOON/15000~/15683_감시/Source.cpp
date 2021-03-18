@@ -32,7 +32,7 @@ int CctvView(vmap& vMap, int nX, int nY, int nDir, int nMode)
 	int nSizeY = vMap[0].size();
 
 	vector<vector<int>> vCctvMovePattern(5);
-	//0 : 그대로 / 1 : 90 / 2 : 180 / 3 : 270
+	//0 : 0 / 1 : 90 / 2 : 180 / 3 : 270 회전
 	vCctvMovePattern[0] = { 0 };
 	vCctvMovePattern[1] = { 0, 2 };
 	vCctvMovePattern[2] = { 0, 1 };
@@ -76,13 +76,12 @@ void BackTracking(vmap& vMap, int &nZeroCount, vector<pi>& vCCTV, int&nMin)
 		return;
 	}
 
-	vector<vector<int>> vCctvDirPattern(5);
-	//0 : 그대로 / 1 : 90 / 2 : 180 / 3 : 270
-	vCctvDirPattern[0] = { 0, 1, 2, 3 };
-	vCctvDirPattern[1] = { 0, 1 };
-	vCctvDirPattern[2] = { 0, 1, 2, 3 };
-	vCctvDirPattern[3] = { 0, 1, 2, 3 };
-	vCctvDirPattern[4] = { 0};
+	vector<int> vCctvDirPattern(5);
+	vCctvDirPattern[0] = 4;
+	vCctvDirPattern[1] = 2;
+	vCctvDirPattern[2] = 4;
+	vCctvDirPattern[3] = 4;
+	vCctvDirPattern[4] = 1;
 
 	pi pTemp = vCCTV.back();
 	int nX, nY, nMode;
@@ -92,9 +91,9 @@ void BackTracking(vmap& vMap, int &nZeroCount, vector<pi>& vCCTV, int&nMin)
 	vCCTV.pop_back();
 	vmap vTemp = vMap;
 
-	for (int i = 0; i < vCctvDirPattern[nMode].size(); i++)
+	for (int i = 0; i < vCctvDirPattern[nMode]; i++)
 	{
-		int nTemp = CctvView(vMap, nX, nY, vCctvDirPattern[nMode][i], nMode);
+		int nTemp = CctvView(vMap, nX, nY, i, nMode);
 		nZeroCount -= nTemp;
 		BackTracking(vMap, nZeroCount, vCCTV, nMin);
 		nZeroCount += nTemp;
