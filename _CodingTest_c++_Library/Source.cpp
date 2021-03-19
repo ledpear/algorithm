@@ -53,18 +53,19 @@ struct DijkstraCompare
  
  	while (!pq.empty())
  	{
- 		int nNowNode, nNowCost;
- 		nNowNode = pq.top().first;
- 		nNowCost = pq.top().second;
+		int nNowNode = pq.top().first;
+		int nNowCost = pq.top().second;
  		pq.pop();
  
- 		if (vResult[nNowNode] < nNowCost) continue;
+		if (vResult[nNowNode] < nNowCost)
+		{
+			continue;
+		}
  
  		for (int i = 0; i < vEgde[nNowNode].size(); i++)
  		{
- 			int nTargetNode, nTargetCost;
- 			nTargetNode = vEgde[nNowNode][i].first;
- 			nTargetCost = vEgde[nNowNode][i].second;
+			int nTargetNode = vEgde[nNowNode][i].first;
+			int nTargetCost = vEgde[nNowNode][i].second;
  
  			if (vResult[nTargetNode] > nNowCost + nTargetCost)
  			{
@@ -182,7 +183,10 @@ struct DijkstraCompare
  bool DfsMap(const vmap& vMap, vmap& vVisit, int nX, int nY)
  {
 	 //规巩贸府
-	 if (vVisit[nX][nY] == true) return false;
+	 if (vVisit[nX][nY] == true)
+	 {
+		 return false;
+	 }
 	 vVisit[nX][nY] = true;
 
 	 //农扁 沥狼
@@ -215,7 +219,10 @@ struct DijkstraCompare
 
  bool DfsEgde(vector<int>& vVisit, const vector<vector<int>>& vEdge, int nNode)
  {
-	 if (vVisit[nNode] == true) return false;
+	 if (vVisit[nNode] == true)
+	 {
+		 return false;
+	 }
 	 vVisit[nNode] = true;
 
 	 for (int i = 0; i < vEdge[nNode].size(); i++)
