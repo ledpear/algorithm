@@ -273,6 +273,42 @@ struct DijkstraCompare
 	 return nCount;
  }
 
+ int BfsEgde(vector<int>& vVisit, const vector<vector<int>>& vEdges, int nStart, int nTarget)
+ {
+	 using node = pair<int, int>;
+	 int nCount(0);
+
+	 queue<node> qNode;
+	 qNode.push(node(nStart, nCount));
+	 vVisit[nStart] = true;
+
+	 while (qNode.empty() == false)
+	 {
+		 const int nNowNode = qNode.front().first;
+		 const int nDist = qNode.front().second;
+		 qNode.pop();
+
+		 //목적지인지 확인
+		 if (nNowNode == nTarget)
+		 {
+			 nCount = nDist;
+			 break;
+		 }
+
+		 //이동할 수 있는 곳은 이동
+		 for (auto& nTargetNode : vEdges[nNowNode])
+		 {
+			 if (vVisit[nTargetNode] == false)
+			 {
+				 vVisit[nTargetNode] = true;
+				 qNode.push(node(nTargetNode, nDist + 1));
+			 }
+		 }
+	 }
+
+	 return nCount;
+ }
+
 int main()
 {
 	ios_base::sync_with_stdio(0);

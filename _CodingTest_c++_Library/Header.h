@@ -16,6 +16,7 @@ bool DfsEgde(vector<int>& vVisit, const vector<vector<int>>& vEdge, int nNode)
 
 //BFS
 int BfsMap(vmap& vMap, int nX, int nY) //바뀐 영역의 수를 반환
+int BfsEgde(vector<int>& vVisit, const vector<vector<int>>& vEdges, int nStart, int nTarget) // 목적지까지 최단 거리 계산
 
 //Print
 void PrintMap(const vmap& vMap);
