@@ -31,12 +31,14 @@ int solution(vector<int> money) {
 	vDpStart[1] = max(money[0], money[1]);
 	vDpEnd[0] = money[1];
 	vDpEnd[1] = max(money[1], money[2]);
+
 	for (int i = 2; i < nSize - 1; i++)
 	{
 		int nStartCount(i), nEndCount(i + 1);
 		vDpStart[i] = max(vDpStart[i - 1], vDpStart[i - 2] + money[i]);
 		vDpEnd[i] = max(vDpEnd[i - 1], vDpEnd[i - 2] + money[i + 1]);
 	}
+
 	answer = max(vDpStart[nSize - 2], vDpEnd[nSize - 2]);
 
 	return answer;
