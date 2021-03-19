@@ -46,7 +46,7 @@ int solution(vector<vector<int>> jobs) {
 
 	priority_queue<job, vector<job>, HeapCompare> pqScheduler;
 	job vNowSchedul(0);
-	int nJobOrder(0), nMS(0), nJobSize(jobs.size()), nSum(0), nSchedulEndTime(eEmpty);
+	int nJobOrder(0), nMS(0), nJobSize(jobs.size()), nSum(0);
 	sort(jobs.begin(), jobs.end());
 
 	while (true)
@@ -63,7 +63,7 @@ int solution(vector<vector<int>> jobs) {
 
 				const vector<int> vJob = jobs[nJobOrder];
 
-				if (vJob[eInput] != nMS)	//해당시간에 작업이 없으면 반환
+				if (nMS < vJob[eInput] )	//해당시간에 작업이 없으면 반환
 				{
 					break;
 				}
@@ -73,32 +73,31 @@ int solution(vector<vector<int>> jobs) {
 			}
 		}
 
-		//스케쥴 관리
-		if (nMS == nSchedulEndTime) // 현재 스케쥴 종료
-		{
-			//종료시간 합산
-			nSum += nSchedulEndTime - vNowSchedul[eInput]; 
-
-			//초기화
-			nSchedulEndTime = eEmpty;
-			vNowSchedul.clear();
-		}
-
-		if (nSchedulEndTime == eEmpty && pqScheduler.empty() == false)	// 대기열에 작업이 있으면 추가
+		if (pqScheduler.empty() == false)// 대기열에 작업이 있으면 추가
 		{
 			vNowSchedul = pqScheduler.top();
-			nSchedulEndTime = nMS + vNowSchedul[eRun];
+			int nSchedulEndTime = nMS + vNowSchedul[eRun];
 
 			pqScheduler.pop();
-		}
 
-		if (pqScheduler.empty() == true && nJobOrder == nJobSize && nSchedulEndTime == eEmpty)	//작업을 모두 추가했고 대기열에 작업이 없으며 현재 수행중인 작업이 없으면 종료
+			//종료시간 합산
+			nSum += nSchedulEndTime - vNowSchedul[eInput];
+
+			//시간 진행
+			nMS = nSchedulEndTime;
+
+			//초기화
+			vNowSchedul.clear();
+		}
+		else if (nJobOrder != nJobSize)//대기열에 작업이 없고 아직 진행하지 않은 작업이 있으면 시간 진행
+		{
+			const vector<int> vJob = jobs[nJobOrder];
+			nMS = vJob[eInput];
+		}
+		else
 		{
 			break;
 		}
-
-		//시간 경과
-		++nMS;
 	}
 	answer = nSum / nJobSize;
 
