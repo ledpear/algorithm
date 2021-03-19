@@ -2,6 +2,9 @@
 #include "Source.cpp"
 
 //custum function
+//정렬
+struct HeapCompare;
+
 //최단경로
 struct DijkstraCompare;
 vector<int> Dijkstra(int nNodeSize, int nEdgeSize, int nTarget, vector<vector<p>> vEgde);
