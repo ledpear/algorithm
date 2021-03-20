@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <climits>
 #include <cmath>
 #include <deque>
 #include <iostream>
@@ -13,8 +14,6 @@
 using namespace std;
 
 //define
-#define DEF_MIN -2147483648
-#define DEF_MAX 2147483647
 
 using ull = unsigned long long ;
 using location =  pair<int, int> ;
