@@ -16,7 +16,7 @@
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "jdkpath": "C:/jdk-15/bin"
+            "jdkpath": "C:/Program Files/Java/jdk-11.0.10/bin"
         },
         {
             "type": "java",
