@@ -1,26 +1,24 @@
-//#include "Header.h"
-
-#include <vector>
+#include <algorithm>
+#include <climits>
+#include <cmath>
+#include <deque>
 #include <iostream>
 #include <limits>
-#include <algorithm>
-#include <cmath>
-#include <string>
-#include <stack>
-#include <queue>
-#include <deque>
 #include <map>
+#include <queue>
 #include <set>
+#include <stack>
+#include <string>
+#include <sstream>
+#include <vector>
 
 using namespace std;
 
 //define
-#define DEF_MIN -2147483648
-#define DEF_MAX 2147483647
 
-typedef unsigned long long ull;
-typedef pair<ull, ull> p;
-typedef vector<vector<int>> vmap;
+using ull = unsigned long long;
+using location = pair<int, int>;
+using matrix = vector<vector<int>>;
 
 //custum function
 //template <typename T>
@@ -37,18 +35,18 @@ struct HeapCompare
 
 struct DijkstraCompare
 {
-	bool operator()(p a, p b)	//Node, W
+	bool operator()(location a, location b)	//Node, W
 	{
 		return a.second > b.second;
 	}
 };
 
- vector<int> Dijkstra(int nNodeSize, int nEdgeSize, int nTarget, vector<vector<p>> vEgde)
+ vector<int> Dijkstra(int nNodeSize, int nEdgeSize, int nTarget, vector<vector<location>> vEgde)
  {
- 	vector<int> vResult(nNodeSize + 1, DEF_MAX);
- 	priority_queue<p, vector<p>, DijkstraCompare> pq; //(nNode, nW)
+ 	vector<int> vResult(nNodeSize + 1, INT_MAX);
+ 	priority_queue<location, vector<location>, DijkstraCompare> pq; //(nNode, nW)
  
- 	pq.push(p(nTarget, 0));
+ 	pq.push(location(nTarget, 0));
  	vResult[nTarget] = 0;
  
  	while (!pq.empty())
@@ -70,7 +68,7 @@ struct DijkstraCompare
  			if (vResult[nTargetNode] > nNowCost + nTargetCost)
  			{
  				vResult[nTargetNode] = nNowCost + nTargetCost;
- 				pq.push(p(nTargetNode, vResult[nTargetNode]));
+ 				pq.push(location(nTargetNode, vResult[nTargetNode]));
  			}
  		}
  	}
@@ -78,10 +76,10 @@ struct DijkstraCompare
  	return vResult;
  }
 
- vmap FloydWarshall(const vmap vMap)
+ matrix FloydWarshall(const matrix vMap)
  {
 	 int nNodeSize = vMap.size();
-	 vmap vResult = vMap;
+	 matrix vResult = vMap;
 
 	 for (int i = 0; i < nNodeSize; i++)
 	 {
@@ -89,7 +87,7 @@ struct DijkstraCompare
 		 {
 			 for (int k = 0; k < nNodeSize; k++)
 			 {
-				 if (k != i && k != j && i != j && vResult[i][k] != DEF_MAX && vResult[k][j] != DEF_MAX)
+				 if (k != i && k != j && i != j && vResult[i][k] != INT_MAX && vResult[k][j] != INT_MAX)
 				 {
 					 if (vResult[i][j] > vResult[i][k] + vResult[k][j])
 					 {
@@ -167,7 +165,7 @@ struct DijkstraCompare
 	 }
  };
 
- void PrintMap(const vmap& vMap)
+ void PrintMap(const matrix& vMap)
  {
 	 int nSizeX = vMap.size();
 	 int nSizeY = vMap[0].size();
@@ -180,7 +178,7 @@ struct DijkstraCompare
 	 }
  }
 
- bool DfsMap(const vmap& vMap, vmap& vVisit, int nX, int nY)
+ bool DfsMap(const matrix& vMap, matrix& vVisit, int nX, int nY)
  {
 	 //방문처리
 	 if (vVisit[nX][nY] == true)
@@ -233,14 +231,14 @@ struct DijkstraCompare
 	 return true;
  }
 
- int BfsMap(vmap& vMap, int nX, int nY)
+ int BfsMap(matrix& vMap, int nX, int nY)
  {
 	 int nCount = 0;
 	 int nSizeX = vMap.size();
 	 int nSizeY = vMap[0].size();
 
-	 queue<p> qPoint;
-	 qPoint.push(p(nX, nY));
+	 queue<location> qPoint;
+	 qPoint.push(location(nX, nY));
 
 	 while (qPoint.empty() == false)
 	 {
@@ -265,7 +263,7 @@ struct DijkstraCompare
 				 //조건
 				 ++nCount;
 				 vMap[nPosX][nPosY] = 2;
-				 qPoint.push(p(nPosX, nPosY));
+				 qPoint.push(location(nPosX, nPosY));
 			 }
 		 }
 	 }
@@ -308,6 +306,19 @@ struct DijkstraCompare
 
 	 return nCount;
  }
+
+ vector<string> parsing(const string& data, const char delimiter = ' ') 
+ {
+	 vector<string> result;
+	 string token;
+	 stringstream splitStream(data);
+
+	 while (getline(splitStream, token, delimiter)) {
+		 result.push_back(token);
+	 }
+	 return result;
+ }
+
 
 int main()
 {
