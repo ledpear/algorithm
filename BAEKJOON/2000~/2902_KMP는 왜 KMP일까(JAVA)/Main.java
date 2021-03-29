@@ -7,12 +7,10 @@ public class Main {
         StringTokenizer st;
 
         String input = br.readLine(), output = "";
+        String[] strSplit = input.split("-");
 
-        StringTokenizer strToken = new StringTokenizer(input, "-");
-        
-        while(strToken.hasMoreTokens() == true){
-            String token = strToken.nextToken();
-            output += token.charAt(0);
+        for(String item : strSplit){
+            output += item.charAt(0);
         }
 
         System.out.println(output);
