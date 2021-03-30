@@ -4,6 +4,7 @@
 
 #directory
 Debug/
+out/
 
 #extension
 *.opendb
