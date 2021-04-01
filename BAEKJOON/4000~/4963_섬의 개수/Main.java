@@ -73,6 +73,44 @@ class Solution {
         }
     }
 
+    void BFS(int x, int y)
+    {
+        Queue<location> BFS_queue = new LinkedList<>();
+
+        BFS_queue.add(new location(x, y));
+
+        while(!BFS_queue.isEmpty())
+        {
+            location loc = BFS_queue.poll();
+
+            for(int i = 0; i < 8; ++i)
+            {
+                int targetX = loc.x + moveX[i];
+                int targetY = loc.y + moveY[i];
+
+                if(targetX >= 0 && targetX < sizeX && targetY >= 0 && targetY < sizeY)
+                {
+                    if(matrix[targetY][targetX] == LAND && !visit[targetY][targetX])
+                    {
+                        visit[targetY][targetX] = true;
+                        BFS_queue.add(new location(targetX, targetY));
+                    }
+                }
+            }
+        }
+    }
+
+    static public class location
+    {
+        int x, y;
+
+        public location(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
     public static final int LAND = 1;
     public static final int SEA = 0;
 
@@ -92,7 +130,7 @@ class Solution {
             {
                 if(matrix[h][w] == LAND && visit[h][w] == false)
                 {
-                    DFS(w, h);
+                    BFS(w, h);
                     ++result;
                 }
             }
