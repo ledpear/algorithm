@@ -42,14 +42,14 @@ public class Main {
 class Solution {
     int sizeX, sizeY;
     int[][] matrix;
-    boolean[][] visit;
+
 
     //우 좌 하 상 우하 우상 좌하 좌상
     //문제에 따라 방향은 수정
     int[] moveX = new int[]{1, -1, 0, 0, 1, 1, -1, -1};
     int[] moveY = new int[]{0, 0, 1, -1, 1, -1, 1, -1};
 
-    void DFS(Integer x, Integer y)
+    void DFS(Integer x, Integer y, boolean[][] visit)
     {
         if(visit[y][x])
         {
@@ -67,13 +67,13 @@ class Solution {
             {
                 if(matrix[targetY][targetX] == LAND && !visit[targetY][targetX])
                 {
-                    DFS(targetX, targetY);
+                    DFS(targetX, targetY, visit);
                 }
             }
         }
     }
 
-    void BFS(int x, int y)
+    void BFS(int x, int y, boolean[][] visit)
     {
         Queue<location> BFS_queue = new LinkedList<>();
 
@@ -122,7 +122,7 @@ class Solution {
 
         //배열 초기화
         matrix = mtx;
-        visit = new boolean[sizeH][sizeW];
+        boolean[][] visit = new boolean[sizeH][sizeW];
 
         for(int h = 0; h < sizeH; ++h)
         {
@@ -130,7 +130,7 @@ class Solution {
             {
                 if(matrix[h][w] == LAND && visit[h][w] == false)
                 {
-                    BFS(w, h);
+                    DFS(w, h, visit);
                     ++result;
                 }
             }
