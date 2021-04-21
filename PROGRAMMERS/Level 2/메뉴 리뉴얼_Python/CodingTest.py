@@ -1,15 +1,4 @@
- 
-def combinations(input, dict, target_size, item = "", count = 0, start_point = 0):
-    if target_size == count:
-        item = ''.join(sorted(list(item)))
-        if item in dict:
-            dict[item] += 1
-        else:
-            dict[item] = 1            
-
-    for i in range(start_point, len(input)):
-        temp = item + input[i]
-        combinations(input, dict, target_size, temp, count + 1, i + 1)
+from itertools import combinations
 
 def solution(orders, course):
     answer = []
@@ -18,7 +7,13 @@ def solution(orders, course):
         dict = {}
 
         for order in orders:
-            combinations(order, dict, course_size)
+            
+            for combi in combinations(order, course_size):
+                val = ''.join(sorted(combi))
+                if val in dict:
+                    dict[val] += 1
+                else:
+                    dict[val] = 1       
 
         if len(dict) == 0 : continue
 
