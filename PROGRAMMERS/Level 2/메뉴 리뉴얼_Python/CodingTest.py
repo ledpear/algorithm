@@ -1,30 +1,48 @@
-def combinations(input, dict, item = "", count = 0, start_point = 0):
-    if 2 <= count:
+ 
+def combinations(input, dict, target_size, item = "", count = 0, start_point = 0):
+    if target_size == count:
+        item = ''.join(sorted(list(item)))
         if item in dict:
             dict[item] += 1
         else:
-            dict[item] = 1
+            dict[item] = 1            
 
     for i in range(start_point, len(input)):
         temp = item + input[i]
-        combinations(input, dict, temp, count + 1, i + 1)
-
-dict = {}
-
-combinations("ABCDE", dict)
-
-print(dict)
-
-
+        combinations(input, dict, target_size, temp, count + 1, i + 1)
 
 def solution(orders, course):
     answer = []
 
-    dict = {}
+    for course_size in course:
+        dict = {}
 
-    combinations("ABCDE", dict)
+        for order in orders:
+            combinations(order, dict, course_size)
 
-    print(dict)
+        if len(dict) == 0 : continue
 
+        list = sorted(dict.items(), reverse=True, key=lambda item:item[1])
+
+        max = list[0][1]
+        
+        if max >= 2 :
+            for i in list:
+                if max != i[1]:
+                    break
+                answer.append(i[0])
+
+    answer.sort()
+    
     return answer
+
+
+orders = ["XYZ", "XWY", "WXA"]
+course = [2,3,4]
+
+print(solution(orders, course))
+#print(dict)
+
+
+
 
