@@ -73,6 +73,12 @@ int main()
 		pB = q.front().first.second;
 		int nCount = q.front().second;
 
+		if (nCount > 10)
+		{
+			nResult = -1;
+			break;
+		}
+
 		q.pop();
 
 		//중복되면 스킵
