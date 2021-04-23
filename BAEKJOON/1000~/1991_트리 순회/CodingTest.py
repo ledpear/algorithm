@@ -1,0 +1,60 @@
+import string
+
+size = int(input())
+
+def getIndexAlphabet(alpahbet):
+    return ord(alpahbet) - ord('A')
+
+def getAlphabetIndex(index):
+    alphabet_list = list(string.ascii_uppercase)
+    return alphabet_list.index(index)
+
+arr = [[] for _ in range(26)]
+
+for _ in range(size):
+    parent, l_child, r_child = map(str, input().split())
+    arr[getIndexAlphabet(parent)] = [l_child, r_child]
+
+str_result = ''
+
+def preorder(node):    
+    if node == '.': 
+        return
+
+    global str_result
+
+    str_result += node
+    preorder(arr[getAlphabetIndex(node)][0])
+    preorder(arr[getAlphabetIndex(node)][1])
+
+def inorder(node):    
+    if node == '.': 
+        return
+
+    global str_result
+
+    inorder(arr[getAlphabetIndex(node)][0])
+    str_result += node
+    inorder(arr[getAlphabetIndex(node)][1])
+
+def postorder(node):    
+    if node == '.': 
+        return
+
+    global str_result
+
+    postorder(arr[getAlphabetIndex(node)][0])
+    postorder(arr[getAlphabetIndex(node)][1])
+    str_result += node
+
+str_result = ''
+preorder('A')
+print(str_result)
+
+str_result = ''
+inorder('A')
+print(str_result)
+
+str_result = ''
+postorder('A')
+print(str_result)
