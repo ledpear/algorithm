@@ -38,10 +38,31 @@ def bfs(visit, x, y, size_x, size_y):
 
     return count
 
+#일반적인 플로이드 위샬
+def floyd_warshall(matrix, size):
+    for i in range(size):
+        for j in range(size):
+            for k in range(size):
+                matrix[i][j] = min(matrix[i][j], matrix[i][k] + matrix[k][j])
 
+#연결확인 플로이드 위샬
+def floyd_warshall_custom(matrix, size):
+    for k in range(size):
+        for i in range(size):
+            for j in range(size):
+                if matrix[i][k] and matrix[k][j]:
+                    matrix[i][j] = 1
+
+#여러 값 입력받기
 size_x, size_y, square_size = map(int, input().split())
+
+#2차원 배열 생성
 area = [[0] * size_y for x in range(size_x)]
 
-visit = copy.deepcopy(area)
+#2차원 배열 입력
+matrix = []
+for i in range(10):
+    matrix.append(list(map(int, input().split(' '))))
 
-print("test", end=' ')    
+#새로운 객체를 생성하면서 복사
+visit = copy.deepcopy(area)
