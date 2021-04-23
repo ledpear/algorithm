@@ -15,46 +15,24 @@ for _ in range(size):
     parent, l_child, r_child = map(str, input().split())
     arr[getIndexAlphabet(parent)] = [l_child, r_child]
 
-str_result = ''
-
 def preorder(node):    
     if node == '.': 
-        return
+        return ''
 
-    global str_result
-
-    str_result += node
-    preorder(arr[getAlphabetIndex(node)][0])
-    preorder(arr[getAlphabetIndex(node)][1])
+    return node + preorder(arr[getAlphabetIndex(node)][0]) + preorder(arr[getAlphabetIndex(node)][1])
 
 def inorder(node):    
     if node == '.': 
-        return
+        return ''
 
-    global str_result
-
-    inorder(arr[getAlphabetIndex(node)][0])
-    str_result += node
-    inorder(arr[getAlphabetIndex(node)][1])
+    return inorder(arr[getAlphabetIndex(node)][0]) + node + inorder(arr[getAlphabetIndex(node)][1])
 
 def postorder(node):    
     if node == '.': 
-        return
+        return ''
 
-    global str_result
+    return postorder(arr[getAlphabetIndex(node)][0]) + postorder(arr[getAlphabetIndex(node)][1]) + node
 
-    postorder(arr[getAlphabetIndex(node)][0])
-    postorder(arr[getAlphabetIndex(node)][1])
-    str_result += node
-
-str_result = ''
-preorder('A')
-print(str_result)
-
-str_result = ''
-inorder('A')
-print(str_result)
-
-str_result = ''
-postorder('A')
-print(str_result)
+print(preorder('A'))
+print(inorder('A'))
+print(postorder('A'))
