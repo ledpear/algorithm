@@ -1,8 +1,6 @@
 import copy
 from collections import deque
 
-val_max = 0
-
 def parser(expression):
     oper = ['*', '+', '-']
     num = ''
