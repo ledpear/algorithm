@@ -1,8 +1,7 @@
-answer = ''
-num = 5
-if num % 2 == 0:
-    answer = 'Even'
-else :
-    answer = 'Odd'
+import string
+import sys
 
-print(answer)
+input = sys.stdin.readline
+
+n, m = map(int, input().split())
+k = input().rstrip()
