@@ -37,6 +37,5 @@ def bfs(target, k):
 
 for _ in range(Q):
     usado, target = map(int, input().split())
-
     
     print(bfs(target, usado))
