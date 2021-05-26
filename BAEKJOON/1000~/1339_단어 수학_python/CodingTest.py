@@ -27,3 +27,16 @@ for word in arr:
     word_arr.append(temp_arr)
 
 for i in range(max_len):
+    m = {}
+    max_val = 0
+    max_c = ''
+
+    for j in range(n):
+        if max_len[j][i] != ' ':
+            if max_len[j][i] in m:
+                m[max_len[j][i]] += 1
+            else:
+                m[max_len[j][i]] = 1
+
+            if m[max_len[j][i]] > max_val:
+                
