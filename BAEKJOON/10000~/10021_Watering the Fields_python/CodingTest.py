@@ -1,5 +1,6 @@
 import string
 import sys
+import heapq
 
 INF = 10000000
 
@@ -12,55 +13,26 @@ positions = []
 for _ in range(n):
     positions.append(list(map(int, input().split())))
 
-arr = []
-
-for i in range(n):
-    for j in range(i+1, n):
-        cost = int(pow(positions[i][0] - positions[j][0], 2) + pow(positions[i][1] - positions[j][1], 2))
-        if cost >= c:
-            arr.append([cost, i, j])
-
-arr.sort()
-node_table = [i for i in range(n)]
-
-def getParent(node):
-    global node_table
-    if node == node_table[node]: return node
-    node_table[node] = getParent(node)
-    return node_table[node]
-
-def checkParent(nodeA, nodeB):
-    parentA = getParent(nodeA)
-    parentB = getParent(nodeB)
-
-    if parentA == parentB:
-        return True
-    else:
-        return False
-
-def unionParent(nodeA, nodeB):
-    global node_table
-
-    parentA = getParent(nodeA)
-    parentB = getParent(nodeB)
-
-    if parentA < parentB:
-        node_table[parentB] = parentA
-    else:
-        node_table[parentA] = parentB
-
+heap = []
+heapq.heappush(heap, [0,0])
+visit = [False] * n
 answer = 0
 
-for edge in arr:
-    cost, nodeA, nodeB = edge
+while heap:
+    cost, node = heapq.heappop(heap)
+    if visit[node]: continue
+    visit[node] = True
+    answer += cost
 
-    if not checkParent(nodeA, nodeB):
-        answer += cost
-        unionParent(nodeA, nodeB)
+    for i in range(n):
+        if not visit[i]:
+            new_cost = int(pow(positions[node][0] - positions[i][0], 2) + pow(positions[node][1] - positions[i][1], 2))
+            if new_cost >= c:
+                heapq.heappush(heap, [new_cost, i])
 
 result = True
-for i in range(0, n):
-    if node_table[i] != 0:
+for i in range(n):
+    if not visit[i]:
         result = False
         break
 
