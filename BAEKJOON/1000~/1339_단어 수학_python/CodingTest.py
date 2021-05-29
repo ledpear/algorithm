@@ -82,12 +82,14 @@ value = 9
 for i in range(size):
     pos = size - i - 1
 
-    #여기서 에러남
-    while True:
-
+    #이미 처리한 문자 통과
+    while alphabet_heap[pos]:
         if alphabet_used[alphabet_heap[pos][0][1]]:
             heapq.heappop(alphabet_heap[pos])
+        else:
+            break
 
+    #모든 문자를 처리했을경우 컨티뉴
     if len(alphabet_heap[pos]) == 0:
         continue
 
@@ -110,19 +112,19 @@ for i in range(size):
 
             #다음 자리 수 에서 가장 큰 값 탐색
             for iter in temp_arr:
-                if alphabet_arr[temp_pos][iter[1]] > new_arr[0][0]:
-                    new_arr.clear
+                if alphabet_arr[temp_pos][iter[1]] > -new_arr[0][0]:
+                    new_arr.clear()
                     new_arr.append(iter)
-                elif -iter[0] == new_arr[0][0]:
+                elif iter[0] == new_arr[0][0]:
                     new_arr.append(iter)
 
             #가장 큰 값이 한개이면 바로 끝나고 아니면 다시 탐색
-            if len(new_arr) == 1 and new_arr[0][1] != -1:
+            if len(new_arr) == 1:
                 alphabet_used[temp_arr[0][1]] = True
                 alphabet_value[temp_arr[0][1]] = value
                 break
-
-            temp_arr = new_arr
+            elif new_arr[0][1] != -1:
+                temp_arr = new_arr
             temp_pos -= 1
 
     #마지막까지 동일하다면 순서대로 값 주입
@@ -138,6 +140,8 @@ answer = 0
 upper = 1
 for i in range(size):
     for n in alphabet_list[i]:
-        answer += alphabet_value[n] * upper
+        answer += alphabet_value[AlphabetToIndex(n)] * upper
 
     upper *= 10
+
+print(answer)
