@@ -26,6 +26,12 @@ struct fallInfo
 	vector<int> floor;
 };
 
+struct node
+{
+	int x, y;
+};
+
+
 const int move_x[4] = { 1, 0, 0, -1 };
 const int move_y[4] = { 0, 1, -1, 0 };
 
@@ -33,7 +39,7 @@ int R(0), C(0);
 
 //custum function
 
-bool DFS(int x, int y, fallInfo &fallinfo, matrix &vMatrix, vector<vector<bool>> &vVisit)
+bool DFS(int x, int y, vector<node> &vNode, fallInfo &fallinfo, matrix &vMatrix, vector<vector<bool>> &vVisit)
 {
 	if (x == (R - 1))
 		return true;
@@ -50,6 +56,11 @@ bool DFS(int x, int y, fallInfo &fallinfo, matrix &vMatrix, vector<vector<bool>>
 			fallinfo.rigth = y;
 	}
 
+	node n;
+	n.x = x;
+	n.y = y;
+	vNode.push_back(n);
+
 	bool result = false;
 	for (int nDir(0); nDir < 4; ++nDir)
 	{
@@ -58,55 +69,76 @@ bool DFS(int x, int y, fallInfo &fallinfo, matrix &vMatrix, vector<vector<bool>>
 		nPosY = y + move_y[nDir];
 
 		//맵 내부이면서 미네랄일 경우 탐색
-		if (nPosX >= 0 && nPosY >= 0 && nPosX < R && nPosY < C && vMatrix[nPosX][nPosY] && !vVisit[nPosX][nPosY])
+		if (nPosX >= 0 && nPosY >= 0 && nPosX < R && nPosY < C)
 		{
-			result = result || DFS(nPosX, nPosY, fallinfo, vMatrix, vVisit);
-			if (result)
-				break;
+			if (vMatrix[nPosX][nPosY] && !vVisit[nPosX][nPosY])
+			{
+				result = result || DFS(nPosX, nPosY, vNode, fallinfo, vMatrix, vVisit);
+				if (result)
+					break;
+			}
 		}
 	}
 
 	return result;
 }
 
-void Fall(fallInfo &fallinfo, matrix &vMatrix)
+void Fall(vector<node> &vNode, fallInfo &fallinfo, matrix &vMatrix)
 {
-	//각 가장 아래부분이 바닥 또는 다른 미네랄에 닿는지 확인
-	int count = 0; // 얼만큼 내려가는지
-	bool search = false;
+	//클러스터를 다 탐색하면서 해당 덩어리 클러스터를 다 0으로 바꾸고 새로운 배열에 이동한 덩어리를 저장하고 탐색이 끝나면 삽입
+	//그 후 다시 탐색해서 아직도 낙하중인지 확인
 
-	int left = fallinfo.left;
-	int right = fallinfo.rigth;
-	vector<int> Floor = fallinfo.floor;
-
-	//얼마나 내려가야하는 탐색
 	while (true)
 	{
-		++count;
-		for (int index(left); index <= right; ++index)
+		//한칸씩 이동
+		//전체 순환를 기본으로 만약 이동을 이미 한 위치라면 지우지 않는다.
+		vector<vector<bool>> vCheck = vector<vector<bool>>(R, vector<bool>(C, false));
+		
+		for (int index(0); index < vNode.size(); ++index)
 		{
-			//탐색되지 않은 곳은 영역 밖
-			if (Floor[index] == -1)
-			{
-				continue;
-			}
+			int x = vNode[index].x;
+			int y = vNode[index].y;
+			int posX = x + 1;
 
-			int underPos = Floor[index] + count + 1;
+			if (!vCheck[x][y])
+				vMatrix[x][y] = 0;
 
-			if (underPos >= R || vMatrix[underPos][index])
-			{
-				search = true;
-			}
+			if (!vMatrix[posX][y])
+				vMatrix[posX][y] = 1;
 
-			if (search)
-				break;
+			vCheck[posX][y] = true;
+
+			vNode[index].x = posX;
 		}
 
-		if (search)
+
+		vector<vector<bool>> vVisit = vector<vector<bool>>(R, vector<bool>(C, false));
+
+		//낙하중인지 확인
+		int left = fallinfo.left;
+		int right = fallinfo.rigth;
+		vector<int> Floor = fallinfo.floor;
+		bool result = false;
+
+		for (int index(left); index <= right; ++index)
+		{
+			++Floor[index];
+			int underPos = Floor[index] + 1;
+			if (underPos >= R)
+			{
+				result = true;
+			}
+			else if(vMatrix[underPos][index])
+			{
+				result = true;
+			}
+
+			if (result)
+				break;
+		}
+		if (result)
 			break;
 	}
-
-	//실제 이동
 }
 
 int main()
@@ -163,15 +195,20 @@ int main()
 		}
 
 		//막대 날리는 기능
+		bool bCrush = false;
 		for (nLine_index; 0 <= nLine_index && nLine_index < C; nLine_index += nRise)
 		{
 			if (vMatrix[nLine][nLine_index])
 			{
 				//미네랄 파과 처리 1 -> 0
 				vMatrix[nLine][nLine_index] = 0;
+				bCrush = true;
 				break;
 			}				
 		}
+
+		if (!bCrush)
+			continue;
 
 		vector<vector<bool>> vVisit = vector<vector<bool>>(R, vector<bool>(C, false));
 
@@ -183,21 +220,27 @@ int main()
 
 			fallInfo fallinfo;
 			fallinfo.floor = vector<int>(C, -1);
+
+			vector<node> vNode = vector<node>();
+
 			bool result(true);
 
 			//외각이 아니고 미네랄이면 낙하하는 클러스터 탐색
-			if (nPosX >= 0 && nPosY >= 0 && nPosX < R && nPosY < C && vMatrix[nPosX][nPosY] && !vVisit[nPosX][nPosY])
+			if (nPosX >= 0 && nPosY >= 0 && nPosX < R && nPosY < C)
 			{
-				result = DFS(nPosX, nPosY, fallinfo, vMatrix, vVisit);
-
-				//낙하하는 클러스터가 있으면
-				if (!result)
+				if (vMatrix[nPosX][nPosY] && !vVisit[nPosX][nPosY])
 				{
-					//낙하 처리를 하고
+					result = DFS(nPosX, nPosY, vNode, fallinfo, vMatrix, vVisit);
 
-					//탐색 종료 - 낙하하는 클러스트는 하나밖에 없으므로
-					break;
-				}
+					//낙하하는 클러스터가 있으면
+					if (!result)
+					{
+						//낙하 처리를 하고
+						Fall(vNode, fallinfo, vMatrix);
+						//탐색 종료 - 낙하하는 클러스트는 하나밖에 없으므로
+						break;
+					}
+				}				
 			}
 		}
 
@@ -206,7 +249,18 @@ int main()
 
 
 	//Output
-
+	for (int i(0); i < vMatrix.size(); ++i)
+	{
+		string strTemp("");
+		for (int j(0); j < vMatrix[0].size(); ++j)
+		{
+			if (vMatrix[i][j])
+				strTemp += 'x';
+			else
+				strTemp += '.';
+		}
+		cout << strTemp << '\n';
+	}
 
 	////////////////////////////////////
 	system("pause");
