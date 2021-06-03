@@ -14,37 +14,30 @@ matrix = []
 moveX = [1, -1, 0, 0]
 moveY = [0, 0, 1, -1]
 
-for _ in range(n):
+arr = []
+
+for i in range(n):
     matrix.append(list(map(int, input().split())))
+    for j in range(n):
+        arr.append([matrix[i][j], i, j])
+
+arr.sort(reverse=True)
 
 DP = [[0] * n for _ in range(n)]
 maxVal = 0
 
-for i in range(n):
-    for j in range(n):
+for node in arr:
+    val, x, y = node
+    DP[x][y] = 1
 
-        if DP[i][j] < 1:
-            dq = collections.deque()
-            dq.append([i,j, 1])
-            visit = [[False] * n for _ in range(n)]
+    for dir in range(4):
+        posX = x + moveX[dir]
+        posY = y + moveY[dir]
+        
+        if posX >= 0 and posX < n and posY >= 0 and posY < n:
+            if DP[posX][posY] >= DP[x][y] and matrix[x][y] < matrix[posX][posY]:
+                DP[x][y] = DP[posX][posY] + 1
 
-            while dq:
-                x , y, val = dq.popleft()
-                if DP[x][y] >= val or visit[x][y]:
-                    continue
+    maxVal = max(maxVal, DP[x][y])
 
-                DP[x][y] = val
-                maxVal = max(maxVal, val)
-                visit[x][y] = True
-                
-                val += 1
-                for dir in range(4):
-                    posX = x + moveX[dir]
-                    posY = y + moveY[dir]
-                    
-                    if posX >= 0 and posX < n and posY >= 0 and posY < n:
-                        if DP[posX][posY] < val and matrix[x][y] < matrix[posX][posY]:
-                            dq.append([posX, posY, val])
-
-
-print(DP)
+print(maxVal)
