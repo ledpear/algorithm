@@ -119,55 +119,74 @@ void Fall(vector<node> &vNode, fallInfo &fallinfo, matrix &vMatrix)
 	{
 		//한칸씩 이동
 		//전체 순환를 기본으로 만약 이동을 이미 한 위치라면 지우지 않는다.
-		vector<vector<bool>> vCheck = vector<vector<bool>>(R, vector<bool>(C, false));
 
+		//2번째 방법
+		//기존 위치를 다 삭제하면서 탐색을하고
+		//낙하가 끝났는지 탐색
+		//그 후 새로운 위치 삽입
+
+		for (int index(0); index < vNode.size(); ++index)
+		{
+			int x = vNode[index].x;
+			int y = vNode[index].y;
+
+			vMatrix[x][y] = 0;
+
+			++vNode[index].x;
+		}
+
+		bool result = false;
 		for (int index(0); index < vNode.size(); ++index)
 		{
 			int x = vNode[index].x;
 			int y = vNode[index].y;
 			int posX = x + 1;
 
-			if (posX >= R)
-				continue;
-
-			if (!vCheck[x][y])
-				vMatrix[x][y] = 0;
-
-			if (!vMatrix[posX][y])
-				vMatrix[posX][y] = 1;
-
-			vCheck[posX][y] = true;
-
-			vNode[index].x = posX;
-		}
-
-		//낙하중인지 확인
-		int left = fallinfo.left;
-		int right = fallinfo.rigth;
-		bool result = false;
-
-		for (int index(left); index <= right; ++index)
-		{
-			++fallinfo.floor[index];
-			int underPos = fallinfo.floor[index] + 1;
-			if (underPos >= R)
+			if (posX >= R || vMatrix[posX][y])
 			{
 				result = true;
-			}
-			else if (vMatrix[underPos][index])
-			{
-				result = true;
-			}
-
-			if (result)
 				break;
+			}
 		}
+
+		for (int index(0); index < vNode.size(); ++index)
+		{
+			int x = vNode[index].x;
+			int y = vNode[index].y;
+
+			vMatrix[x][y] = 1;
+		}
+
 		if (result)
 			break;
-		//dfs로 탐색
-		vector<vector<bool>> vVisit = vector<vector<bool>>(R, vector<bool>(C, false));
-		if (DFS(vNode[0].x, vNode[0].y, vMatrix, vVisit))
-			break;
+
+// 		//낙하중인지 확인
+// 		int left = fallinfo.left;
+// 		int right = fallinfo.rigth;
+// 		bool result = false;
+// 
+// 		for (int index(left); index <= right; ++index)
+// 		{
+// 			++fallinfo.floor[index];
+// 			int underPos = fallinfo.floor[index] + 1;
+// 			if (underPos >= R)
+// 			{
+// 				result = true;
+// 			}
+// 			else if (vMatrix[underPos][index])
+// 			{
+// 				result = true;
+// 			}
+// 
+// 			if (result)
+// 				break;
+// 		}
+// 		if (result)
+// 			break;
+// 		//dfs로 탐색
+// 		vector<vector<bool>> vVisit = vector<vector<bool>>(R, vector<bool>(C, false));
+// 		if (DFS(vNode[0].x, vNode[0].y, vMatrix, vVisit))
+// 			break;
 	}
 }
 
