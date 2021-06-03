@@ -16,8 +16,8 @@ using namespace std;
 
 //define
 
-using ull = unsigned long long ;
-using location =  pair<int, int> ;
+using ull = unsigned long long;
+using location = pair<int, int>;
 using matrix = vector<vector<int>>;
 
 struct fallInfo
@@ -41,9 +41,6 @@ int R(0), C(0);
 
 bool DFS(int x, int y, vector<node> &vNode, fallInfo &fallinfo, matrix &vMatrix, vector<vector<bool>> &vVisit)
 {
-	if (x == (R - 1))
-		return true;
-
 	vVisit[x][y] = true;
 
 	if (fallinfo.floor[y] < x)
@@ -62,6 +59,10 @@ bool DFS(int x, int y, vector<node> &vNode, fallInfo &fallinfo, matrix &vMatrix,
 	vNode.push_back(n);
 
 	bool result = false;
+
+	if (x == (R - 1))
+		result = true;
+	
 	for (int nDir(0); nDir < 4; ++nDir)
 	{
 		int nPosX(0), nPosY(0);
@@ -73,9 +74,35 @@ bool DFS(int x, int y, vector<node> &vNode, fallInfo &fallinfo, matrix &vMatrix,
 		{
 			if (vMatrix[nPosX][nPosY] && !vVisit[nPosX][nPosY])
 			{
-				result = result || DFS(nPosX, nPosY, vNode, fallinfo, vMatrix, vVisit);
-				if (result)
-					break;
+				result = DFS(nPosX, nPosY, vNode, fallinfo, vMatrix, vVisit) || result;
+			}
+		}
+	}
+
+	return result;
+}
+
+bool DFS(int x, int y, matrix &vMatrix, vector<vector<bool>> &vVisit)
+{
+	vVisit[x][y] = true;
+
+	bool result = false;
+
+	if (x == (R - 1))
+		return true;
+
+	for (int nDir(0); nDir < 4; ++nDir)
+	{
+		int nPosX(0), nPosY(0);
+		nPosX = x + move_x[nDir];
+		nPosY = y + move_y[nDir];
+
+		//맵 내부이면서 미네랄일 경우 탐색
+		if (nPosX >= 0 && nPosY >= 0 && nPosX < R && nPosY < C)
+		{
+			if (vMatrix[nPosX][nPosY] && !vVisit[nPosX][nPosY])
+			{
+				result = DFS(nPosX, nPosY, vMatrix, vVisit) || result;
 			}
 		}
 	}
@@ -93,12 +120,15 @@ void Fall(vector<node> &vNode, fallInfo &fallinfo, matrix &vMatrix)
 		//한칸씩 이동
 		//전체 순환를 기본으로 만약 이동을 이미 한 위치라면 지우지 않는다.
 		vector<vector<bool>> vCheck = vector<vector<bool>>(R, vector<bool>(C, false));
-		
+
 		for (int index(0); index < vNode.size(); ++index)
 		{
 			int x = vNode[index].x;
 			int y = vNode[index].y;
 			int posX = x + 1;
+
+			if (posX >= R)
+				continue;
 
 			if (!vCheck[x][y])
 				vMatrix[x][y] = 0;
@@ -111,24 +141,20 @@ void Fall(vector<node> &vNode, fallInfo &fallinfo, matrix &vMatrix)
 			vNode[index].x = posX;
 		}
 
-
-		vector<vector<bool>> vVisit = vector<vector<bool>>(R, vector<bool>(C, false));
-
 		//낙하중인지 확인
 		int left = fallinfo.left;
 		int right = fallinfo.rigth;
-		vector<int> Floor = fallinfo.floor;
 		bool result = false;
 
 		for (int index(left); index <= right; ++index)
 		{
-			++Floor[index];
-			int underPos = Floor[index] + 1;
+			++fallinfo.floor[index];
+			int underPos = fallinfo.floor[index] + 1;
 			if (underPos >= R)
 			{
 				result = true;
 			}
-			else if(vMatrix[underPos][index])
+			else if (vMatrix[underPos][index])
 			{
 				result = true;
 			}
@@ -137,6 +163,10 @@ void Fall(vector<node> &vNode, fallInfo &fallinfo, matrix &vMatrix)
 				break;
 		}
 		if (result)
+			break;
+		//dfs로 탐색
+		vector<vector<bool>> vVisit = vector<vector<bool>>(R, vector<bool>(C, false));
+		if (DFS(vNode[0].x, vNode[0].y, vMatrix, vVisit))
 			break;
 	}
 }
@@ -154,15 +184,15 @@ int main()
 	//4. 바닥에 연결되어있지 않은 클러스터는 낙하처리
 	//5. 낙하처리는 탐색시 1차원 배열에 해당 클러스터에 가장 아래 위치를 저장해서 한칸씩 내려가면서 부딪히는지 확인
 	//Declaration
-	
+
 	cin >> R >> C;
-	matrix vMatrix = matrix(R, vector<int>(C,0));
+	matrix vMatrix = matrix(R, vector<int>(C, 0));
 
 	for (int i(0); i < R; ++i)
 	{
 		string temp("");
 		cin >> temp;
-		for (int j(0); j < C; ++j)
+		for (int j(0); j < temp.size(); ++j)
 		{
 			if (temp[j] == 'x')
 			{
@@ -186,7 +216,7 @@ int main()
 	bool bLeft = true;	//true면 왼쪽->오른쪽 false면 오른쪽->왼쪽
 	for (int nLine : vCmd)
 	{
-		nLine = 8 - nLine;
+		nLine = R - nLine;
 		int nRise(1), nLine_index(0);
 		if (!bLeft)
 		{
@@ -196,6 +226,7 @@ int main()
 
 		//막대 날리는 기능
 		bool bCrush = false;
+
 		for (nLine_index; 0 <= nLine_index && nLine_index < C; nLine_index += nRise)
 		{
 			if (vMatrix[nLine][nLine_index])
@@ -204,8 +235,10 @@ int main()
 				vMatrix[nLine][nLine_index] = 0;
 				bCrush = true;
 				break;
-			}				
+			}
 		}
+
+		bLeft = !bLeft;
 
 		if (!bCrush)
 			continue;
@@ -240,11 +273,9 @@ int main()
 						//탐색 종료 - 낙하하는 클러스트는 하나밖에 없으므로
 						break;
 					}
-				}				
+				}
 			}
-		}
-
-		bLeft = !bLeft;
+		}		
 	}
 
 
