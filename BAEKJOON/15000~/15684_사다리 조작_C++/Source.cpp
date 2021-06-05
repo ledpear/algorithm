@@ -23,7 +23,7 @@ using matrix = vector<vector<int>>;
 int Min(int A, int B) { if (A < B) return A; return B; }
 
 //custum function
-bool lines[12][32];
+bool lines[32][12];
 int size_x, size_y, maxVal;
 bool answer_find;
 
@@ -60,7 +60,7 @@ void BT(int count, int StartX)
 
 	if (Run())
 	{
-		maxVal = Min(maxVal, count);
+		maxVal = min(maxVal, count);
 		return;
 	}
 
