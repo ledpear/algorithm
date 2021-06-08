@@ -14,6 +14,31 @@ maxVal = 0
 moveX = [1, -1, 0, 0]
 moveY = [0, 0, 1, -1]
 
+visit = [[False] * y for _ in range(x)]
+finds = []
+
+for i in range(x):
+    for j in range(y):
+        if not visit[i][j] and matrix[i][j] == 'W':
+            queue = [[i, j]]
+            visit[i][j] = True
+
+            while queue:
+                nowX, nowY = queue.pop(0)
+                
+                for i in range(4):
+                    posX = nowX + moveX[i]
+                    posY = nowY + moveY[i]
+
+                    if posX >= 0 and posY >= 0 and posX < x and posY < y:
+                        if not visit[posX][posY]:
+                            visit[posX][posY] = True
+                            if matrix[posX][posY] == 'W':
+                                queue.append([posX, posY])
+                            else:
+                                finds.append([posX, posY])
+
+
 def bfs(x, y, sizeX, sizeY):
     global matrix, moveX, moveY, maxVal
 
@@ -35,9 +60,8 @@ def bfs(x, y, sizeX, sizeY):
                     visit[posX][posY] = True
                     queue.append([posX, posY, nowScore + 1])
 
-for i in range(x):
-    for j in range(y):
-        if matrix[i][j] == 'L':
-            bfs(i, j, x, y)
+for find in finds:
+    i, j = find
+    bfs(i, j, x, y)
 
 print(maxVal)
