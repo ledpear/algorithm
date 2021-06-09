@@ -18,6 +18,22 @@ visit = [[False] * y for _ in range(x)]
 finds = []
 
 for i in range(x):
+    if not visit[i][0] and matrix[i][0] == 'L':
+        visit[i][0] = True
+        finds.append([i, 0])
+    if not visit[i][-1] and matrix[i][-1] == 'L':
+        visit[i][-1] = True
+        finds.append([i, y-1])
+
+for j in range(y):
+    if not visit[0][j] and matrix[0][j] == 'L':
+        visit[0][j] = True
+        finds.append([0, j])
+    if not visit[-1][j] and matrix[-1][j] == 'L':
+        visit[-1][j] = True
+        finds.append([x-1, j])
+
+for i in range(x):
     for j in range(y):
         if not visit[i][j] and matrix[i][j] == 'W':
             queue = [[i, j]]
@@ -26,9 +42,9 @@ for i in range(x):
             while queue:
                 nowX, nowY = queue.pop(0)
                 
-                for i in range(4):
-                    posX = nowX + moveX[i]
-                    posY = nowY + moveY[i]
+                for dir in range(4):
+                    posX = nowX + moveX[dir]
+                    posY = nowY + moveY[dir]
 
                     if posX >= 0 and posY >= 0 and posX < x and posY < y:
                         if not visit[posX][posY]:
