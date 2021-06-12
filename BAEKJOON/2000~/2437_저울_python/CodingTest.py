@@ -7,28 +7,16 @@ size = int(input().rstrip())
 
 arr = list(map(int, input().split()))
 
-#arr.sort()
+arr.sort()
 
-minVal = 1
-visit = set()
+sumVal = 0
 
-
-def BT(start, val):
-    global minVal, visit, arr, size
-
-    for i in range(start, size):
-        val += arr[i]
-
-        visit.add(val)
-        if val == minVal:
-            minVal += 1
-            while minVal in visit:
-                minVal += 1
-
-        BT(i + 1, val)
-        val -= arr[i]
-
-BT(0, 0)
+for i in range(size):
+    if sumVal + 1 < arr[i]:
+        sumVal += 1
+        break
+    
+    sumVal += arr[i]
 
 
-print(minVal)
+print(sumVal)
