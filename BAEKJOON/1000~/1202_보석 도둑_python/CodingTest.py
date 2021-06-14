@@ -5,33 +5,28 @@ import heapq
 input = sys.stdin.readline
 
 n, k = map(int, input().split())
-n_arr = [[] for _ in range(1000001)]
+n_arr = []
 k_arr = []
 
 for _ in range(n):
-    w, v = map(int, input().split())
-    heapq.heappush(n_arr[w], -v)
+    heapq.heappush(n_arr, list(map(int, input().split())))
 
 for _ in range(k):
     heapq.heappush(k_arr, int(input().rstrip()))
 
 answer = 0
+cal = []
 
 while k_arr:
     now_w = heapq.heappop(k_arr)
 
-    maxVal = 0
-    maxIndex = 0
+    while n_arr and n_arr[0][0] <= now_w:
+        now_m, now_v = heapq.heappop(n_arr)
+        heapq.heappush(cal, -now_v)
 
-    for i in range(1, now_w + 1):
-        if not n_arr[i]:
-            continue
-        if maxVal < -n_arr[i][0]:
-            maxVal = -n_arr[i][0]
-            maxIndex = i
-    
-    if maxIndex != 0:
-        answer += maxVal
-        heapq.heappop(n_arr[maxIndex])
+    if cal:
+        answer -= heapq.heappop(cal)
+    elif not n_arr:
+        break
 
 print(answer)
