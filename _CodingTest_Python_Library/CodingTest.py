@@ -1,5 +1,8 @@
 import copy
 from collections import deque
+import heapq
+
+INF = 1e9
 
 def dfs(visit, x, y, size_x, size_y, count):
     visit[x][y] = 1
@@ -37,6 +40,28 @@ def bfs(visit, x, y, size_x, size_y):
                 count += 1
 
     return count
+
+#다익스트라
+def dijkstra(start, size, edge_list):
+    h = []
+    heapq.heappush(h, (0, 1))
+
+    cost_list = [INF] * (size + 1)
+    
+    while h:
+        cost, node = heapq.heappop(h)
+        
+        if cost_list[node] <= cost:
+            continue
+            
+        cost_list[node] = cost
+        
+        for edge in edge_list[node]:
+            end = edge[0]
+            end_cost = edge[1] + cost
+            
+            if cost_list[end] > end_cost:
+                heapq.heappush(h, (end_cost, end))
 
 #일반적인 플로이드 위샬
 def floyd_warshall(matrix, size):
