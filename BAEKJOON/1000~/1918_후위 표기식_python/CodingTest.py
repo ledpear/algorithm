@@ -12,7 +12,8 @@ input = input().rstrip()
 #괄호 체크를 하기위해 스택으로 판단
 #괄호 스택이 0일때 연산자를 만나면 루트 노드 생성됨
 
-oper = ['+', '-', '*', '/']
+second_oper = ['+', '-']
+first_oper = ['*', '/']
 class node:
     def __init__(self, val):
         self.val = val
@@ -33,8 +34,16 @@ class node:
     def setLeftNode(self, leftnode):
         self.leftnode = leftnode
 
-    def setrightNode(self, rightnode):
+    def setRightNode(self, rightnode):
         self.rightnode = rightnode
+
+    def getLeftVal(self):
+        return self.leftnode.val
+
+    def getRightVal(self):
+        return self.leftnode.val
+
+
 
 def makeTree(input):
     if len(input) == 1:
@@ -46,12 +55,28 @@ def makeTree(input):
             stack.append(i)
         elif input[i] == ')':
             stack.pop()
-        elif input[i] in oper and not stack:
+        elif input[i] in second_oper and not stack:
+            leftnode = makeTree(input[:i])
+            rightnode = makeTree(input[i+1:])
+            return node(input[i], leftnode, rightnode)
+        elif input[i] in first_oper and not stack:
             leftnode = makeTree(input[:i])
             rightnode = makeTree(input[i+1:])
             return node(input[i], leftnode, rightnode)
 
     return makeTree(input[1:-1])
 
+    
+
 tree = makeTree(input)
-print("test")
+answer = ""
+
+def postfix(tree):
+    if tree.isTerminal():
+        return tree.val
+        
+    return postfix(tree.leftnode) + postfix(tree.rightnode) + tree.val 
+
+answer = postfix(tree)
+
+print(answer)
