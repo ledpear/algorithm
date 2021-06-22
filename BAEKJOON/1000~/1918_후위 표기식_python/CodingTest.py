@@ -7,76 +7,32 @@ input = sys.stdin.readline
 #k = input().rstrip()
 
 input = input().rstrip()
-#괄호안에 있는건 재귀로 돌리고
-#연산자 좌우로 트리생성
-#괄호 체크를 하기위해 스택으로 판단
-#괄호 스택이 0일때 연산자를 만나면 루트 노드 생성됨
 
 second_oper = ['+', '-']
 first_oper = ['*', '/']
-class node:
-    def __init__(self, val):
-        self.val = val
-        self.leftnode = None
-        self.rightnode = None
 
-    def __init__(self, val, leftnode, rightnode):
-        self.val = val
-        self.leftnode = leftnode
-        self.rightnode = rightnode
+answer = ''
+stack = []
 
-    def isTerminal(self):
-        if self.leftnode == None and self.rightnode == None:
-            return True
-        else:
-            return False
+for c in input:
+    if 'A' <= c <= 'Z':
+        answer += c
+    elif c == '(':
+        stack.append(c)
+    elif c == ')':
+        while stack and stack[-1] != '(':
+            answer += stack.pop()
+        stack.pop()
+    elif c in second_oper:
+        while stack and stack[-1] != '(':
+            answer += stack.pop()
+        stack.append(c)
+    elif c in first_oper:
+        while stack and stack[-1] in first_oper:
+            answer += stack.pop()
+        stack.append(c)
 
-    def setLeftNode(self, leftnode):
-        self.leftnode = leftnode
-
-    def setRightNode(self, rightnode):
-        self.rightnode = rightnode
-
-    def getLeftVal(self):
-        return self.leftnode.val
-
-    def getRightVal(self):
-        return self.leftnode.val
-
-
-
-def makeTree(input):
-    if len(input) == 1:
-        return node(input, None, None)
-    stack = []
-    left = ''
-    for i in range(len(input)):
-        if input[i] == '(':
-            stack.append(i)
-        elif input[i] == ')':
-            stack.pop()
-        elif input[i] in second_oper and not stack:
-            leftnode = makeTree(input[:i])
-            rightnode = makeTree(input[i+1:])
-            return node(input[i], leftnode, rightnode)
-        elif input[i] in first_oper and not stack:
-            leftnode = makeTree(input[:i])
-            rightnode = makeTree(input[i+1:])
-            return node(input[i], leftnode, rightnode)
-
-    return makeTree(input[1:-1])
-
-    
-
-tree = makeTree(input)
-answer = ""
-
-def postfix(tree):
-    if tree.isTerminal():
-        return tree.val
-        
-    return postfix(tree.leftnode) + postfix(tree.rightnode) + tree.val 
-
-answer = postfix(tree)
+while stack:
+    answer += stack.pop()
 
 print(answer)
