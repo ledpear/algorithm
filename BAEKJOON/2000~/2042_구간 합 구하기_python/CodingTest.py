@@ -23,6 +23,7 @@ for _ in range(total_size):
     a, b, c = map(int, input().split())
     if a == 1:
         diff = c - arr[b-1]
+        arr[b-1] = c
         for i in range(b - 1, num_size):
             sum_arr[i] += diff
     elif a == 2:
