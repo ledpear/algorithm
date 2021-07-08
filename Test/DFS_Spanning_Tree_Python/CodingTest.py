@@ -37,3 +37,6 @@ def solution(s):
     for node in edges:
         if not discovered[getIndex(node)]:
             DFS(node, edges, discovered, finished, findCnt)
+
+#solution(["AC", "CD", 'AB', 'BE', 'EA', 'BC'])
+solution(["CD", 'EA', 'BC', "AC", 'AB', 'BE' ])

@@ -3,8 +3,8 @@ import sys
 
 input = sys.stdin.readline
 
-#n, m = map(int, input().split())
-#k = input().rstrip()
+#사이트 주소와 비밀번호를 입력받아 dictionary에 저장
+#질의하는 사이트주소에 맞는 비밀번호를 출력
 
 password_size, answer_size = map(int, input().split())
 passwords = {}
