@@ -3,63 +3,57 @@ import sys
 from bisect import bisect_left, bisect_right
 
 class Node():
-    def __init__(self,data):
-        self.prev = None
-        self.next = None
-        self.data = data
+    def __init__(self,val):
+        self.pre = None
+        self.post = None
+        self.val = val
         
 
 def solution(n,k,cmds):
-    node_list = [Node(0)]
-    deleted_stack = []
-    deleted_state = ['O' for _ in range(n)]
-    for num in range(1,n):
-        prev_num = node_list[num-1]
-        cur_num = Node(num)
-        prev_num.next = cur_num
-        cur_num.prev = prev_num
-        node_list.append(cur_num)
-    
-    cur_node = node_list[k]
+    arr = ['O' for _ in range(n)]
+    now_pos = k
+    stack = []
 
     for cmd in cmds:
-        command = cmd.split()
-        if len(command)>1:
-            num = int(command[1])
-            command = command[0]
-            if command =='D':
-                for _ in range(num):
-                    cur_node = cur_node.next
+        cmd = cmd.split()
+        if len(cmd) > 1:
+            move = int(cmd[1])
+            cmd = cmd[0]
+            count = 0
+
+            if cmd == 'D':
+                while count != move:
+                    now_pos += 1
+                    if arr[now_pos] == 'O':
+                        count += 1
             else:
-                for _ in range(num):
-                    cur_node = cur_node.prev
+                while count != move:
+                    now_pos -= 1
+                    if arr[now_pos] == 'O':
+                        count += 1
+
         else:
-            command = command[0]
-            if command == 'C':
-                prev_num = cur_node.prev
-                next_num = cur_node.next
-                deleted_stack.append(cur_node)
-                deleted_state[cur_node.data] = 'X'
-                if next_num != None:
-                    next_num.prev = prev_num
-                if prev_num != None:
-                    prev_num.next = next_num
-                    
-                if next_num != None:
-                    cur_node = next_num
+            cmd = cmd[0]
+            if cmd == 'C':
+                arr[now_pos] = 'X'
+                stack.append(now_pos)
+                
+                move_pos = now_pos + 1
+                while move_pos < n:
+                    if arr[move_pos] == 'X':
+                        move_pos += 1
+                    else:
+                        break
+                if move_pos == n:
+                    while arr[now_pos] == 'X':
+                        now_pos -= 1
                 else:
-                    cur_node = prev_num
+                    now_pos = move_pos
             else:
-                restore_node = deleted_stack.pop()
-                prev_num = restore_node.prev
-                next_num = restore_node.next
-                if prev_num != None:
-                    prev_num.next = restore_node
-                if next_num != None:
-                    next_num.prev = restore_node
-                deleted_state[restore_node.data] = 'O'
-    answer = ''.join(deleted_state)
-    return answer
+                arr[stack[-1]] = 'O'
+                stack.pop()
+
+    return ''.join(arr)
 
 #print(solution(8,2,["D 2","C","U 3","C","D 4","C","U 2","Z","Z"]))
 print(solution(8,2,["D 2","C","U 3","C","D 4","C","U 2","Z","Z","U 1","C"]	))
