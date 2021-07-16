@@ -12,7 +12,7 @@ def getPiMax(txt):
 
     sameCount = 0
     index = 1
-    maxCount = 1
+    maxCount = 0
     while index < txtSize:
         if txt[index] == txt[sameCount]:
             sameCount += 1
@@ -27,13 +27,10 @@ def getPiMax(txt):
     maxCount = max(maxCount, sameCount)
     return maxCount
 
-if txtSize < 2:
-    print(0)
-else:
-    maxCount = 1
-    index = 0
-    while index < txtSize - maxCount:
-        maxCount = max(maxCount, getPiMax(txt[index:]))
-        index += 1
+maxCount = 0
+index = 0
+while index < txtSize - maxCount:
+    maxCount = max(maxCount, getPiMax(txt[index:]))
+    index += 1
 
-    print(maxCount)
+print(maxCount)
