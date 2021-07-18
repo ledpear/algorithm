@@ -5,8 +5,6 @@ from copy import deepcopy
 input = sys.stdin.readline
 
 size = int(input().rstrip())
-arr = []
-
 arr = list(map(int, input().split()))
 
 maxDP = deepcopy(arr)
