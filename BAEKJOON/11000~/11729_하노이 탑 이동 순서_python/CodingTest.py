@@ -18,5 +18,6 @@ count = 1
 
 for i in range(size - 1):
     count = count * 2 + 1
+    
 print(count)
 hanoi(size, 1, 2, 3)

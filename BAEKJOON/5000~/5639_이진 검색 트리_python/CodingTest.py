@@ -1,44 +1,29 @@
 import string
 import sys
 
+sys.setrecursionlimit(10**9)
 input = sys.stdin.readline
 
-class node:
-    def __init__(self, val, left = None, right = None):
-        self.val = val
-        self.left = left
-        self.right = right
-
 inputArr = []
-rootNode = None
+
 while True:
     try:
-        inputNum = int(input().rstrip())
-        if rootNode == None:
-            rootNode = node(inputNum)
-        else:
-            nowNode = rootNode
-            while True:
-                if inputNum < nowNode.val:
-                    if nowNode.left == None:
-                        nowNode.left = node(inputNum)
-                        break
-                    else:
-                        nowNode = nowNode.left
-                else:
-                    if nowNode.right == None:
-                        nowNode.right = node(inputNum)
-                        break
-                    else:
-                        nowNode = nowNode.right
+        inputArr.append(int(input().rstrip()))
     except:
         break
 
-def printTree(Node):
-    if Node.left != None:
-        printTree(Node.left)
-    if Node.right != None:
-        printTree(Node.right)
-    print(Node.val)
+def postorderPrint(start, end):
+    if start >= end:
+        return
 
-printTree(rootNode)
+    div = end
+    for index in range(start + 1, end):
+        if inputArr[start] < inputArr[index]:
+            div = index
+            break
+
+    postorderPrint(start + 1, div)
+    postorderPrint(div, end)
+    print(inputArr[start])
+
+postorderPrint(0, len(inputArr))
