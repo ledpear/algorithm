@@ -54,49 +54,61 @@ vector<int> getPiArr(string subStr)
 
 string solution(string mainStr, string subStr)
 {
-	vector<int> piArr = getPiArr(subStr);
+	int mainSize = mainStr.size();
+	int subSize = subStr.size();
 
-	while (mainStr.size() > 0)
+	//vector<int> subPiArr = getPiArr(subStr);
+	vector<int> mainPiArr(mainSize + 1);
+	//main을 복사한 result를 폭탄이 터졌을때 인덱스를 이동시키는 것으로 속도를 향상시킨다.
+	string resultStr(mainStr);
+	int mainIndex(0), subIndex(0), resultIndex(0);
+
+	while (mainIndex < mainSize)
 	{
-		string resultStr("");
-		bool same(false);
-		int mainSize = mainStr.size();
-		int subSize = subStr.size();
-		int mainIndex(0), subIndex(0);
-
-		while (mainIndex < mainSize)
+		if (mainStr[mainIndex] == subStr[subIndex])
 		{
-			if (mainStr[mainIndex] == subStr[subIndex])
-			{
-				resultStr += mainStr[mainIndex];
-				++mainIndex;
-				++subIndex;
+			//인덱스가 달랐을때만 복사할까?
+			resultStr[resultIndex] = mainStr[mainIndex];
+			++resultIndex;
+			++subIndex;
+			++mainIndex;
+			mainPiArr[mainIndex] = subIndex;
 
-				if (subIndex == subSize)
-				{
-					resultStr = resultStr.substr(0, resultStr.size() - subSize);
-					subIndex = piArr[subIndex - 1];
-					same = true;
-				}
-			}
-			else if (subIndex != 0)
+			if (subIndex == subSize)
 			{
-				subIndex = piArr[subIndex - 1];
-			}
-			else
-			{
-				resultStr += mainStr[mainIndex];
-				++mainIndex;
+				//resultStr = resultStr.substr(0, resultStr.size() - subSize);
+				//subIndex = subPiArr[subIndex - 1];
+				
+				//기억한 위치값으로 변경
+				subIndex = mainPiArr[resultIndex - subSize];
+				//폭탄이 터지면 sub의 크기만큼 빼준다
+				resultIndex -= subSize;
 			}
 		}
-		if (!same)
+		else if (subIndex != 0)
 		{
-			break;
+			//subIndex = subPiArr[subIndex - 1];
+// 			int backPos = mainIndex - subSize - 1;
+// 			if (backPos >= 0)
+// 			{
+// 				subIndex = mainPiArr[mainIndex - subSize - 1];
+// 			}
+// 			else
+// 			{
+// 				subIndex = 0;
+// 			}
+			subIndex = 0;
 		}
-		mainStr = resultStr;
+		else
+		{
+			//resultStr += mainStr[mainIndex];
+			resultStr[resultIndex] = mainStr[mainIndex];
+			++resultIndex;
+			++mainIndex;
+		}
 	}
 
-	return mainStr;
+	return resultStr.substr(0, resultIndex);
 }
 
 int main()
