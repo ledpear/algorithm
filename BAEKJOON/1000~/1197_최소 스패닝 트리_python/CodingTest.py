@@ -5,9 +5,6 @@ import heapq
 sys.setrecursionlimit(10**9)
 input = sys.stdin.readline
 
-#n, m = map(int, input().split())
-#k = input().rstrip()
-
 nodeSize, edgeSize = map(int, input().split())
 edges = [[] for _ in range(nodeSize + 1)]
 for _ in range(edgeSize):
