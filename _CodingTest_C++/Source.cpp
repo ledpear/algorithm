@@ -12,14 +12,17 @@
 #include <sstream>
 #include <vector>
 
-using namespace std;
+using std::cin;
+using std::cout;
+using std::pair;
+using std::vector;
+using std::ios_base;
 
-//define
-
-using ull = unsigned long long ;
-using location =  pair<int, int> ;
+using ull = unsigned long long;
+using location = pair<int, int>;
 using matrix = vector<vector<int>>;
 
+//define
 //custum function
 
 int main()
