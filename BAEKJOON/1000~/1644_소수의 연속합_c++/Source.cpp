@@ -49,30 +49,33 @@ int main()
 	cin.tie(0);
 	////////////////////////////////////
 	//Declaration
-	int target(0);
+	int target(0), answer(0);
 	cin >> target;
 
 	//Solution
 	vector<int> primeNumArr = getPrimeNum(target);
-	int answer(0);
+	vector<int> primeNumSum = primeNumArr;
+
+	for (int index(1); index < primeNumSum.size(); ++index)
+	{
+		primeNumSum[index] += primeNumSum[index - 1];
+	}
+
 	for (int index(primeNumArr.size() - 1); index >= 0; --index)
 	{
-		int sumVal = primeNumArr[index];
-		int sumIndex = index - 1;
-
-		while (sumVal <= target)
+		if (primeNumSum[index] == target)
 		{
-			if (sumVal == target)
+			++answer;
+		}
+
+		for (int outOfRangeIndex(index - 1); outOfRangeIndex >= 0; --outOfRangeIndex)
+		{
+			int checkNum = primeNumSum[index] - primeNumSum[outOfRangeIndex];
+			if (checkNum == target)
 			{
 				++answer;
-				break;
 			}
-
-			if (sumIndex >= 0)
-			{
-				sumVal += primeNumArr[sumIndex--];
-			}
-			else
+			else if (checkNum > target)
 			{
 				break;
 			}
