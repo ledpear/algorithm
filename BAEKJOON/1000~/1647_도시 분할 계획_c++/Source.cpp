@@ -25,6 +25,9 @@ struct compare
 	{
 		return e1.cost > e2.cost;
 	}
+	bool operator++() {
+
+	}
 };
 
 //union find
