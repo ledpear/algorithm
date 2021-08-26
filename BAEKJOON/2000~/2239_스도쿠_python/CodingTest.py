@@ -63,8 +63,6 @@ def BT(count):
 
     x, y = blankPos[count]
     for number in range(1, NUMBER_SIZE):
-        if answer != "":
-            return
         if not rowNumber[x][number] and not colNumber[y][number] and not blockNumber[getBlockIndex(x, y)][number]:
             rowNumber[x][number] = True
             colNumber[y][number] = True
