@@ -30,16 +30,41 @@ class Shark:
 
     def move(self):
         moveCount = self.speed
-        while moveCount:
-            posX = self.x + moveX[self.__dict]
-            posY = self.y + moveY[self.__dict]
 
-            if 0 <= posX < boardSizeX and 0 <= posY < boardSizeY:
-                moveCount -= 1
-                self.x = posX
-                self.y = posY
-            else:
-                self.__dict = dictReverse(self.__dict)
+        #방향에 따라 0 또는 (size - 1)까지의 거리보다 높으면 해당 거리로 이동 후 다시 계산
+        while moveCount:
+            if self.__dict == 1: #위
+                if self.x < moveCount:
+                    moveCount -= self.x
+                    self.x = 0
+                    self.__dict = dictReverse(self.__dict)
+                else:
+                    self.x -= moveCount
+                    moveCount = 0
+            elif self.__dict == 2: #아래
+                if self.x + moveCount >= boardSizeX:
+                    moveCount -= (boardSizeX - 1) - self.x
+                    self.x = boardSizeX - 1
+                    self.__dict = dictReverse(self.__dict)
+                else:
+                    self.x += moveCount
+                    moveCount = 0
+            elif self.__dict == 3: #오른쪽
+                if self.y + moveCount >= boardSizeY:
+                    moveCount -= (boardSizeY - 1) - self.y
+                    self.y = boardSizeY - 1
+                    self.__dict = dictReverse(self.__dict)
+                else:
+                    self.y += moveCount
+                    moveCount = 0        
+            if self.__dict == 4: #왼쪽
+                if self.y < moveCount:
+                    moveCount -= self.y
+                    self.y = 0
+                    self.__dict = dictReverse(self.__dict)
+                else:
+                    self.y -= moveCount
+                    moveCount = 0
 
     def getSize(self):
         return self.__size
