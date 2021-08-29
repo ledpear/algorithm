@@ -28,12 +28,6 @@ class Shark:
         else:
             self.speed = s % ((boardSizeY - 1) * 2)
 
-    def __lt__(self, other):
-        if self.__size > other.__size:
-            return True
-        else :
-            return False
-
     def move(self):
         moveCount = self.speed
         while moveCount:
@@ -56,54 +50,49 @@ if sharkTotalCount == 0:
 else:
     #입력
     sharkData = []
-    board = [[[] for _ in range(boardSizeY)] for _ in range(boardSizeX)]
+    board = [[None] * boardSizeY for _ in range(boardSizeX)]
+
     for _ in range(sharkTotalCount):
         x, y, speed, dict, size = map(int, input().split())
         x -= 1
         y -= 1
         sharkData.append(Shark(x, y, speed, dict, size))
-        board[x][y].append(sharkData[-1])
+        board[x][y] = sharkData[-1]
 
     fishingKingPos = 0
     answer = 0
-    eatPos = []
 
     while fishingKingPos < boardSizeY:
         #1. 낚시왕이 있는 열에 있는 상어 중에서 땅과 제일 가까운 상어를 잡는다. 상어를 잡으면 격자판에서 잡은 상어가 사라진다.
         for x in range(boardSizeX):
-            if len(board[x][fishingKingPos]):
-                answer += board[x][fishingKingPos][0].getSize()
+            if board[x][fishingKingPos] != None:
+                answer += board[x][fishingKingPos].getSize()
                 #상어 리스트에서 제거
-                sharkData.remove(board[x][fishingKingPos][0])
-                board[x][fishingKingPos].clear()            
+                sharkData.remove(board[x][fishingKingPos])
+                board[x][fishingKingPos] = None           
                 break
         #2. 상어가 이동한다.
-        moveCount = [[0] * boardSizeY for _ in range(boardSizeX)]
+        tempBoard = [[None] * boardSizeY for _ in range(boardSizeX)]
+        deadShark = []
         for shark in sharkData:
-            board[shark.x][shark.y].remove(shark)
+            board[shark.x][shark.y] = None
             shark.move()
-            moveCount[shark.x][shark.y] += 1
-            #큰 크기순으로 저장하기 위해 heapq를 이용하여 추가
-            heapq.heappush(board[shark.x][shark.y], shark)
+            
+            #상어 중복 확인
+            if tempBoard[shark.x][shark.y] != None:
+                if shark.getSize() > tempBoard[shark.x][shark.y].getSize():
+                    deadShark.append(tempBoard[shark.x][shark.y])
+                    tempBoard[shark.x][shark.y] = shark
+                else:
+                    deadShark.append(shark)
+            else:
+                tempBoard[shark.x][shark.y] = shark
 
-            #리스트의 크기가 2가 되면 먹는 행위가 발생하기 때문에 리스트에 추가
-            #2와 일치해야만 추가하는 이유는 상어가 더 추가가 됐을때 중복해서 위치를 추가하지 않기 위해
-            if moveCount[shark.x][shark.y] == 2:
-                eatPos.append([shark.x, shark.y])
+        board = tempBoard
 
-        #2-1 먹는 행위 발생
-        for x, y in eatPos:
-            if len(board[x][y]) < 2:
-                continue
-            liveShark = board[x][y][0]
-            #죽은 상어는 리스트에서 제거
-            for idx in range(1, len(board[x][y])):
-                sharkData.remove(board[x][y][idx])
-            #리스트를 초기화하고 살아남은 상어를 추가한다
-            board[x][y].clear()
-            board[x][y].append(liveShark)
-        #초기화
-        eatPos.clear()
+        #죽은 상어 제거
+        for shark in deadShark:
+            sharkData.remove(shark)
 
         #3. 낚시왕이 오른쪽으로 한 칸 이동한다.
         fishingKingPos += 1
