@@ -24,9 +24,9 @@ class Shark:
 
         #speed가 왕복하는 거리보다 크면 나머지값만 계산한다
         if self.__dict == 1 or self.__dict == 2:
-            self.speed = s % ((boardSizeX - 1) * 2)
+            self.__speed = s % ((boardSizeX - 1) * 2)
         else:
-            self.speed = s % ((boardSizeY - 1) * 2)
+            self.__speed = s % ((boardSizeY - 1) * 2)
 
     def move(self):
         moveCount = self.speed
