@@ -11,6 +11,8 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <afxmt.h>
+class CCriticalSection;
 
 using namespace std;
 
@@ -28,18 +30,22 @@ int main()
 	cin.tie(0);
 	////////////////////////////////////
 	//Declaration
-
+	CCriticalSection	* m_pcs;
+	m_pcs = new CCriticalSection();
 	vector<int> test1(3);
 	test1[0] = 1;
 	test1[1] = 1;
 	test1[2] = 1;
 
+	m_pcs->Lock();
 	vector<int> &test2 = test1;
 	cout << test2[1] << '\n';
 
 	test2[1] = 2;
 	cout << test1[1] << '\n';
 	cout << test2[1] << '\n';
+
+	m_pcs->Unlock();
 	//Solution
 
 
