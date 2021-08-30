@@ -1,13 +1,13 @@
 #include <iostream>
+#include <string>
+#include <vector>
 using namespace std;
 
 void _strcpy(char* original, char *copy)
 {
-	int idx = 0;
-	while (original[idx] && copy[idx])
+	for (original; *original != '\0'; ++original)
 	{
-		copy[idx] = original[idx];
-		++idx;
+		*copy++ = *original;
 	}
 }
 
@@ -42,52 +42,114 @@ void cswap(const char& chArr1, const char& chArr2)
 {
 }
 
+int getNumSize(int num)
+{
+	int count(0);
+	while (num)
+	{
+		num /= 10;
+		++count;
+	}
+
+	return count;
+}
+
+void _swap(int *numA, int* numB)
+{
+	int temp = *numA;
+	*numA = *numB;
+	*numB = temp;
+}
+
+void _swap(int &numA, int& numB)
+{
+	int temp = numA;
+	numA = numB;
+	numB = temp;
+}
+
+class testClass
+{
+private:
+	int num;
+public:
+	testClass(int num = 5)
+	{
+		this->num = num;
+	}
+};
+
+void _swap(string& iterA, string& iterB)
+{
+	auto temp = iterA;
+	iterA = iterB;
+	iterB = temp;
+}
+
+void _swap(vector<int>& iterA, vector<int>& iterB)
+{
+	auto temp = iterA;
+	iterA = iterB;
+	iterB = temp;
+}
+
+void _swap(testClass** iterA, testClass** iterB)
+{
+	auto temp = *iterA;
+	*iterA = *iterB;
+	*iterB = temp;
+}
+
+void _swap(testClass* iterA, testClass* iterB)
+{
+	testClass* temp = iterA;
+	iterA = iterB;
+	iterB = temp;
+}
+
+struct testStruct
+{
+	int i1;
+	int d;
+	char c1;
+	char c2;
+	int i2;
+	char c3;
+	char c4;
+
+	testStruct(int ii1 = 1, double id = 2.0, char ic1 = 'a', char ic2 = 'b', int ii2 = 4, char ic3 = 'c', char ic4 = 'd')
+		: i1(ii1), d(id), c1(ic1), c2(ic2), i2(ii2), c3(ic3), c4(ic4) {}
+};
+
 int main()
 {
- 	char chArr1[6] = { 'b', 'p', 'p', 'l', 'e' };
- 	char chArr2[4] = { 'a' };
+ 	char chArr1[6] = { 'a', 'p', 'p', 'l', 'e' };
+ 	char chArr2[5] = { 'c' };
 
+	int numA(4), numB(9);
+	_swap(numA, numB);
 
-	const int *a = new int(10);
-	const int *b = new int(20);
+	vector<int> vectorA(5, 1);
+	vector<int> vectorB(9, -3);
 
-	a = b;
+	_swap(vectorA, vectorB);
 
-	a += 1;
+	string strA("testA");
+	string strB("testBB");
 
-// 	cout << "chArr1 : " << _strlen(chArr1) << '\n';
-// 	cout << "chArr2 : " << _strlen(chArr2) << '\n';
-// 	cout << '\n';
-// 
-// 	cout << "_strcpy\n";
-// 	_strcpy(chArr1, chArr2);
-// 	cout << "chArr1 : " << chArr1 << '\n';
-// 	cout << "chArr2 : " << chArr2 << '\n';
-// 	cout << '\n';
-// 
-// 	cout << "_strcmp\n";
-// 	cout << _strcmp(chArr1, chArr2);
-// 	cout << '\n';
-// 
-// 	////////////////////////////////////////////////
-// 
-// 	char chArr3[6] = { 'a', 'p', 'p', 'l', 'e' };
-// 	char chArr4[6] = { 'a', 'l', 'e' };
-// 
-// 	cout << "_strlen\n";
-// 	cout << "chArr3 : " << _strlen(chArr3) << '\n';
-// 	cout << "chArr4 : " << _strlen(chArr4) << '\n';
-// 	cout << '\n';
-// 
-// 	cout << "_strcpy\n";
-// 	_strcpy(chArr3, chArr4);
-// 	cout << "chArr3 : " << chArr3 << '\n';
-// 	cout << "chArr4 : " << chArr4 << '\n';
-// 	cout << '\n';
-// 
-// 	cout << "_strcmp\n";
-// 	cout << _strcmp(chArr3, chArr4);
-// 	cout << '\n';
+	_swap(strA, strB);
+
+	testClass *testA = new testClass(3);
+	testClass *testB = new testClass(79);
+
+	_swap(&testA, &testB);
+
+	testStruct ts;
+
+	cout << sizeof(ts) << '\n';
+
+	delete(testA);
+	delete(testB);
 
 	return 0;
 }
