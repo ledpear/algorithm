@@ -29,7 +29,7 @@ class Shark:
             self.__speed = s % ((boardSizeY - 1) * 2)
 
     def move(self):
-        moveCount = self.speed
+        moveCount = self.__speed
 
         #방향에 따라 0 또는 (size - 1)까지의 거리보다 높으면 해당 거리로 이동 후 다시 계산
         while moveCount:
