@@ -29,19 +29,23 @@ def solution(relation):
             if not minimal:
                 continue
 
+            #유일성 확인
             nowSet = set()
             isCandidateKey = True
             for row in relation:
+                #해당하는 컬럼의 값을 하나의 값으로 만든다
                 nowVal = ""
                 for idx in columnCombi:
                     nowVal += ',' + row[idx]
 
+                #동일한 값이 있다면 유일성을 만족하지 못한다
                 if nowVal in nowSet:
                     isCandidateKey = False
                     break
                 else:
                     nowSet.add(nowVal)
 
+            #최소성과 유일성을 만족하면 후보키이다
             if isCandidateKey:
                 answer += 1
                 CandidateKeys.append(columnCombi)
