@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 
 namespace sg
 {
@@ -19,12 +20,35 @@ namespace sg
 		//Assignment operator
 		Ptr& operator= (const Ptr& rhs) = delete;
 		//Move assignment operator
-		Ptr& operator= (Ptr&& rhs);
+		Ptr& operator= (Ptr&& rhs)
+		{
+			reset(rhs.release());
+			return (*this);
+		}
 
 		//Modifiers
-		T* release();
-		void reset(T* newPtr = nullptr);
-		void swap(Ptr& rhs);
+		T* release()
+		{
+			T* oldPtr = get();
+			_ptr = Ptr();
+			return oldPtr;
+		}
+		void reset(T* newPtr = nullptr)
+		{
+			T* oldPtr = get();
+			_ptr = newPtr;
+			if (oldPtr != _ptr)
+			{
+				if (oldPtr != nullptr)
+				{
+					delete oldPtr;
+				}
+			}
+		}
+		void swap(Ptr& rhs)
+		{
+			std::swap(_ptr, rhs._ptr);
+		}
 
 		//Observers
 		T* get() const { return _ptr; }
@@ -53,12 +77,35 @@ namespace sg
  		//Assignment operator
  		PtrArr& operator= (const PtrArr& rhs) = delete;
  		//Move assignment operator
- 		PtrArr& operator= (PtrArr&& rhs);
+ 		PtrArr& operator= (PtrArr&& rhs)
+		{
+			reset(rhs.release());
+			return (*this);
+		}
  
  		//Modifiers
- 		T* release();
- 		void reset(T* newPtr = nullptr);
- 		void swap(PtrArr& rhs);
+ 		T* release()
+		{
+			T* oldPtr = get();
+			_ptr = PtrArr();
+			return oldPtr;
+		}
+ 		void reset(T* newPtr = nullptr)
+		{
+			T* oldPtr = get();
+			_ptr = newPtr;
+			if (oldPtr != _ptr)
+			{
+				if (nullptr != oldPtr)
+				{
+					delete[] oldPtr;
+				}
+			}
+		}
+ 		void swap(PtrArr& rhs)
+		{
+			std::swap(_ptr, rhs._ptr);
+		}
  
  		//Observers
  		T* get() const { return _ptr; }
@@ -67,5 +114,7 @@ namespace sg
   
   		//Array version
 		T& operator[](size_t idx) const { return (get()[idx]); }
-  	};
+  	}; 	
+
+
 }
