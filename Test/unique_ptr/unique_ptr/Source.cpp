@@ -1,6 +1,18 @@
 #include "source.h"
-#include <algorithm>
 #include <iostream>
+
+namespace sg
+{
+	bool foo(const Ptr<int>& ptr)
+	{
+		if (nullptr == ptr)
+		{
+			return false;
+		}
+		//blabla
+		return true;
+	}
+}
 
 int main()
 {
@@ -27,4 +39,13 @@ int main()
 	for (int i = 0; i < 3; ++i)
 		std::cout << paArr[i] << '\n';
 
+	sg::Ptr<int> test;
+	if (sg::foo(test))
+	{
+		std::cout << "is not Null Ptr\n";
+	}
+	else
+	{
+		std::cout << "is Null Ptr\n";
+	}
 }

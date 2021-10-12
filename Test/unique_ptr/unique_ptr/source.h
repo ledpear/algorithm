@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <memory>
 
 namespace sg
 {
@@ -10,7 +11,9 @@ namespace sg
 		T* _ptr;
 		void deleter() { if (_ptr != nullptr) delete _ptr; }
 	public:
-		explicit Ptr(T* readPtr = nullptr) : _ptr(readPtr) {}
+		explicit Ptr() : _ptr(nullptr) {}
+		explicit Ptr(nullptr_t) : _ptr(nullptr) {}
+		explicit Ptr(T* readPtr) : _ptr(readPtr) {}
 		~Ptr() { deleter(); }
 		
 		//Copy constructor
@@ -116,5 +119,26 @@ namespace sg
 		T& operator[](size_t idx) const { return (get()[idx]); }
   	}; 	
 
+// 	bool foo(const Ptr<int>& ptr)
+// 	{
+// 		if (nullptr == ptr)
+// 		{
+// 			return false;
+// 		}
+// 		//blabla
+// 		return true;
+// 	}
+}
 
+//quest2
+template <typename T>
+bool operator==(std::nullptr_t, const sg::Ptr<T>& _Right)
+{
+	return (!_Right);
+}
+
+template <typename T>
+bool operator==(const sg::Ptr<T>& _Left, std::nullptr_t) _NOEXCEPT
+{
+	return (!_Left);
 }
