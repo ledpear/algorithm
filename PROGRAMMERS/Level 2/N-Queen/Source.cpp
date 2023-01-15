@@ -7,53 +7,50 @@
 
 using namespace std;
 
-void search(vector<vector<bool>>& map, int col, int fullSize, int& result)
+void search(vector<vector<bool>>& map, int row, int col, int& result)
 {
-	if (map.size() == 1)
+	int size = map.size();
+	if (row == size - 1)
 	{
-		for (int i = 0; i < fullSize; ++i)
+		for (int i = 0; i < size; ++i)
 		{
-			if (map[0][i] == false)
+			if (map[row][i] == false)
 				++result;
 		}
 		return;
 	}
 
-	vector<vector<bool>> newMap;
-	for (int i = 1; i < map.size(); ++i)
-	{
-		newMap.push_back(map[i]);
-	}
-
+	vector<vector<bool>> newMap = map;
 	//금지 표시
 	int gap = 1;
-	int size = newMap.size();
-	for (int i = 0; i < size; ++i)
+	for (int i = row + 1; i < size; ++i)
 	{
 		newMap[i][col] = true;
 		{
 			int pos = col + gap;
-			if (pos < fullSize)
+			if (pos < size)
 				newMap[i][pos] = true;
+
 		}
 		{
 			int pos = col - gap;
-			if (pos >= 0)
+			if (pos >= 0 )
 				newMap[i][pos] = true;
 		}
 		++gap;
 	}
 
-	for (int i = 0; i < fullSize; ++i)
+	int next = row + 1;
+	for (int i = 0; i < size; ++i)
 	{
-		if (newMap[0][i] == false)
+		if (newMap[next][i] == false)
 		{
-			search(newMap, i, fullSize, result);
+			search(newMap, next, i, result);
 		}
 	}
 }
 
-int solution(int n)
+int solution(int n) 
 {
 	// 0부터 n-1까지 탐색하는 전체 탐색
 	// 놓을 수 있는 곳을 알게되면 인자로 넘긴다
@@ -68,7 +65,7 @@ int solution(int n)
 
 	for (int i = 0; i < n; ++i)
 	{
-		search(map, i, n, answer);
+		search(map, 0, i, answer);
 	}
 
 	return answer;
