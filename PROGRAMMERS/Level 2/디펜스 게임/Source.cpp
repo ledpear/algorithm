@@ -7,13 +7,16 @@
 
 using namespace std;
 
+#include <queue>
+#include <functional>
 int solution(int n, int k, vector<int> enemy)
 {
 	//순서대로 들어오는 값을 더하는데
 	//그중 높은 값은 더하지 않는다
 	//벡터를 만들고 크기순으로 insert한다
 	const int count = enemy.size();
-	vector<int> clear;
+	//vector<int> clear;
+	priority_queue<int> clear;
 	int sum = 0;
 
 	//라운드를 순차적으로 돈다
@@ -21,50 +24,31 @@ int solution(int n, int k, vector<int> enemy)
 	{
 		const int enemyNum = enemy[round];
 		int index = 0;
-
-		clear.reserve(k);
-
-		//들어갈 위치를 찾는다
-		if (clear.size() >= k && clear[k - 1] >= enemyNum)
-			index = count;
-		else
+		
+		//1. 큐의 크기가 K보다 작으면 일단 넣는다
+		if (clear.size() < k)
 		{
-			for (index; index < clear.size(); ++index)
-			{
-				//순위권(k)안에 들지 않으면 그냥 push back
-				if (index >= k)
-				{
-					index = count;
-					break;
-				}
-
-				//위치를 찾았다
-				if (clear[index] < enemyNum)
-					break;
-			}
+			clear.push(enemyNum);
+			continue;
 		}
 
-		if (clear.size() == index)
-			clear.push_back(enemyNum);
-		else if (index == count)
+		//2. 큐의 top(가장 작은 값)보다 작거나 같으면 sum에 더해주고 값이 넘어가면 끝난다
+		if ( enemyNum <= clear.top() )
 		{
 			sum += enemyNum;
-			if (sum > n)
-				return round;
-		}
-		else
-		{
-			if (clear.size() >= k)
-			{
-				sum += clear[k - 1];
-				clear.pop_back();
-			}
-
-			if (sum > n)
+			if(sum > n)
 				return round;
 
-			clear.insert(clear.begin() + index, enemyNum);
+			continue;
 		}
+
+		//3. 큐에 있는 값보다 크면 큐의 top을 pop해서 sum에 넣어주고 큐에 넣는다
+		sum += clear.top();
+		if (sum > n)
+			return round;
+
+		clear.pop();
+		clear.push(enemyNum);
 	}
 
 	return count;
