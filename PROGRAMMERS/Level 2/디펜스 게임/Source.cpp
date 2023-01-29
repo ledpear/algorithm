@@ -16,7 +16,7 @@ int solution(int n, int k, vector<int> enemy)
 	//벡터를 만들고 크기순으로 insert한다
 	const int count = enemy.size();
 	//vector<int> clear;
-	priority_queue<int> clear;
+	priority_queue<int, vector<int>, greater<int>> clear;
 	int sum = 0;
 
 	//라운드를 순차적으로 돈다
