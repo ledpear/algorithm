@@ -50,9 +50,13 @@ int solution(vector<vector<int>> data, int col, int row_begin, int row_end)
 
 		//°è»ê
 		vector<int> nums = data[pq.top()[2]];
+		pq.pop();
 		int sum = 0;
 		for (int j = 0; j < nums.size(); ++j)
-			sum += nums[j] % i;
+		{
+			int mod = i + 1;
+			sum += nums[j] % mod;
+		}
 
 		answer ^= sum;
 	}
