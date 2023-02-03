@@ -7,37 +7,46 @@
 
 using namespace std;
 
+int nextNum(int num)
+{
+	if (num == static_cast<int>('z'))
+		return static_cast<int>('a');
+	else
+		return num + 1;
+}
+
 string solution(string s, string skip, int index) 
 {
 	string answer = "";
 
+	//스킵할 알파벳을 찾는다
 	vector<bool> skipAlpha = vector<bool>('z' - 'a' + 1);
 	for (char c : skip)
 	{
 		skipAlpha[c - 'a'] = true;
-	}
-
-	
+	}	
 
 	for (char c : s)
 	{
+		//건너뛸 횟수
 		int count = 0;
+		//현재 숫자
 		int num = static_cast<int>(c);
-		while (count < index)
+		while (true)
 		{
+			//스킵할 알파벳이면 count는 올리지 않고 num만 올린다
 			if (skipAlpha[num - static_cast<int>('a')])
 			{
-				++num;
+				num = nextNum(num);
 				continue;
 			}
 
-			//z를 넘어가면 a 아니면 다음 글자
-			if (num == static_cast<int>('z'))
-				num = static_cast<int>('a');
-			else
-				++num;
-
 			++count;
+			if (count > index)
+				break;
+
+			//z를 넘어가면 a 아니면 다음 글자
+			num = nextNum(num);
 		}
 
 		answer.push_back(static_cast<char>(num));
@@ -48,6 +57,6 @@ string solution(string s, string skip, int index)
 
 int main()
 {
-	string a = solution("aukks", "wbqd", 5);
+	string a = solution("ybcde", "az", 1);
 	return 0;
 }
