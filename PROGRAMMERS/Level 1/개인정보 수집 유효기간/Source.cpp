@@ -76,7 +76,7 @@ vector<int> solution(string today, vector<string> terms, vector<string> privacie
 		month += termNum % 12;
 		if (month > 12)
 		{
-			--month;
+			month -= 12;
 			++year;
 		}
 
@@ -84,7 +84,10 @@ vector<int> solution(string today, vector<string> terms, vector<string> privacie
 		if (day < 1)
 		{
 			day = 28;
-			--month;			
+			if (month == 1)
+				month = 12;
+			else
+				--month;			
 		}
 
 		//지금보다 유효기간을 더한 날짜가 전이면 파기
@@ -118,7 +121,7 @@ vector<int> solution(string today, vector<string> terms, vector<string> privacie
 int main()
 {
 	vector<int> answer;
-	answer = solution("2022.05.19", vector<string>{ "A 6", "B 12", "C 3" }, vector<string>{"2021.05.02 A", "2021.07.01 B", "2022.02.19 C", "2022.02.20 C"});
+	answer = solution("2022.05.19", vector<string>{ "A 96", "B 12", "C 15" }, vector<string>{"2014.01.01 A", "2014.05.20 A", "2021.02.19 C", "2022.02.20 C"});
 	answer = solution("2020.01.01", vector<string>{ "Z 3", "D 5" }, vector<string>{"2019.01.01 D", "2019.11.15 Z", "2019.08.02 D", "2019.07.01 D", "2018.12.28 Z"});
 	return 0;
 }
