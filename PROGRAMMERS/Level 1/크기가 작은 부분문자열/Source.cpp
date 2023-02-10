@@ -7,15 +7,27 @@
 
 using namespace std;
 
+//r이 p가 될것이다
+bool compare(string l, string r)
+{
+	int length = l.length();
+	for (int i = 0; i < length; ++i)
+	{
+		if (l[i] > r[i])
+			return false;
+		else if (l[i] < r[i])
+			return true;
+	}
+	return true;
+}
+
 int solution(string t, string p) 
 {
 	int answer = 0;
-	int target = atoi(p.c_str());
-
 	for (int i = 0; i < t.size() - p.size() + 1; ++i)
 	{
-		int currNum = atoi(t.substr(i, p.size()).c_str());
-		if (currNum <= target)
+		string currNum = t.substr(i, p.size()).c_str();
+		if (compare(currNum, p))
 			++answer;
 	}
 
