@@ -5,29 +5,28 @@
 #include <cmath>
 #include <string>
 
-#include <map>
 using namespace std;
 
 vector<int> solution(string s) 
 {
 	vector<int> answer;
-	map<char, int> search;
+	vector<int> search = vector<int>('z' - 'a' + 1, -1);
 	for (int index = 0; index < s.length(); ++index)
 	{
-		const char c = s[index];
-		//없다면 넣고 -1을 삽입
-		if (search.find(c) == search.end())
+		const int num = s[index] - 'a';
+		//없다면 갱신하고 -1을 삽입
+		if (search[num] == -1)
 		{
-			search.insert(pair<char, int>(c, index));
+			search[num] = index;
 			answer.push_back(-1);
 		}
-		//있다면 현 위치와 이전 위치의 차이를 삽입하고 map에 있는 위치를 갱신1
+		//있다면 현 위치와 이전 위치의 차이를 삽입하고 map에 있는 위치를 갱신
 		else
 		{
-			const int diff = index - search[c];
+			const int diff = index - search[num];
 			answer.push_back(diff);
 
-			search[c] = index;
+			search[num] = index;
 		}
 	}
 
