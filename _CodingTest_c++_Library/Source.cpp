@@ -41,11 +41,13 @@ struct DijkstraCompare
 	}
 };
 
- vector<int> Dijkstra(int nNodeSize, int nEdgeSize, int nTarget, vector<vector<location>> vEgde)
+ vector<int> Dijkstra(int nNodeSize, int nEdgeSize, int nTarget, vector<vector<location>> vEgde)//노드 개수, 간선 개수, 시작지점, 노드(1차)와 연결된 간선(2차)
  {
  	vector<int> vResult(nNodeSize + 1, INT_MAX);
- 	priority_queue<location, vector<location>, DijkstraCompare> pq; //(nNode, nW)
+	//우선순위 큐(오름차순)
+ 	priority_queue<location, vector<location>, DijkstraCompare> pq; //(nNode, nW) : (노드, 가중치)
  
+	//시작 노드 삽입
  	pq.push(location(nTarget, 0));
  	vResult[nTarget] = 0;
  
@@ -55,16 +57,20 @@ struct DijkstraCompare
 		int nNowCost = pq.top().second;
  		pq.pop();
  
+		//저장되어있는 가중치가 큐에 저장된 값보다 크다면 넘어간다
 		if (vResult[nNowNode] < nNowCost)
 		{
 			continue;
 		}
  
+		//가중치 갱신
  		for (int i = 0; i < vEgde[nNowNode].size(); i++)
  		{
+			//거쳐서 갈 때 목적지와 가중치
 			int nTargetNode = vEgde[nNowNode][i].first;
 			int nTargetCost = vEgde[nNowNode][i].second;
  
+			//저장되어 있는 가중치보다 현재 노드를 거쳐서 갈때가 더 낮다면 갱신
  			if (vResult[nTargetNode] > nNowCost + nTargetCost)
  			{
  				vResult[nTargetNode] = nNowCost + nTargetCost;
@@ -87,7 +93,7 @@ struct DijkstraCompare
 		 {
 			 for (int k = 0; k < nNodeSize; k++)
 			 {
-				 if (k != i && k != j && i != j && vResult[i][k] != INT_MAX && vResult[k][j] != INT_MAX)
+				 if (k != i && k != j && i != j && ( vResult[i][k] != INT_MAX ) && ( vResult[k][j] != INT_MAX ) )
 				 {
 					 if (vResult[i][j] > vResult[i][k] + vResult[k][j])
 					 {
