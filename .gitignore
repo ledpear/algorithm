@@ -9,6 +9,8 @@ out/
 새 폴더/
 Test/
 .vs/
+bin/
+obj/
 
 #extension
 *.opendb
