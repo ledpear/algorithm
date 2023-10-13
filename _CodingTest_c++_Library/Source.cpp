@@ -253,7 +253,7 @@ struct DijkstraCompare
 		 const int nValue = vMap[nNowX][nNowY];
 		 qPoint.pop();
 
-		 //이동패턴 정의
+		 //이동패턴 정의 (상하좌우)
 		 int nMoveX[4] = { 0, 0, 1, -1 };
 		 int nMoveY[4] = { 1, -1, 0, 0 };
 

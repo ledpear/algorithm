@@ -11,6 +11,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <unordered_set>
 
 using std::cin;
 using std::cout;
@@ -23,33 +24,27 @@ using location = pair<int, int>;
 using matrix = vector<vector<int>>;
 
 using namespace std;
-//define
-//custum function
 
 int solution(int n)
 {
-	int size = n;
-	if (size < 5)
-		size = 5;
-	vector<int> resultArr(size + 1, -1);
+	int answer = -1;
+	const int quotient = n / 5;
+	const int remainder = n % 5;
+	//5로 나눈 나머지가 3으로 나누어 떨어질때
+	if (remainder % 3 == 0)
+		answer = quotient + (remainder / 3);
+	//5로 나눈 나머지 + 5가 3으로 나누어 떨어질때
+	else if ((n > 5) && (remainder + 5) % 3 == 0)
+		answer = (quotient - 1) + ((remainder + 5) / 3);
+	//5로 나눈 나머지 + 10가 3으로 나누어 떨어질때
+	else if ((n > 10) && (remainder + 10) % 3 == 0)
+		answer = (quotient - 2) + ((remainder + 5) / 3);
+	//3으로 나누어 떨어질때
+	else if (n % 3 == 0)
+		answer = n / 3;
+	//이외에는 불가능
 
-	resultArr[2] = 1;
-	resultArr[4] = 2;
-	resultArr[5] = 1;
-
-	for (int i = 6; i <= n; ++i)
-	{
-		int result = INT_MAX;
-		if (resultArr[i - 2] != -1)
-			result = resultArr[i - 2];
-
-		if (i >= 5 &&  resultArr[i - 5] != -1)
-			result = min(resultArr[i - 5], result);
-
-		if (result != INT_MAX)
-			resultArr[i] = result + 1;
-	}
-	return resultArr[n];
+	return answer;
 }
 
 int main()
@@ -59,14 +54,27 @@ int main()
 	////////////////////////////////////
 	//input
 	int n = 0;
-	cin >> n;
+	//cin >> n;
 
-	//Solution
-	int result = solution(n);
+	////5로 바로 나누어졌을 때
+	//int answer = -1;
+	//const int quotient = n / 5;
+	//const int remainder = n % 5;
+	//if (remainder % 2 == 0)
+	//	answer = quotient + (remainder / 2);
+	////나머지+5가 2로 나누어질때
+	//else if ( (n > 5) &&  (remainder + 5) % 2 == 0)
+	//	answer = (quotient - 1) + ((remainder + 5) / 2);
+	////2로 나누어질 때
+	//else if (n % 2 == 0)
+	//	answer = n / 2;
 
-	//Output
-	cout << result << endl;
+	//cout << answer << endl;
 
+	for (int i = 1; i < 1000000000; ++i)
+		cout << solution(i) << endl;
+	//이외엔 불가능
 	////////////////////////////////////
+	system("pause");
 	return 0;
 }

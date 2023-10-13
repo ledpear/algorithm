@@ -5,6 +5,10 @@
 #directory
 Debug/
 out/
+네오플/
+새 폴더/
+Test/
+.vs/
 
 #extension
 *.opendb
@@ -12,3 +16,14 @@ out/
 *.filters
 *.suo
 *.VC.db
+*.user
+*.sdf
+
+
+PROGRAMMERS/Level 1/기사단원의 무기/sample_c++/sample_c++.vcxproj.user
+PROGRAMMERS/Level 1/기사단원의 무기/sample_c++/sample_c++.vcxproj
+PROGRAMMERS/Level 1/기사단원의 무기/.vs/sample_c++/v17/ipch/AutoPCH/9b22690558a1761b/SAMPLE_C++.ipch
+PROGRAMMERS/Level 1/기사단원의 무기/.vs/sample_c++/FileContentIndex/read.lock
+PROGRAMMERS/Level 1/기사단원의 무기/.vs/sample_c++/v17/ipch/AutoPCH/46b6b8c028defdf3/SAMPLE_C++.ipch
+PROGRAMMERS/Level 1/기사단원의 무기/.vs/sample_c++/FileContentIndex/a89a815c-1bb4-4574-9d6a-fa801e98cb98.vsidx
+PROGRAMMERS/Level 1/기사단원의 무기/.vs/sample_c++/FileContentIndex/99f3ace6-48b5-418c-ab06-6d3241f479e0.vsidx
