@@ -6,11 +6,12 @@
 #include <queue>
 #include <string>
 #include <vector>
+#include <unordered_set>
 
 using namespace std;
 
 //백트레킹
-void backTracking(const vector<int>& info, vector<bool>& visit, vector<bool>& duplicationCheck, const vector<vector<int>>& nodeEdge, deque<int> routeQueue, int& maxScore, int sheepCount, int wolfCount, int currentNode)
+void backTracking(const vector<int>& info, const vector<vector<int>>& nodeEdge, unordered_set<int> routeSet, int& maxScore, int sheepCount, int wolfCount, int currentNode)
 {
 	//시작은 정해져있으니 시작할 때 갈 수 있는 경로를 큐에 넣는다
 	//큐에 있는 걸 빼고 처리 후 다시 넣는다
@@ -30,53 +31,20 @@ void backTracking(const vector<int>& info, vector<bool>& visit, vector<bool>& du
 	if (maxScore < sheepCount)
 		maxScore = sheepCount;
 
+	routeSet.erase(currentNode);
+
 	//갈수있는 경로 추가
 	int addCount = 0;
 	for (const int nextNode : nodeEdge[currentNode])
 	{
-		if (visit[nextNode])
+		if (routeSet.find(nextNode) != routeSet.end())
 			continue;
 
-		if (duplicationCheck[nextNode])
-			continue;
-
-		routeQueue.push_back(nextNode);
-		duplicationCheck[nextNode] = true;
-		++addCount;
+		routeSet.insert(nextNode);
 	}
 
-	//탈출부(리턴필요)
-	if (routeQueue.empty())
-		return;
-
-	//현재 노드에서 나아가는지
-
-	//이전 방문지 경로에서 나아가는지
-
-	const int routeCount = routeQueue.size();
-	for (int index = 0; index < routeCount; ++index)
-	{
-		int nextNode = routeQueue.front();
-
-		//전처리
-		routeQueue.pop_front();
-		visit[nextNode] = true;
-		duplicationCheck[nextNode] = false;
-
-		//본처리
-		backTracking(info, visit, duplicationCheck, nodeEdge, routeQueue, maxScore, sheepCount, wolfCount, nextNode);
-
-		//후처리
-		routeQueue.push_back(nextNode);
-		visit[nextNode] = false;
-		duplicationCheck[nextNode] = true;
-	}
-
-	for (int i = 0; i < addCount; ++i)
-	{
-		duplicationCheck[routeQueue.back()] = false;
-		routeQueue.pop_back();
-	}
+	for (const int nextNode : routeSet)
+		backTracking(info, nodeEdge, routeSet, maxScore, sheepCount, wolfCount, nextNode);
 }
 
 int solution(vector<int> info, vector<vector<int>> edges)
@@ -92,10 +60,8 @@ int solution(vector<int> info, vector<vector<int>> edges)
 	for (const vector<int>& edge : edges)
 		nodeEdge[edge[0]].push_back(edge[1]);
 
-	deque<int> routeQueue;
-	vector<bool> visit(nodeSize, false);
-	vector<bool> duplicationCheck(nodeSize, false);
-	backTracking(info, visit, duplicationCheck, nodeEdge, routeQueue, answer, 0, 0, 0);
+	unordered_set<int> routeSet;
+	backTracking(info, nodeEdge, routeSet, answer, 0, 0, 0);
 
 	return answer;
 }
