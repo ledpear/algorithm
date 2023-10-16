@@ -48,17 +48,17 @@ bool DfsMap(const vector<vector<int>>& vMap, vector<vector<bool>>& vVisit, int n
 	return true;
 }
 
-bool DfsEgde(vector<bool>& vVisit, const vector<vector<int>>& vEdge, int nNode)
+bool DfsEgde(vector<bool>& visit, const vector<vector<int>>& edges, int node)
 {
-	if (vVisit[nNode] == true)
+	if (visit[node] == true)
 	{
 		return false;
 	}
-	vVisit[nNode] = true;
+	visit[node] = true;
 
-	for (int i = 0; i < vEdge[nNode].size(); i++)
+	for (int i = 0; i < edges[node].size(); i++)
 	{
-		DfsEgde(vVisit, vEdge, vEdge[nNode][i]);
+		DfsEgde(visit, edges, edges[node][i]);
 	}
 
 	return true;
@@ -118,14 +118,14 @@ int BfsMap(vector<vector<int>>& vMap, int nX, int nY)
 	return nCount;
 }
 
-int BfsEgde(vector<int>& vVisit, const vector<vector<int>>& vEdges, int nStart, int nTarget)
+int BfsEgde(vector<int>& visit, const vector<vector<int>>& edges, int start, int target)
 {
 	using node = pair<int, int>;
 	int nCount(0);
 
 	queue<node> qNode;
-	qNode.push(node(nStart, nCount));
-	vVisit[nStart] = true;
+	qNode.push(node(start, nCount));
+	visit[start] = true;
 
 	while (qNode.empty() == false)
 	{
@@ -134,18 +134,18 @@ int BfsEgde(vector<int>& vVisit, const vector<vector<int>>& vEdges, int nStart, 
 		qNode.pop();
 
 		//목적지인지 확인
-		if (nNowNode == nTarget)
+		if (nNowNode == target)
 		{
 			nCount = nDist;
 			break;
 		}
 
 		//이동할 수 있는 곳은 이동
-		for (auto& nTargetNode : vEdges[nNowNode])
+		for (auto& nTargetNode : edges[nNowNode])
 		{
-			if (vVisit[nTargetNode] == false)
+			if (visit[nTargetNode] == false)
 			{
-				vVisit[nTargetNode] = true;
+				visit[nTargetNode] = true;
 				qNode.push(node(nTargetNode, nDist + 1));
 			}
 		}
