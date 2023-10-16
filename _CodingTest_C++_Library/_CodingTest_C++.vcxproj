@@ -131,6 +131,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="경로탐색.h" />
+    <ClInclude Include="문자열.h" />
+    <ClInclude Include="미분류.h" />
+    <ClInclude Include="자료구조.h" />
+    <ClInclude Include="최단거리.h" />
+    <ClInclude Include="탐색.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

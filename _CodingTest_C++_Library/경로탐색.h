@@ -64,6 +64,20 @@ bool DfsEgde(vector<bool>& vVisit, const vector<vector<int>>& vEdge, int nNode)
 	return true;
 }
 
+bool DfsBackTracking()
+{
+	//탈출부(리턴필요)
+
+	//중복 예외처리
+
+	//만족했을때
+	//방문 처리
+	//재귀
+	//방문 해제
+
+	return true;
+}
+
 int BfsMap(vector<vector<int>>& vMap, int nX, int nY)
 {
 	int nCount = 0;
