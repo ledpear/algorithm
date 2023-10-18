@@ -13,3 +13,4 @@ using namespace std;
 
 //이분탐색
 
+//전체탐색 - 브루트포스
