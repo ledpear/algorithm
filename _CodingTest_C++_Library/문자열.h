@@ -37,6 +37,10 @@ namespace std
 
         void insertWord(string word);
 
+        //문제에 따라 달라질 수 있음
+        string findWord(string word);
+        bool findWord2(string word);
+
     private:
         Node _rootNode;
     };
@@ -72,4 +76,41 @@ namespace std
 
     //    return count;
     //}
+
+    string Trie::findWord(string word)
+    {
+        Node* currentNode = &_rootNode;
+        string answer = "";
+        int count = 0;
+        for (count; count < word.size(); ++count)
+        {
+            int alphabet = word[count] - 97;
+            if (currentNode->childNodes[alphabet].get() == nullptr)
+                return "";
+
+            answer.push_back(word[count]);
+            currentNode = currentNode->childNodes[alphabet].get();
+            if (currentNode->isFinish)
+                return answer;
+        }
+
+        return "";
+    }
+
+    bool Trie::findWord2(string word)
+    {
+        Node* currentNode = &_rootNode;
+        for (int count = 0; count < word.size(); ++count)
+        {
+            int alphabet = word[count] - 97;
+            if (currentNode->childNodes[alphabet].get() == nullptr)
+                return false;
+
+            currentNode = currentNode->childNodes[alphabet].get();
+            if (currentNode->isFinish)
+                return true;
+        }
+
+        return false;
+    }
 }

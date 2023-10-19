@@ -130,6 +130,7 @@
     <ClCompile Include="_CodingTest_C++_Library.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DP.h" />
     <ClInclude Include="경로탐색.h" />
     <ClInclude Include="문자열.h" />
     <ClInclude Include="미분류.h" />
